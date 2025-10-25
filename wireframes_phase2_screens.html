@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEA Wireframes - Phase 2 Screens</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tabs button {
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-tabs button:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .nav-tabs button.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .wireframe-container {
+            display: none;
+        }
+
+        .wireframe-container.active {
+            display: block;
+        }
+
+        .wireframe-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .phone-frame {
+            background: white;
+            border: 3px solid #333;
+            border-radius: 30px;
+            padding: 50px 20px 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+        }
+
+        .annotations {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .annotations h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .annotation-item {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .annotation-item::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .annotation-item strong {
+            color: #667eea;
+        }
+
+        .research-note {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 0.95em;
+            color: #0c5460;
+        }
+
+        /* Wireframe Components */
+        .wireframe {
+            background: white;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 30px;
+            background: #667eea;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            color: #667eea;
+        }
+
+        .help-button {
+            background: #ffc107;
+            color: #000;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .search-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+        }
+
+        .filter-chip {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-chip:hover {
+            border-color: #667eea;
+        }
+
+        .filter-chip.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .filter-panel {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .filter-section {
+            margin-bottom: 15px;
+        }
+
+        .filter-label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 0.9em;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        .price-range {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .price-input {
+            flex: 1;
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+
+        .listing-card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .listing-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .listing-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .listing-price {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .listing-badge {
+            background: #28a745;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+
+        .listing-badge.fee {
+            background: #dc3545;
+        }
+
+        .listing-badge.voucher {
+            background: #17a2b8;
+        }
+
+        .listing-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .listing-address {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .listing-features {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .listing-landlord {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85em;
+            padding-top: 10px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .rating-stars {
+            color: #ffc107;
+        }
+
+        .sort-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .result-count {
+            color: #666;
+        }
+
+        .sort-dropdown {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9em;
+            background: white;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: #adb5bd;
+            margin-bottom: 20px;
+        }
+
+        .detail-section {
+            margin-bottom: 20px;
+        }
+
+        .detail-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .detail-address {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .detail-price {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .price-breakdown {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .info-label {
+            font-size: 0.8em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .landlord-card {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .landlord-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .landlord-name {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .landlord-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .stat-item {
+            font-size: 0.85em;
+        }
+
+        .stat-label {
+            color: #666;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .community-section {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .community-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #856404;
+        }
+
+        .tip-item {
+            background: white;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+
+        .tip-author {
+            font-size: 0.75em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .verified-badge {
+            color: #28a745;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #333;
+            border: 2px solid #ddd;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .document-list {
+            margin-bottom: 20px;
+        }
+
+        .document-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .document-item.complete {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+
+        .document-item.missing {
+            border-color: #ffc107;
+            background: #fff3cd;
+        }
+
+        .document-icon {
+            width: 50px;
+            height: 50px;
+            background: #e9ecef;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            flex-shrink: 0;
+        }
+
+        .document-icon.complete {
+            background: #28a745;
+            color: white;
+        }
+
+        .document-info {
+            flex: 1;
+        }
+
+        .document-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .document-status {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .document-action {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            cursor: pointer;
+        }
+
+        .document-action.complete {
+            background: #28a745;
+        }
+
+        .upload-area {
+            border: 3px dashed #ddd;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            border-color: #667eea;
+            background: #f0f0ff;
+        }
+
+        .upload-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #adb5bd;
+        }
+
+        .upload-text {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .upload-subtext {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .tab-nav {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .cost-calculator {
+            background: #e7f3ff;
+            border: 2px solid #0c5460;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .cost-header {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #0c5460;
+        }
+
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+
+        .cost-row.total {
+            font-weight: bold;
+            font-size: 1.1em;
+            padding-top: 10px;
+            border-top: 2px solid #0c5460;
+            margin-top: 10px;
+        }
+
+        .cost-savings {
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .template-card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .template-card:hover {
+            border-color: #667eea;
+        }
+
+        .template-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .template-desc {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .divider {
+            border-top: 2px solid #e9ecef;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 1200px) {
+            .wireframe-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PEA Phase 2 Wireframes</h1>
+        <p class="subtitle">Search, Discovery & Document Management</p>
+
+        <div class="nav-tabs">
+            <button class="active" onclick="showWireframe('search')">1. Search & Filter</button>
+            <button onclick="showWireframe('results')">2. Search Results</button>
+            <button onclick="showWireframe('detail')">3. Listing Detail</button>
+            <button onclick="showWireframe('documents')">4. Document Manager</button>
+        </div>
+
+        <!-- Wireframe 1: Search & Filter -->
+        <div class="wireframe-container active" id="search">
+            <h2 style="margin-bottom: 30px; color: #333;">Wireframe 1: Search & Filter Interface</h2>
+
+            <div class="wireframe-wrapper">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <div class="logo">PEA</div>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 15px;">
+                            Find Housing
+                        </div>
+
+                        <div class="search-bar">
+                            <input type="text" class="search-input" placeholder="Search by neighborhood, address...">
+                            <button class="search-button">🔍</button>
+                        </div>
+
+                        <div class="filter-chips">
+                            <div class="filter-chip active">✓ No broker fee</div>
+                            <div class="filter-chip">Accepts vouchers</div>
+                            <div class="filter-chip">Accessible</div>
+                            <div class="filter-chip">Pet-friendly</div>
+                            <div class="filter-chip">+ More filters</div>
+                        </div>
+
+                        <div class="filter-panel">
+                            <div class="filter-section">
+                                <label class="filter-label">Price Range</label>
+                                <div class="price-range">
+                                    <input type="text" class="price-input" placeholder="Min">
+                                    <span>—</span>
+                                    <input type="text" class="price-input" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="filter-section">
+                                <label class="filter-label">Bedrooms</label>
+                                <div style="display: flex; gap: 8px;">
+                                    <div class="filter-chip">Studio</div>
+                                    <div class="filter-chip active">1BR</div>
+                                    <div class="filter-chip">2BR</div>
+                                    <div class="filter-chip">3BR+</div>
+                                </div>
+                            </div>
+
+                            <div class="filter-section">
+                                <label class="filter-label">Important to Me</label>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" checked>
+                                    <label>No broker fee</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" checked>
+                                    <label>Accepts housing vouchers</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox">
+                                    <label>Wheelchair accessible</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox">
+                                    <label>Pets allowed</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox">
+                                    <label>Laundry in building</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary">Show 24 Results</button>
+                        <button class="btn-outline">Reset Filters</button>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Search & Filter</h3>
+                    <div class="annotation-item">
+                        <strong>"No broker fee" default selected:</strong> First chip, checked by default
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Mr. Patterson's #1 priority - "avoid large broker fees" - make this the easiest filter to apply
+                    </div>
+                    <div class="annotation-item">
+                        <strong>"Accepts vouchers" prominent:</strong> Second filter option
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Ms. Ellis's critical need - voucher-accepting landlords. Both interviewees mentioned landlord discrimination.
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Accessibility filter visible:</strong> Wheelchair accessible option
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 100% rated accessibility as at least somewhat important; 50% rated as essential
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Filter chips + detailed panel:</strong> Quick filters on top, detailed below
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Plain language:</strong> "Important to Me" not "Amenities" or "Requirements"
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Result count shown:</strong> "Show 24 Results" = transparency, sets expectations
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Reset option:</strong> Easy to start over (Mr. L needs simplicity)
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Search by neighborhood:</strong> Users may not know exact addresses
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wireframe 2: Search Results -->
+        <div class="wireframe-container" id="results">
+            <h2 style="margin-bottom: 30px; color: #333;">Wireframe 2: Search Results</h2>
+
+            <div class="wireframe-wrapper">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <button class="back-button">← Back</button>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div class="sort-bar">
+                            <div class="result-count">24 apartments found</div>
+                            <select class="sort-dropdown">
+                                <option>Lowest price</option>
+                                <option>No-fee first</option>
+                                <option>Best rated</option>
+                                <option>Newest</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-chips">
+                            <div class="filter-chip active">✓ No fee</div>
+                            <div class="filter-chip active">✓ Vouchers</div>
+                            <div class="filter-chip">+ Edit</div>
+                        </div>
+
+                        <div class="listing-card">
+                            <div class="listing-header">
+                                <div class="listing-price">$2,400/mo</div>
+                                <div class="listing-badge">No Fee</div>
+                            </div>
+                            <div class="listing-title">2 Bedroom in Upper Manhattan</div>
+                            <div class="listing-address">📍 West 145th Street, Manhattan</div>
+                            <div class="listing-features">
+                                <span>🛏️ 2 BR</span>
+                                <span>🚿 1 Bath</span>
+                                <span>📏 850 sq ft</span>
+                            </div>
+                            <div style="margin: 10px 0;">
+                                <span class="listing-badge voucher">Accepts Vouchers</span>
+                            </div>
+                            <div class="listing-landlord">
+                                <span>Landlord: Martinez Properties</span>
+                                <span class="rating-stars">★★★★★</span>
+                                <span style="color: #666;">4.8</span>
+                            </div>
+                        </div>
+
+                        <div class="listing-card">
+                            <div class="listing-header">
+                                <div class="listing-price">$2,600/mo</div>
+                                <div class="listing-badge">No Fee</div>
+                            </div>
+                            <div class="listing-title">1 Bedroom in Brooklyn</div>
+                            <div class="listing-address">📍 Bedford Ave, Brooklyn</div>
+                            <div class="listing-features">
+                                <span>🛏️ 1 BR</span>
+                                <span>🚿 1 Bath</span>
+                                <span>📏 650 sq ft</span>
+                            </div>
+                            <div style="margin: 10px 0;">
+                                <span class="listing-badge voucher">Accepts Vouchers</span>
+                                <span style="margin-left: 5px; font-size: 0.85em; color: #666;">Pet-friendly</span>
+                            </div>
+                            <div class="listing-landlord">
+                                <span>Landlord: Brooklyn Housing Co.</span>
+                                <span class="rating-stars">★★★★☆</span>
+                                <span style="color: #666;">4.2</span>
+                            </div>
+                        </div>
+
+                        <div class="listing-card" style="opacity: 0.6;">
+                            <div class="listing-header">
+                                <div class="listing-price">$2,200/mo</div>
+                                <div class="listing-badge fee">Broker Fee: $3,300</div>
+                            </div>
+                            <div class="listing-title">Studio in Queens</div>
+                            <div class="listing-address">📍 Astoria Blvd, Queens</div>
+                            <div style="font-size: 0.85em; color: #dc3545; margin-top: 10px;">
+                                ⚠️ Total move-in: $7,700 (includes broker fee)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Search Results</h3>
+                    <div class="annotation-item">
+                        <strong>No-fee listings first:</strong> Prioritized at top of results
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Mr. Patterson specifically requested "help tenants avoid large broker fees" - system prioritizes no-fee options
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Broker fee prominent when present:</strong> Red badge, shows total cost
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Voucher acceptance badge:</strong> Clear visual indicator
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Ms. Ellis needs to know upfront if landlord accepts vouchers - prevents wasted time and discrimination
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Landlord rating visible:</strong> Stars + numeric rating
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Landlord name shown:</strong> Builds accountability, enables research
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 75% trust community tips if verified - landlord ratings are community-powered
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Sort options:</strong> "No-fee first" as explicit option
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Active filters visible:</strong> Chips show current filters, easy to edit
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Card layout:</strong> Scannable, touch-friendly, shows key info at glance
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Fee listings de-emphasized:</strong> Lower opacity, shown for comparison
+                    </div>
+                </div>
+            </div>
+
+            <div class="wireframe-wrapper" style="margin-top: 40px;">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <button class="back-button">← Back</button>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 5px;">
+                            No Results Found
+                        </div>
+                        <div style="color: #666; margin-bottom: 20px;">
+                            We couldn't find any apartments matching all your filters
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                            <div style="font-weight: bold; margin-bottom: 10px;">Your current filters:</div>
+                            <div class="filter-chips">
+                                <div class="filter-chip active">No broker fee</div>
+                                <div class="filter-chip active">Accepts vouchers</div>
+                                <div class="filter-chip active">Wheelchair accessible</div>
+                                <div class="filter-chip active">Brooklyn</div>
+                                <div class="filter-chip active">$1000-$1500</div>
+                            </div>
+                        </div>
+
+                        <div style="font-weight: bold; margin-bottom: 10px;">Try these suggestions:</div>
+
+                        <div class="listing-card">
+                            <div style="margin-bottom: 10px;">
+                                <strong>💡 Expand your price range</strong>
+                            </div>
+                            <div style="font-size: 0.85em; color: #666; margin-bottom: 10px;">
+                                We found 8 apartments if you increase to $1,500-$2,000
+                            </div>
+                            <button class="btn-secondary">Try This</button>
+                        </div>
+
+                        <div class="listing-card">
+                            <div style="margin-bottom: 10px;">
+                                <strong>💡 Include nearby neighborhoods</strong>
+                            </div>
+                            <div style="font-size: 0.85em; color: #666; margin-bottom: 10px;">
+                                Queens has 12 apartments matching your other criteria
+                            </div>
+                            <button class="btn-secondary">Try This</button>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <button class="btn-primary">💬 Talk to a housing counselor</button>
+                        <button class="btn-outline">Reset All Filters</button>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - No Results State</h3>
+                    <div class="annotation-item">
+                        <strong>Never a dead end:</strong> Shows active filters, suggests alternatives
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Mr. L felt "lost and unsupported" - this prevents that feeling even when search fails
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Specific suggestions:</strong> "8 apartments if you increase price" not vague advice
+                    </div>
+                    <div class="annotation-item">
+                        <strong>One-tap solutions:</strong> "Try This" buttons apply suggestion automatically
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Human support option:</strong> Talk to counselor if stuck
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 100% want option to speak with real person - available even in error states
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Shows what's possible:</strong> "12 apartments in Queens" = hopeful, not discouraging
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Reset option:</strong> Easy to start completely over
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wireframe 3: Listing Detail -->
+        <div class="wireframe-container" id="detail">
+            <h2 style="margin-bottom: 30px; color: #333;">Wireframe 3: Listing Detail & Landlord Profile</h2>
+
+            <div class="wireframe-wrapper">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <button class="back-button">← Back</button>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div class="image-placeholder">🏠</div>
+
+                        <div class="detail-section">
+                            <div class="badge-row">
+                                <div class="listing-badge">No Broker Fee</div>
+                                <div class="listing-badge voucher">Accepts Vouchers</div>
+                            </div>
+                            <div class="detail-title">2BR in Upper Manhattan</div>
+                            <div class="detail-address">📍 West 145th Street, Manhattan, NY 10031</div>
+                        </div>
+
+                        <div class="detail-section">
+                            <div class="detail-price">$2,400/mo</div>
+                            <div class="price-breakdown">
+                                First month: $2,400 • Security: $2,400<br>
+                                <strong>Total move-in: $4,800</strong>
+                            </div>
+                        </div>
+
+                        <div class="cost-calculator">
+                            <div class="cost-header">💰 Cost Comparison</div>
+                            <div class="cost-row">
+                                <span>This apartment (no fee)</span>
+                                <span>$4,800</span>
+                            </div>
+                            <div class="cost-row" style="color: #dc3545;">
+                                <span>Similar apt with broker</span>
+                                <span>$8,400</span>
+                            </div>
+                            <div class="cost-savings">
+                                ✓ You save $3,600 with no-fee listing
+                            </div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-label">Bedrooms</div>
+                                <div class="info-value">2 BR</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Bathrooms</div>
+                                <div class="info-value">1 Bath</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Square Feet</div>
+                                <div class="info-value">850 sq ft</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Available</div>
+                                <div class="info-value">Nov 1</div>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary">📧 Contact Landlord</button>
+                        <button class="btn-secondary">💾 Save for Later</button>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Listing Detail</h3>
+                    <div class="annotation-item">
+                        <strong>Cost calculator prominent:</strong> Shows exact savings vs. broker fee
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Mr. Patterson wants transparency - "$3,600 saved" makes value concrete
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Total move-in cost:</strong> Not just monthly rent, shows full upfront cost
+                    </div>
+                    <div class="annotation-item">
+                        <strong>No-fee badge prominent:</strong> Top of page, can't miss it
+                    </div>
+                    <div class="annotation-item">
+                        <strong>"Accepts Vouchers" badge:</strong> Clear for Ms. Ellis-type users
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Key info grid:</strong> Scannable, organized, shows what matters
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Primary CTA:</strong> "Contact Landlord" = direct connection (no broker)
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Save option:</strong> Users may need to compare multiple listings
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Image placeholder:</strong> Would show photos in real app
+                    </div>
+                </div>
+            </div>
+
+            <div class="wireframe-wrapper" style="margin-top: 40px;">
+                <div class="phone-frame">
+                    <div class="wireframe" style="overflow-y: auto; max-height: 600px;">
+                        <div class="header">
+                            <button class="back-button">← Back</button>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div class="tab-nav">
+                            <button class="tab-button">Details</button>
+                            <button class="tab-button active">Landlord</button>
+                            <button class="tab-button">Community</button>
+                        </div>
+
+                        <div class="landlord-card">
+                            <div class="landlord-header">
+                                <div>
+                                    <div class="landlord-name">Martinez Properties</div>
+                                    <div style="font-size: 0.85em; color: #666;">Managing 12 buildings in Manhattan</div>
+                                </div>
+                                <div>
+                                    <div class="rating-stars">★★★★★</div>
+                                    <div style="text-align: center; font-weight: bold;">4.8</div>
+                                </div>
+                            </div>
+
+                            <div class="landlord-stats">
+                                <div class="stat-item">
+                                    <div class="stat-label">Voucher acceptance rate</div>
+                                    <div class="stat-value" style="color: #28a745;">95%</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Avg response time</div>
+                                    <div class="stat-value">4 hours</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Building violations</div>
+                                    <div class="stat-value" style="color: #28a745;">0 active</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Tenant rating</div>
+                                    <div class="stat-value">4.8 / 5.0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="community-section">
+                            <div class="community-header">💬 What Tenants Say</div>
+                            <div class="tip-item">
+                                "Very responsive to maintenance requests. Fixed my heating issue within 24 hours."
+                                <div class="tip-author">— Current tenant • <span class="verified-badge">✓ Verified</span></div>
+                            </div>
+                            <div class="tip-item">
+                                "Accepted my voucher without any issues. Professional and respectful throughout."
+                                <div class="tip-author">— Voucher holder • <span class="verified-badge">✓ Verified</span></div>
+                            </div>
+                            <div class="tip-item">
+                                "Building is well-maintained. Landlord responds to emails quickly."
+                                <div class="tip-author">— Former tenant • <span class="verified-badge">✓ Verified</span></div>
+                            </div>
+                        </div>
+
+                        <div style="background: #d4edda; border: 2px solid #28a745; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                            <div style="font-weight: bold; margin-bottom: 5px; color: #155724;">
+                                ✓ Voucher-Friendly Landlord
+                            </div>
+                            <div style="font-size: 0.85em; color: #155724;">
+                                This landlord has successfully rented to 23 voucher holders in the past year with 4.8★ average rating.
+                            </div>
+                        </div>
+
+                        <button class="btn-primary">📧 Contact Martinez Properties</button>
+                        <button class="btn-secondary">📋 View All Reviews (47)</button>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Landlord Profile</h3>
+                    <div class="annotation-item">
+                        <strong>Voucher acceptance rate:</strong> 95% = transparent track record
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Ms. Ellis's #1 request - "landlords to have information" BEFORE meeting. This shows landlord's history with vouchers.
+                    </div>
+                    <div class="annotation-item">
+                        <strong>"Voucher-Friendly" badge:</strong> Highlights positive track record
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Community reviews verified:</strong> Checkmark shows authenticity
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 75% trust community tips if verified elsewhere - verification badge critical
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Response time shown:</strong> "4 hours" sets expectations
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Building violations:</strong> "0 active" = safety/quality signal
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Tenant quotes:</strong> Real experiences from real people
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Voucher-specific reviews:</strong> "Accepted my voucher without any issues"
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Both interviewees cited landlord discrimination - seeing positive voucher experiences builds confidence
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Tab navigation:</strong> Details / Landlord / Community = organized info
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wireframe 4: Document Manager -->
+        <div class="wireframe-container" id="documents">
+            <h2 style="margin-bottom: 30px; color: #333;">Wireframe 4: Document Manager</h2>
+
+            <div class="wireframe-wrapper">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <button class="back-button">← Back</button>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 5px;">
+                            My Documents
+                        </div>
+                        <div style="color: #666; margin-bottom: 20px; font-size: 0.9em;">
+                            Keep all your housing documents in one place
+                        </div>
+
+                        <div style="background: #d4edda; border: 2px solid #28a745; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+                            <strong>✓ 4 of 6 documents ready</strong>
+                            <div style="font-size: 0.85em; margin-top: 5px;">You're almost done! Just 2 more to go.</div>
+                        </div>
+
+                        <div class="document-list">
+                            <div class="document-item complete">
+                                <div class="document-icon complete">✓</div>
+                                <div class="document-info">
+                                    <div class="document-name">Photo ID</div>
+                                    <div class="document-status">Uploaded Oct 15, 2025</div>
+                                </div>
+                                <button class="document-action complete">View</button>
+                            </div>
+
+                            <div class="document-item complete">
+                                <div class="document-icon complete">✓</div>
+                                <div class="document-info">
+                                    <div class="document-name">Proof of Income</div>
+                                    <div class="document-status">Uploaded Oct 16, 2025</div>
+                                </div>
+                                <button class="document-action complete">View</button>
+                            </div>
+
+                            <div class="document-item complete">
+                                <div class="document-icon complete">✓</div>
+                                <div class="document-info">
+                                    <div class="document-name">Housing Voucher</div>
+                                    <div class="document-status">Uploaded Oct 18, 2025</div>
+                                </div>
+                                <button class="document-action complete">View</button>
+                            </div>
+
+                            <div class="document-item complete">
+                                <div class="document-icon complete">✓</div>
+                                <div class="document-info">
+                                    <div class="document-name">References</div>
+                                    <div class="document-status">3 references added</div>
+                                </div>
+                                <button class="document-action complete">View</button>
+                            </div>
+
+                            <div class="document-item missing">
+                                <div class="document-icon">📄</div>
+                                <div class="document-info">
+                                    <div class="document-name">Proof of Residency</div>
+                                    <div class="document-status">Not uploaded yet</div>
+                                </div>
+                                <button class="document-action">Upload</button>
+                            </div>
+
+                            <div class="document-item missing">
+                                <div class="document-icon">📄</div>
+                                <div class="document-info">
+                                    <div class="document-name">Credit Report</div>
+                                    <div class="document-status">Optional but recommended</div>
+                                </div>
+                                <button class="document-action">Upload</button>
+                            </div>
+                        </div>
+
+                        <button class="btn-secondary">➕ Add Another Document</button>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Document Manager</h3>
+                    <div class="annotation-item">
+                        <strong>Progress indicator:</strong> "4 of 6 documents ready" = visual progress
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Color-coded status:</strong> Green = complete, Yellow = missing
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 33% cited missing documents as challenge - visual system makes it clear what's needed
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Encouraging message:</strong> "You're almost done! Just 2 more to go."
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Upload date shown:</strong> User knows when they added it
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Optional vs. required:</strong> "Optional but recommended" = clear expectations
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Specific labels:</strong> "3 references added" not just "References"
+                    </div>
+                    <div class="annotation-item">
+                        <strong>View option:</strong> Can review uploaded documents anytime
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Add more option:</strong> Flexible for different application needs
+                    </div>
+                </div>
+            </div>
+
+            <div class="wireframe-wrapper" style="margin-top: 40px;">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <button class="back-button">← Back</button>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 15px;">
+                            Upload Document
+                        </div>
+
+                        <div class="upload-area">
+                            <div class="upload-icon">📸</div>
+                            <div class="upload-text">Take a photo or choose file</div>
+                            <div class="upload-subtext">JPG, PNG, PDF up to 10MB</div>
+                        </div>
+
+                        <div style="font-weight: bold; margin-bottom: 10px;">Quick Upload Options:</div>
+
+                        <button class="btn-primary">📸 Take Photo Now</button>
+                        <button class="btn-secondary">📁 Choose from Files</button>
+                        <button class="btn-secondary">☁️ Import from Cloud</button>
+
+                        <div class="divider"></div>
+
+                        <div style="font-weight: bold; margin-bottom: 10px;">Don't have this document?</div>
+
+                        <div class="template-card">
+                            <div class="template-title">❓ How to get Proof of Residency</div>
+                            <div class="template-desc">
+                                Learn what counts as proof and where to get it
+                            </div>
+                        </div>
+
+                        <div class="template-card">
+                            <div class="template-title">💬 Ask a housing counselor</div>
+                            <div class="template-desc">
+                                Get help understanding what you need
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Document Upload</h3>
+                    <div class="annotation-item">
+                        <strong>Multiple upload methods:</strong> Photo, files, cloud import
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 50% use document photo feature - make this primary option
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Large touch target:</strong> Entire upload area is tappable
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Camera-first:</strong> "Take Photo Now" = mobile-native approach
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Help if missing:</strong> "Don't have this document?" section
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Mr. L cited missing documents - provide guidance immediately
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Human support option:</strong> "Ask a housing counselor" available
+                    </div>
+                    <div class="annotation-item">
+                        <strong>File type/size shown:</strong> Sets expectations, prevents errors
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Educational content:</strong> "How to get..." guides integrated
+                    </div>
+                </div>
+            </div>
+
+            <div class="wireframe-wrapper" style="margin-top: 40px;">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <button class="back-button">← Back</button>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 15px;">
+                            Document Templates
+                        </div>
+
+                        <div style="color: #666; margin-bottom: 20px; font-size: 0.9em;">
+                            Save time with pre-filled document sets
+                        </div>
+
+                        <div class="template-card">
+                            <div class="template-title">📋 Emergency Housing Application</div>
+                            <div class="template-desc">
+                                4 documents needed: ID, Income proof, Residency, Social Security
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <span style="color: #28a745; font-weight: bold;">✓ 3 of 4 ready</span>
+                            </div>
+                        </div>
+
+                        <div class="template-card">
+                            <div class="template-title">🎫 Voucher Application Package</div>
+                            <div class="template-desc">
+                                6 documents needed for voucher holders applying to apartments
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <span style="color: #28a745; font-weight: bold;">✓ 4 of 6 ready</span>
+                            </div>
+                        </div>
+
+                        <div class="template-card">
+                            <div class="template-title">🏢 Standard Rental Application</div>
+                            <div class="template-desc">
+                                5 documents: ID, Income, Credit, References, Previous landlord
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <span style="color: #ffc107; font-weight: bold;">○ 0 of 5 ready</span>
+                            </div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <button class="btn-primary">➕ Create Custom Template</button>
+
+                        <div style="margin-top: 20px; background: #e7f3ff; padding: 15px; border-radius: 8px;">
+                            <div style="font-weight: bold; margin-bottom: 5px;">💡 Pro Tip</div>
+                            <div style="font-size: 0.85em;">
+                                Once you upload a document, you can reuse it for multiple applications. Save time by building your document library now!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Document Templates</h3>
+                    <div class="annotation-item">
+                        <strong>Pre-built templates:</strong> Common application types ready-made
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Mr. Patterson wants efficiency - templates save time on repeat applications
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Progress per template:</strong> Shows completion for each set
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Reusable documents:</strong> Upload once, use many times
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Custom template option:</strong> Flexibility for unique needs
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Pro tip section:</strong> Educates on efficiency benefits
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Specific to journey:</strong> Emergency vs. Voucher vs. Standard
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Clear document count:</strong> "6 documents needed" = transparent
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showWireframe(id) {
+            // Hide all wireframes
+            document.querySelectorAll('.wireframe-container').forEach(container => {
+                container.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-tabs button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected wireframe
+            document.getElementById(id).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

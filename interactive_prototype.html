@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEA Interactive Prototype</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .prototype-wrapper {
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .controls-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            min-width: 250px;
+        }
+
+        .controls-panel h3 {
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .persona-select {
+            margin-bottom: 20px;
+        }
+
+        .persona-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .persona-btn:hover {
+            border-color: #667eea;
+            background: #f0f0ff;
+        }
+
+        .persona-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .flow-info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .flow-info strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #0c5460;
+        }
+
+        .reset-btn {
+            width: 100%;
+            padding: 12px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .reset-btn:hover {
+            background: #c82333;
+        }
+
+        .screen-indicator {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 8px;
+            font-size: 0.85em;
+        }
+
+        .screen-indicator strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #856404;
+        }
+
+        .phone-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone-frame {
+            background: white;
+            border: 4px solid #333;
+            border-radius: 35px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            padding: 55px 0 25px;
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 7px;
+            background: #333;
+            border-radius: 4px;
+        }
+
+        .screen {
+            display: none;
+            padding: 20px;
+            height: 700px;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Component Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 32px;
+            background: #667eea;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .help-button {
+            background: #ffc107;
+            color: #000;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f0ff;
+        }
+
+        .skip-button {
+            color: #667eea;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .onboarding-screen {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .onboarding-image {
+            width: 200px;
+            height: 200px;
+            background: #e9ecef;
+            border-radius: 15px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5em;
+        }
+
+        .onboarding-title {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .onboarding-desc {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 35px;
+            font-size: 1.05em;
+        }
+
+        .indicator-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 35px;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            background: #ddd;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: #667eea;
+            width: 28px;
+            border-radius: 5px;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option-btn:hover {
+            border-color: #667eea;
+            background: #f0f0ff;
+            transform: translateX(5px);
+        }
+
+        .greeting {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .subtext {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+        }
+
+        .progress-card {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.95em;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #28a745;
+            transition: width 0.5s ease;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .quick-action-btn {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 18px 12px;
+            text-align: center;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-action-btn:hover {
+            border-color: #667eea;
+            background: #f0f0ff;
+            transform: translateY(-3px);
+        }
+
+        .icon {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+        }
+
+        .action-card {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-card:hover {
+            background: #f0f0ff;
+            transform: translateX(5px);
+        }
+
+        .action-title {
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .action-desc {
+            font-size: 0.88em;
+            color: #666;
+        }
+
+        .step-list {
+            margin-bottom: 20px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 15px;
+            padding: 16px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .step-item.completed {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .step-item.current {
+            border-color: #667eea;
+            border-width: 3px;
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-number.completed {
+            background: #28a745;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .step-desc {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .listing-card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .listing-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .listing-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .listing-price {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .listing-badge {
+            background: #28a745;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.78em;
+            font-weight: bold;
+        }
+
+        .listing-badge.voucher {
+            background: #17a2b8;
+        }
+
+        .listing-title {
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .listing-address {
+            font-size: 0.88em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .listing-features {
+            display: flex;
+            gap: 15px;
+            font-size: 0.88em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .listing-landlord {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.88em;
+            padding-top: 10px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .rating-stars {
+            color: #ffc107;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1em;
+        }
+
+        .search-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+        }
+
+        .filter-chip {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 9px 18px;
+            border-radius: 22px;
+            font-size: 0.88em;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-chip:hover {
+            border-color: #667eea;
+        }
+
+        .filter-chip.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .clickable {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .clickable:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 1024px) {
+            .prototype-wrapper {
+                flex-direction: column;
+            }
+
+            .controls-panel {
+                width: 100%;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="prototype-wrapper">
+        <!-- Controls Panel -->
+        <div class="controls-panel">
+            <h3>Select User Journey</h3>
+            <div class="persona-select">
+                <button class="persona-btn active" onclick="selectPersona('mr-l')">
+                    👨 Mr. L<br>
+                    <small>Emergency Housing</small>
+                </button>
+                <button class="persona-btn" onclick="selectPersona('ms-ellis')">
+                    👩 Ms. Ellis<br>
+                    <small>Voucher Holder</small>
+                </button>
+                <button class="persona-btn" onclick="selectPersona('mr-patterson')">
+                    👨 Mr. Patterson<br>
+                    <small>No-Fee Search</small>
+                </button>
+            </div>
+
+            <div class="flow-info" id="flow-info">
+                <strong>Current Flow: Mr. L</strong>
+                Emergency housing seeker. Needs simplicity and human support.
+            </div>
+
+            <div class="screen-indicator">
+                <strong>Current Screen:</strong>
+                <span id="current-screen-name">Welcome</span>
+            </div>
+
+            <button class="reset-btn" onclick="resetFlow()">🔄 Restart Journey</button>
+
+            <div style="margin-top: 20px; padding: 15px; background: #d1ecf1; border-radius: 8px; font-size: 0.85em;">
+                <strong style="display: block; margin-bottom: 5px; color: #0c5460;">💡 Interaction Tips:</strong>
+                Click buttons and cards to navigate through the prototype. All links are functional!
+            </div>
+        </div>
+
+        <!-- Phone Frame -->
+        <div class="phone-container">
+            <div class="phone-frame">
+
+                <!-- Screen 1: Welcome -->
+                <div class="screen active" id="screen-welcome">
+                    <div class="onboarding-screen">
+                        <div class="onboarding-image">🏠</div>
+                        <div class="onboarding-title">Welcome to People Empowering App</div>
+                        <div class="onboarding-desc">
+                            We're here to help you find housing in NYC. No confusing forms. No overwhelming lists. Just clear steps and real support.
+                        </div>
+                        <div class="indicator-dots">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                        <button class="btn-primary" onclick="goToScreen('screen-assessment')">Get Started</button>
+                        <button class="skip-button clickable" onclick="goToScreen('screen-dashboard')">Skip intro</button>
+                    </div>
+                </div>
+
+                <!-- Screen 2: Needs Assessment -->
+                <div class="screen" id="screen-assessment">
+                    <div class="header">
+                        <div class="logo">PEA</div>
+                        <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Need Help?</button>
+                    </div>
+                    <div class="onboarding-screen" style="text-align: left;">
+                        <div class="onboarding-title" style="text-align: center; margin-bottom: 20px;">
+                            What brings you here today?
+                        </div>
+                        <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 12px; padding: 20px;">
+                            <div style="font-weight: bold; margin-bottom: 15px;">I need help with:</div>
+                            <button class="option-btn" onclick="selectNeed('emergency')">
+                                <strong>🚨 Emergency housing</strong><br>
+                                <span style="font-size: 0.88em; color: #666;">I need a place to stay tonight</span>
+                            </button>
+                            <button class="option-btn" onclick="selectNeed('permanent')">
+                                <strong>🏘️ Finding an apartment</strong><br>
+                                <span style="font-size: 0.88em; color: #666;">I'm looking for permanent housing</span>
+                            </button>
+                            <button class="option-btn" onclick="selectNeed('voucher')">
+                                <strong>🎫 Using a housing voucher</strong><br>
+                                <span style="font-size: 0.88em; color: #666;">I have a voucher and need to find a landlord</span>
+                            </button>
+                            <button class="option-btn" onclick="goToScreen('screen-support')">
+                                <strong>❓ I'm not sure</strong><br>
+                                <span style="font-size: 0.88em; color: #666;">Let me talk to someone</span>
+                            </button>
+                        </div>
+                        <div class="indicator-dots" style="margin-top: 25px;">
+                            <div class="dot"></div>
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 3: Dashboard (Mr. L) -->
+                <div class="screen" id="screen-dashboard">
+                    <div class="header">
+                        <div class="logo">PEA</div>
+                        <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Get Help</button>
+                    </div>
+                    <div class="greeting">Hi, Louis 👋</div>
+                    <div class="subtext">Here's where you are in your journey</div>
+
+                    <div class="progress-card clickable" onclick="goToScreen('screen-action-plan')">
+                        <div class="progress-header">
+                            <strong>Emergency Housing Application</strong>
+                            <span style="color: #666; font-size: 0.9em;">Step 2 of 5</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 40%;"></div>
+                        </div>
+                        <div style="margin-top: 12px;">
+                            <strong style="color: #667eea;">Next: Upload required documents</strong>
+                        </div>
+                        <button class="btn-primary" style="margin-top: 12px;">Continue</button>
+                    </div>
+
+                    <div style="font-weight: bold; margin-bottom: 12px;">Quick Actions</div>
+                    <div class="quick-actions">
+                        <div class="quick-action-btn clickable" onclick="goToScreen('screen-search')">
+                            <div class="icon">🔍</div>
+                            <div>Find Housing</div>
+                        </div>
+                        <div class="quick-action-btn clickable" onclick="goToScreen('screen-documents')">
+                            <div class="icon">📄</div>
+                            <div>My Documents</div>
+                        </div>
+                        <div class="quick-action-btn clickable" onclick="goToScreen('screen-support')">
+                            <div class="icon">📞</div>
+                            <div>Talk to Someone</div>
+                        </div>
+                        <div class="quick-action-btn">
+                            <div class="icon">🔔</div>
+                            <div>Notifications <span style="background: #dc3545; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.75em;">2</span></div>
+                        </div>
+                    </div>
+
+                    <div style="font-weight: bold; margin-bottom: 12px;">Suggested for You</div>
+                    <div class="action-card">
+                        <div class="action-title">📋 Complete your profile</div>
+                        <div class="action-desc">This helps us give you better recommendations</div>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-title">💰 Check if you qualify for rental assistance</div>
+                        <div class="action-desc">You might be eligible for programs you don't know about</div>
+                    </div>
+                </div>
+
+                <!-- Screen 4: Dashboard (Ms. Ellis) -->
+                <div class="screen" id="screen-dashboard-ellis">
+                    <div class="header">
+                        <div class="logo">PEA</div>
+                        <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Get Help</button>
+                    </div>
+                    <div class="greeting">Hi, Jennifer 👋</div>
+                    <div class="subtext">Here's where you are in your journey</div>
+
+                    <div class="progress-card clickable" onclick="goToScreen('screen-action-plan')">
+                        <div class="progress-header">
+                            <strong>Find Apartment with Voucher</strong>
+                            <span style="color: #666; font-size: 0.9em;">Step 4 of 7</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 57%;"></div>
+                        </div>
+                        <div style="margin-top: 12px;">
+                            <strong style="color: #667eea;">Next: Share profile with landlords</strong>
+                        </div>
+                        <button class="btn-primary" style="margin-top: 12px;">Continue</button>
+                    </div>
+
+                    <div style="background: #17a2b8; color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                        <strong style="display: block; margin-bottom: 5px;">✓ Your tenant profile is ready!</strong>
+                        <div style="font-size: 0.92em;">Landlords can see your credentials before meeting you</div>
+                    </div>
+
+                    <div style="font-weight: bold; margin-bottom: 12px;">Recommended Apartments</div>
+                    <div class="action-card clickable" onclick="goToScreen('screen-listing-detail')">
+                        <div class="action-title">2BR in Manhattan - $2,400/mo</div>
+                        <div class="action-desc">
+                            ✓ Accepts vouchers • 4.5★ landlord rating<br>
+                            <span style="color: #28a745; font-weight: bold;">No broker fee</span>
+                        </div>
+                    </div>
+                    <div class="action-card clickable" onclick="goToScreen('screen-listing-detail')">
+                        <div class="action-title">1BR in Upper West Side - $2,100/mo</div>
+                        <div class="action-desc">
+                            ✓ Accepts vouchers • 4.2★ landlord rating<br>
+                            Responds within 24 hours
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 5: Action Plan -->
+                <div class="screen" id="screen-action-plan">
+                    <div class="header">
+                        <button class="back-button clickable" onclick="goToScreen('screen-dashboard')">← Back</button>
+                        <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Get Help</button>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div style="font-size: 1.4em; font-weight: bold;">Emergency Housing</div>
+                        <div style="color: #666; font-size: 0.95em;">2 of 5 steps</div>
+                    </div>
+
+                    <div class="progress-bar" style="margin-bottom: 20px;">
+                        <div class="progress-fill" style="width: 40%;"></div>
+                    </div>
+
+                    <div class="step-list">
+                        <div class="step-item completed">
+                            <div class="step-number completed">✓</div>
+                            <div class="step-content">
+                                <div class="step-title">Call DHS Hotline</div>
+                                <div class="step-desc">You called and got your reference number</div>
+                            </div>
+                        </div>
+
+                        <div class="step-item current">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Gather Required Documents</div>
+                                <div class="step-desc">
+                                    You need 4 documents for your intake appointment
+                                </div>
+                                <button class="btn-primary" style="margin-top: 10px;" onclick="goToScreen('screen-documents')">📸 Upload Documents</button>
+                                <button class="btn-secondary">❓ I'm missing a document</button>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Go to Intake Center</div>
+                                <div class="step-desc">We'll help you prepare when you're ready</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn-secondary" onclick="goToScreen('screen-support')">💬 I'm stuck - talk to someone</button>
+                    </div>
+                </div>
+
+                <!-- Screen 6: Human Support Hub -->
+                <div class="screen" id="screen-support">
+                    <div class="header">
+                        <button class="back-button clickable" onclick="history.back()">← Back</button>
+                        <button class="help-button" style="background: #28a745;">✓ Help Active</button>
+                    </div>
+
+                    <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 12px;">
+                        How can we help you?
+                    </div>
+                    <div class="subtext">Choose the way that works best for you</div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                        <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer;" class="clickable" onclick="goToScreen('screen-chat')">
+                            <div style="font-size: 2.8em; margin-bottom: 10px;">💬</div>
+                            <div style="font-weight: bold; margin-bottom: 5px;">Live Chat</div>
+                            <div style="font-size: 0.85em; color: #666;">Response: 2 min</div>
+                            <div style="color: #28a745; font-weight: bold; font-size: 0.88em; margin-top: 5px;">● Available now</div>
+                        </div>
+
+                        <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer;" class="clickable">
+                            <div style="font-size: 2.8em; margin-bottom: 10px;">📞</div>
+                            <div style="font-weight: bold; margin-bottom: 5px;">Phone Call</div>
+                            <div style="font-size: 0.85em; color: #666;">Response: 5 min</div>
+                            <div style="color: #28a745; font-weight: bold; font-size: 0.88em; margin-top: 5px;">● Available now</div>
+                        </div>
+
+                        <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer;" class="clickable">
+                            <div style="font-size: 2.8em; margin-bottom: 10px;">📹</div>
+                            <div style="font-weight: bold; margin-bottom: 5px;">Video Call</div>
+                            <div style="font-size: 0.85em; color: #666;">Response: 10 min</div>
+                            <div style="color: #28a745; font-weight: bold; font-size: 0.88em; margin-top: 5px;">● Available now</div>
+                        </div>
+
+                        <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer;" class="clickable">
+                            <div style="font-size: 2.8em; margin-bottom: 10px;">📱</div>
+                            <div style="font-weight: bold; margin-bottom: 5px;">Text Message</div>
+                            <div style="font-size: 0.85em; color: #666;">Response: 1 hour</div>
+                            <div style="color: #666; font-size: 0.88em; margin-top: 5px;">Available 24/7</div>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 2px solid #e9ecef; margin: 20px 0;"></div>
+
+                    <div style="background: #dc3545; color: white; padding: 18px; border-radius: 10px;">
+                        <strong style="display: block; margin-bottom: 5px; font-size: 1.1em;">🚨 In Crisis?</strong>
+                        <div style="font-size: 0.92em; margin-bottom: 12px;">Call 311 for immediate emergency housing</div>
+                        <button class="btn-primary" style="background: white; color: #dc3545;">📞 Call 311 Now</button>
+                    </div>
+                </div>
+
+                <!-- Screen 7: Live Chat -->
+                <div class="screen" id="screen-chat">
+                    <div class="header">
+                        <button class="back-button clickable" onclick="goToScreen('screen-support')">← Back</button>
+                        <div style="color: #28a745; font-weight: bold; font-size: 0.95em;">✓ Connected</div>
+                    </div>
+
+                    <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 18px;">
+                        Chat with Maria
+                    </div>
+
+                    <div style="border: 2px solid #ddd; border-radius: 12px; padding: 18px; margin-bottom: 20px; background: #f8f9fa; height: 400px; overflow-y: auto;">
+                        <div style="background: #e7f3ff; padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+                            <div style="font-weight: bold; font-size: 0.88em; margin-bottom: 5px;">Maria (Housing Counselor)</div>
+                            <div style="font-size: 0.95em;">
+                                Hi! I'm here to help. I see you're on Step 2 of your emergency housing application. What can I clarify for you?
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+                            <div style="font-weight: bold; font-size: 0.88em; margin-bottom: 5px;">You</div>
+                            <div style="font-size: 0.95em;">
+                                I don't have a social security card. Can I still apply?
+                            </div>
+                        </div>
+
+                        <div style="background: #e7f3ff; padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+                            <div style="font-weight: bold; font-size: 0.88em; margin-bottom: 5px;">Maria (Housing Counselor)</div>
+                            <div style="font-size: 0.95em;">
+                                Yes! You have options. You can bring a letter from Social Security Administration showing your number, or we can help you get a replacement card. Which would work better for you?
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" placeholder="Type your message..." style="flex: 1; padding: 12px; border: 2px solid #ddd; border-radius: 10px;">
+                        <button class="btn-primary" style="width: auto; padding: 12px 22px;">Send</button>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button class="btn-secondary">🎤 Use voice instead</button>
+                    </div>
+                </div>
+
+                <!-- Screen 8: Search -->
+                <div class="screen" id="screen-search">
+                    <div class="header">
+                        <button class="back-button clickable" onclick="goToScreen('screen-dashboard')">← Back</button>
+                        <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Get Help</button>
+                    </div>
+
+                    <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 18px;">
+                        Find Housing
+                    </div>
+
+                    <div class="search-bar">
+                        <input type="text" class="search-input" placeholder="Search by neighborhood, address...">
+                        <button class="search-button">🔍</button>
+                    </div>
+
+                    <div class="filter-chips">
+                        <div class="filter-chip active">✓ No broker fee</div>
+                        <div class="filter-chip">Accepts vouchers</div>
+                        <div class="filter-chip">Accessible</div>
+                        <div class="filter-chip">Pet-friendly</div>
+                    </div>
+
+                    <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 12px; padding: 18px; margin-bottom: 20px;">
+                        <div style="margin-bottom: 15px;">
+                            <label style="font-weight: bold; margin-bottom: 10px; display: block; font-size: 0.95em;">Price Range</label>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <input type="text" placeholder="Min" style="flex: 1; padding: 10px; border: 2px solid #ddd; border-radius: 8px;">
+                                <span>—</span>
+                                <input type="text" placeholder="Max" style="flex: 1; padding: 10px; border: 2px solid #ddd; border-radius: 8px;">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label style="font-weight: bold; margin-bottom: 10px; display: block; font-size: 0.95em;">Bedrooms</label>
+                            <div style="display: flex; gap: 10px;">
+                                <div class="filter-chip">Studio</div>
+                                <div class="filter-chip active">1BR</div>
+                                <div class="filter-chip">2BR</div>
+                                <div class="filter-chip">3BR+</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary" onclick="goToScreen('screen-results')">Show 24 Results</button>
+                    <button class="btn-secondary" style="background: #f8f9fa; color: #666; border-color: #ddd;">Reset Filters</button>
+                </div>
+
+                <!-- Screen 9: Search Results -->
+                <div class="screen" id="screen-results">
+                    <div class="header">
+                        <button class="back-button clickable" onclick="goToScreen('screen-search')">← Back</button>
+                        <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Get Help</button>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 0.95em;">
+                        <div style="color: #666;">24 apartments found</div>
+                        <select style="padding: 8px 12px; border: 2px solid #ddd; border-radius: 8px; background: white;">
+                            <option>No-fee first</option>
+                            <option>Lowest price</option>
+                            <option>Best rated</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-chips">
+                        <div class="filter-chip active">✓ No fee</div>
+                        <div class="filter-chip active">✓ Vouchers</div>
+                        <div class="filter-chip clickable">+ Edit</div>
+                    </div>
+
+                    <div class="listing-card clickable" onclick="goToScreen('screen-listing-detail')">
+                        <div class="listing-header">
+                            <div class="listing-price">$2,400/mo</div>
+                            <div class="listing-badge">No Fee</div>
+                        </div>
+                        <div class="listing-title">2 Bedroom in Upper Manhattan</div>
+                        <div class="listing-address">📍 West 145th Street, Manhattan</div>
+                        <div class="listing-features">
+                            <span>🛏️ 2 BR</span>
+                            <span>🚿 1 Bath</span>
+                            <span>📏 850 sq ft</span>
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <span class="listing-badge voucher">Accepts Vouchers</span>
+                        </div>
+                        <div class="listing-landlord">
+                            <span>Martinez Properties</span>
+                            <span class="rating-stars">★★★★★</span>
+                            <span style="color: #666;">4.8</span>
+                        </div>
+                    </div>
+
+                    <div class="listing-card clickable" onclick="goToScreen('screen-listing-detail')">
+                        <div class="listing-header">
+                            <div class="listing-price">$2,600/mo</div>
+                            <div class="listing-badge">No Fee</div>
+                        </div>
+                        <div class="listing-title">1 Bedroom in Brooklyn</div>
+                        <div class="listing-address">📍 Bedford Ave, Brooklyn</div>
+                        <div class="listing-features">
+                            <span>🛏️ 1 BR</span>
+                            <span>🚿 1 Bath</span>
+                            <span>📏 650 sq ft</span>
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <span class="listing-badge voucher">Accepts Vouchers</span>
+                        </div>
+                        <div class="listing-landlord">
+                            <span>Brooklyn Housing Co.</span>
+                            <span class="rating-stars">★★★★☆</span>
+                            <span style="color: #666;">4.2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 10: Listing Detail -->
+                <div class="screen" id="screen-listing-detail">
+                    <div class="header">
+                        <button class="back-button clickable" onclick="goToScreen('screen-results')">← Back</button>
+                        <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Get Help</button>
+                    </div>
+
+                    <div style="width: 100%; height: 220px; background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 4em; color: #adb5bd; margin-bottom: 20px;">
+                        🏠
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
+                            <div class="listing-badge">No Broker Fee</div>
+                            <div class="listing-badge voucher">Accepts Vouchers</div>
+                        </div>
+                        <div style="font-size: 1.6em; font-weight: bold; margin-bottom: 8px;">2BR in Upper Manhattan</div>
+                        <div style="color: #666; margin-bottom: 15px;">📍 West 145th Street, Manhattan, NY 10031</div>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <div style="font-size: 1.9em; font-weight: bold; color: #667eea; margin-bottom: 5px;">$2,400/mo</div>
+                        <div style="font-size: 0.92em; color: #666;">
+                            First month: $2,400 • Security: $2,400<br>
+                            <strong>Total move-in: $4,800</strong>
+                        </div>
+                    </div>
+
+                    <div style="background: #e7f3ff; border: 2px solid #0c5460; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+                        <div style="font-weight: bold; margin-bottom: 12px; color: #0c5460;">💰 Cost Comparison</div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95em;">
+                            <span>This apartment (no fee)</span>
+                            <span>$4,800</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.95em; color: #dc3545;">
+                            <span>Similar apt with broker</span>
+                            <span>$8,400</span>
+                        </div>
+                        <div style="background: #28a745; color: white; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold;">
+                            ✓ You save $3,600 with no-fee listing
+                        </div>
+                    </div>
+
+                    <button class="btn-primary">📧 Contact Landlord</button>
+                    <button class="btn-secondary">💾 Save for Later</button>
+                </div>
+
+                <!-- Screen 11: Document Manager -->
+                <div class="screen" id="screen-documents">
+                    <div class="header">
+                        <button class="back-button clickable" onclick="goToScreen('screen-dashboard')">← Back</button>
+                        <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Get Help</button>
+                    </div>
+
+                    <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 8px;">
+                        My Documents
+                    </div>
+                    <div style="color: #666; margin-bottom: 20px; font-size: 0.95em;">
+                        Keep all your housing documents in one place
+                    </div>
+
+                    <div style="background: #d4edda; border: 2px solid #28a745; padding: 14px; border-radius: 10px; margin-bottom: 20px;">
+                        <strong>✓ 4 of 6 documents ready</strong>
+                        <div style="font-size: 0.88em; margin-top: 5px;">You're almost done! Just 2 more to go.</div>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; align-items: center; gap: 15px; background: #d4edda; border: 2px solid #28a745; border-radius: 12px; padding: 16px; margin-bottom: 12px;">
+                            <div style="width: 50px; height: 50px; background: #28a745; color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.6em; flex-shrink: 0;">✓</div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: bold; margin-bottom: 5px;">Photo ID</div>
+                                <div style="font-size: 0.88em; color: #666;">Uploaded Oct 15, 2025</div>
+                            </div>
+                            <button style="background: #28a745; color: white; border: none; padding: 9px 18px; border-radius: 8px; font-size: 0.88em; cursor: pointer;">View</button>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 15px; background: #d4edda; border: 2px solid #28a745; border-radius: 12px; padding: 16px; margin-bottom: 12px;">
+                            <div style="width: 50px; height: 50px; background: #28a745; color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.6em; flex-shrink: 0;">✓</div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: bold; margin-bottom: 5px;">Proof of Income</div>
+                                <div style="font-size: 0.88em; color: #666;">Uploaded Oct 16, 2025</div>
+                            </div>
+                            <button style="background: #28a745; color: white; border: none; padding: 9px 18px; border-radius: 8px; font-size: 0.88em; cursor: pointer;">View</button>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 15px; background: #fff3cd; border: 2px solid #ffc107; border-radius: 12px; padding: 16px; margin-bottom: 12px;">
+                            <div style="width: 50px; height: 50px; background: #e9ecef; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.6em; flex-shrink: 0;">📄</div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: bold; margin-bottom: 5px;">Proof of Residency</div>
+                                <div style="font-size: 0.88em; color: #666;">Not uploaded yet</div>
+                            </div>
+                            <button style="background: #667eea; color: white; border: none; padding: 9px 18px; border-radius: 8px; font-size: 0.88em; cursor: pointer;" onclick="goToScreen('screen-upload')">Upload</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-secondary">➕ Add Another Document</button>
+                </div>
+
+                <!-- Screen 12: Document Upload -->
+                <div class="screen" id="screen-upload">
+                    <div class="header">
+                        <button class="back-button clickable" onclick="goToScreen('screen-documents')">← Back</button>
+                        <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Get Help</button>
+                    </div>
+
+                    <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 18px;">
+                        Upload Document
+                    </div>
+
+                    <div style="border: 3px dashed #ddd; border-radius: 12px; padding: 50px 20px; text-align: center; background: #f8f9fa; margin-bottom: 20px; cursor: pointer;" class="clickable">
+                        <div style="font-size: 3.5em; margin-bottom: 12px; color: #adb5bd;">📸</div>
+                        <div style="font-weight: bold; margin-bottom: 8px;">Take a photo or choose file</div>
+                        <div style="font-size: 0.88em; color: #666;">JPG, PNG, PDF up to 10MB</div>
+                    </div>
+
+                    <div style="font-weight: bold; margin-bottom: 12px;">Quick Upload Options:</div>
+
+                    <button class="btn-primary">📸 Take Photo Now</button>
+                    <button class="btn-secondary">📁 Choose from Files</button>
+                    <button class="btn-secondary">☁️ Import from Cloud</button>
+
+                    <div style="border-top: 2px solid #e9ecef; margin: 20px 0;"></div>
+
+                    <div style="font-weight: bold; margin-bottom: 12px;">Don't have this document?</div>
+
+                    <div style="background: white; border: 2px solid #ddd; border-radius: 12px; padding: 14px; margin-bottom: 12px; cursor: pointer;" class="clickable">
+                        <div style="font-weight: bold; margin-bottom: 5px;">❓ How to get Proof of Residency</div>
+                        <div style="font-size: 0.88em; color: #666;">
+                            Learn what counts as proof and where to get it
+                        </div>
+                    </div>
+
+                    <div style="background: white; border: 2px solid #ddd; border-radius: 12px; padding: 14px; cursor: pointer;" class="clickable" onclick="goToScreen('screen-support')">
+                        <div style="font-weight: bold; margin-bottom: 5px;">💬 Ask a housing counselor</div>
+                        <div style="font-size: 0.88em; color: #666;">
+                            Get help understanding what you need
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPersona = 'mr-l';
+        let screenHistory = [];
+
+        const personaFlows = {
+            'mr-l': {
+                name: 'Mr. L - Emergency Housing',
+                description: 'Emergency housing seeker. Needs simplicity and human support.',
+                dashboard: 'screen-dashboard'
+            },
+            'ms-ellis': {
+                name: 'Ms. Ellis - Voucher Holder',
+                description: 'Voucher holder seeking apartment. Needs landlord engagement.',
+                dashboard: 'screen-dashboard-ellis'
+            },
+            'mr-patterson': {
+                name: 'Mr. Patterson - No-Fee Search',
+                description: 'Professional seeking no-fee apartments. Wants efficiency.',
+                dashboard: 'screen-dashboard'
+            }
+        };
+
+        const screenNames = {
+            'screen-welcome': 'Welcome / Onboarding',
+            'screen-assessment': 'Needs Assessment',
+            'screen-dashboard': 'Dashboard (Mr. L)',
+            'screen-dashboard-ellis': 'Dashboard (Ms. Ellis)',
+            'screen-action-plan': 'Action Plan',
+            'screen-support': 'Human Support Hub',
+            'screen-chat': 'Live Chat',
+            'screen-search': 'Search & Filter',
+            'screen-results': 'Search Results',
+            'screen-listing-detail': 'Listing Detail',
+            'screen-documents': 'Document Manager',
+            'screen-upload': 'Document Upload'
+        };
+
+        function goToScreen(screenId) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+
+            // Show target screen
+            const targetScreen = document.getElementById(screenId);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+
+                // Add to history
+                if (screenHistory[screenHistory.length - 1] !== screenId) {
+                    screenHistory.push(screenId);
+                }
+
+                // Update screen indicator
+                updateScreenIndicator(screenId);
+
+                // Scroll to top
+                targetScreen.scrollTop = 0;
+            }
+        }
+
+        function updateScreenIndicator(screenId) {
+            const screenNameElement = document.getElementById('current-screen-name');
+            if (screenNameElement) {
+                screenNameElement.textContent = screenNames[screenId] || screenId;
+            }
+        }
+
+        function selectPersona(persona) {
+            currentPersona = persona;
+
+            // Update button states
+            document.querySelectorAll('.persona-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.persona-btn').classList.add('active');
+
+            // Update flow info
+            const flowInfo = document.getElementById('flow-info');
+            const personaData = personaFlows[persona];
+            flowInfo.innerHTML = `<strong>Current Flow: ${personaData.name}</strong>${personaData.description}`;
+
+            // Go to appropriate dashboard
+            if (persona === 'ms-ellis') {
+                goToScreen('screen-dashboard-ellis');
+            } else {
+                goToScreen('screen-dashboard');
+            }
+        }
+
+        function selectNeed(need) {
+            if (need === 'emergency') {
+                goToScreen('screen-dashboard');
+            } else if (need === 'voucher') {
+                goToScreen('screen-dashboard-ellis');
+            } else if (need === 'permanent') {
+                goToScreen('screen-search');
+            }
+        }
+
+        function resetFlow() {
+            screenHistory = [];
+            goToScreen('screen-welcome');
+        }
+
+        // Handle browser back button
+        history.back = function() {
+            if (screenHistory.length > 1) {
+                screenHistory.pop(); // Remove current
+                const previousScreen = screenHistory[screenHistory.length - 1];
+                // Remove from history since goToScreen will add it
+                screenHistory.pop();
+                goToScreen(previousScreen);
+            }
+        };
+
+        // Initialize
+        updateScreenIndicator('screen-welcome');
+        screenHistory.push('screen-welcome');
+    </script>
+</body>
+</html>

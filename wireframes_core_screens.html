@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEA Wireframes - Core Screens</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tabs button {
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-tabs button:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .nav-tabs button.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .wireframe-container {
+            display: none;
+        }
+
+        .wireframe-container.active {
+            display: block;
+        }
+
+        .wireframe-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .phone-frame {
+            background: white;
+            border: 3px solid #333;
+            border-radius: 30px;
+            padding: 50px 20px 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+        }
+
+        .annotations {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .annotations h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .annotation-item {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .annotation-item::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .annotation-item strong {
+            color: #667eea;
+        }
+
+        .research-note {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 0.95em;
+            color: #0c5460;
+        }
+
+        /* Wireframe Components */
+        .wireframe {
+            background: white;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 30px;
+            background: #667eea;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .help-button {
+            background: #ffc107;
+            color: #000;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .greeting {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .subtext {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        .progress-card {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #28a745;
+        }
+
+        .step-indicator {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .action-card {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .action-card:hover {
+            background: #f0f0ff;
+        }
+
+        .action-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .action-desc {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quick-action-btn {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 0.85em;
+            cursor: pointer;
+        }
+
+        .quick-action-btn:hover {
+            border-color: #667eea;
+        }
+
+        .icon {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .notification-badge {
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            margin-left: 5px;
+        }
+
+        .step-list {
+            margin-bottom: 20px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .step-item.completed {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .step-item.current {
+            border-color: #667eea;
+            border-width: 3px;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-number.completed {
+            background: #28a745;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .step-desc {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .community-tip {
+            background: #fff3cd;
+            border-left: 3px solid #ffc107;
+            padding: 8px;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+
+        .verified-badge {
+            color: #28a745;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .support-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .support-card {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .support-card:hover {
+            border-color: #667eea;
+            background: #f0f0ff;
+        }
+
+        .support-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .support-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .support-time {
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .available-now {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+
+        .chat-window {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+        }
+
+        .chat-message {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .chat-message.support {
+            background: #e7f3ff;
+        }
+
+        .message-sender {
+            font-weight: bold;
+            font-size: 0.85em;
+            margin-bottom: 5px;
+        }
+
+        .message-text {
+            font-size: 0.9em;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .onboarding-screen {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .onboarding-image {
+            width: 200px;
+            height: 200px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+        }
+
+        .onboarding-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .onboarding-desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .indicator-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #ddd;
+            border-radius: 50%;
+        }
+
+        .dot.active {
+            background: #667eea;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .skip-button {
+            color: #667eea;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .needs-assessment {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option-btn:hover {
+            border-color: #667eea;
+            background: #f0f0ff;
+        }
+
+        .emergency-banner {
+            background: #dc3545;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .emergency-banner strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .faq-item {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #667eea;
+            cursor: pointer;
+        }
+
+        .faq-answer {
+            font-size: 0.85em;
+            color: #666;
+            display: none;
+        }
+
+        .divider {
+            border-top: 2px solid #ddd;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 1200px) {
+            .wireframe-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PEA Core Wireframes</h1>
+        <p class="subtitle">Low-Fidelity Mockups - Phase 1</p>
+
+        <div class="nav-tabs">
+            <button class="active" onclick="showWireframe('onboarding')">1. Onboarding</button>
+            <button onclick="showWireframe('dashboard')">2. Dashboard</button>
+            <button onclick="showWireframe('action-plan')">3. Action Plan</button>
+            <button onclick="showWireframe('human-support')">4. Human Support</button>
+        </div>
+
+        <!-- Wireframe 1: Onboarding -->
+        <div class="wireframe-container active" id="onboarding">
+            <h2 style="margin-bottom: 30px; color: #333;">Wireframe 1: Onboarding Flow</h2>
+
+            <div class="wireframe-wrapper">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="onboarding-screen">
+                            <div class="onboarding-image">🏠</div>
+                            <div class="onboarding-title">Welcome to People Empowering App</div>
+                            <div class="onboarding-desc">
+                                We're here to help you find housing in NYC. No confusing forms. No overwhelming lists. Just clear steps and real support.
+                            </div>
+                            <div class="indicator-dots">
+                                <div class="dot active"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                            <button class="btn-primary">Get Started</button>
+                            <button class="skip-button">Skip intro</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Onboarding Screen 1</h3>
+                    <div class="annotation-item">
+                        <strong>Simple, friendly language:</strong> "No confusing forms. No overwhelming lists."
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Mr. L said "Don't make me more confused" - this sets expectations immediately.
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Skip option:</strong> Respects user autonomy (trauma-informed design)
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Visual metaphor:</strong> House emoji = housing (universal, accessible)
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Progress dots:</strong> Shows 3 screens only - keeps it short
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 25% users are "somewhat uncomfortable" with apps - onboarding builds confidence
+                    </div>
+                </div>
+            </div>
+
+            <div class="wireframe-wrapper" style="margin-top: 40px;">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <div class="logo">PEA</div>
+                            <button class="help-button">💬 Need Help?</button>
+                        </div>
+
+                        <div class="onboarding-screen" style="text-align: left;">
+                            <div class="onboarding-title" style="text-align: center; margin-bottom: 20px;">
+                                What brings you here today?
+                            </div>
+
+                            <div class="needs-assessment">
+                                <div class="question">I need help with:</div>
+                                <button class="option-btn">
+                                    <strong>🚨 Emergency housing</strong><br>
+                                    <span style="font-size: 0.85em; color: #666;">I need a place to stay tonight</span>
+                                </button>
+                                <button class="option-btn">
+                                    <strong>🏘️ Finding an apartment</strong><br>
+                                    <span style="font-size: 0.85em; color: #666;">I'm looking for permanent housing</span>
+                                </button>
+                                <button class="option-btn">
+                                    <strong>🎫 Using a housing voucher</strong><br>
+                                    <span style="font-size: 0.85em; color: #666;">I have a voucher and need to find a landlord</span>
+                                </button>
+                                <button class="option-btn">
+                                    <strong>❓ I'm not sure</strong><br>
+                                    <span style="font-size: 0.85em; color: #666;">Let me talk to someone</span>
+                                </button>
+                            </div>
+
+                            <div class="indicator-dots">
+                                <div class="dot"></div>
+                                <div class="dot active"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Needs Assessment</h3>
+                    <div class="annotation-item">
+                        <strong>Help button always visible:</strong> Header position, bright yellow
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 100% want option to speak with real person - accessible from first screen
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Large touch targets:</strong> Easy to tap, reduces errors
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Icons + text:</strong> Supports multiple literacy levels
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Emergency prioritized:</strong> First option for users in crisis (Mr. L's situation)
+                    </div>
+                    <div class="annotation-item">
+                        <strong>"I'm not sure" option:</strong> No wrong answer, connects to human immediately
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 67% felt lost - this prevents that feeling from the start
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Proactive suggestions start here:</strong> Based on selection, app will suggest resources
+                    </div>
+                </div>
+            </div>
+
+            <div class="wireframe-wrapper" style="margin-top: 40px;">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="onboarding-screen">
+                            <div class="onboarding-image">✓</div>
+                            <div class="onboarding-title">You're All Set!</div>
+                            <div class="onboarding-desc">
+                                We've created your personal action plan. You'll see clear steps, and you can always chat with someone if you get stuck.
+                            </div>
+                            <div class="indicator-dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot active"></div>
+                            </div>
+                            <button class="btn-primary">View My Action Plan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Onboarding Complete</h3>
+                    <div class="annotation-item">
+                        <strong>Immediate value:</strong> "We've created your personal action plan" - not just registration
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Reassurance:</strong> "you can always chat with someone if you get stuck"
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Mr. L felt "lost and unsupported" - this promises he won't be
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Clear CTA:</strong> "View My Action Plan" = specific, not vague "Continue"
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Checkmark icon:</strong> Visual progress, builds confidence
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wireframe 2: Dashboard -->
+        <div class="wireframe-container" id="dashboard">
+            <h2 style="margin-bottom: 30px; color: #333;">Wireframe 2: Dashboard (Home Screen)</h2>
+
+            <div class="wireframe-wrapper">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <div class="logo">PEA</div>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div class="greeting">Hi, Louis 👋</div>
+                        <div class="subtext">Here's where you are in your journey</div>
+
+                        <div class="progress-card">
+                            <div class="progress-header">
+                                <strong>Emergency Housing Application</strong>
+                                <span class="step-indicator">Step 2 of 5</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <strong style="color: #667eea;">Next: Upload required documents</strong>
+                            </div>
+                            <button class="btn-primary" style="margin-top: 10px;">Continue</button>
+                        </div>
+
+                        <div style="font-weight: bold; margin-bottom: 10px;">Quick Actions</div>
+                        <div class="quick-actions">
+                            <div class="quick-action-btn">
+                                <div class="icon">🔍</div>
+                                <div>Find Housing</div>
+                            </div>
+                            <div class="quick-action-btn">
+                                <div class="icon">📄</div>
+                                <div>My Documents</div>
+                            </div>
+                            <div class="quick-action-btn">
+                                <div class="icon">📞</div>
+                                <div>Talk to Someone</div>
+                            </div>
+                            <div class="quick-action-btn">
+                                <div class="icon">🔔</div>
+                                <div>Notifications <span class="notification-badge">2</span></div>
+                            </div>
+                        </div>
+
+                        <div style="font-weight: bold; margin-bottom: 10px;">Suggested for You</div>
+                        <div class="action-card">
+                            <div class="action-title">📋 Complete your profile</div>
+                            <div class="action-desc">This helps us give you better recommendations</div>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-title">💰 Check if you qualify for rental assistance</div>
+                            <div class="action-desc">You might be eligible for programs you don't know about</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Dashboard</h3>
+                    <div class="annotation-item">
+                        <strong>Personal greeting:</strong> Uses first name to humanize experience
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Progress front and center:</strong> Shows exactly where user is
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 100% want step-by-step guidance - progress card is primary element
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Clear next action:</strong> "Next: Upload required documents" - no guessing
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Help button persistent:</strong> Always in header (100% want this option)
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Quick actions:</strong> Common tasks accessible in one tap
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Notification badge:</strong> Draws attention to important updates
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Proactive suggestions validated - "Suggested for You" section
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Icons for scannability:</strong> Users can quickly identify sections
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Explains benefits:</strong> "This helps us..." - builds trust through transparency
+                    </div>
+                </div>
+            </div>
+
+            <div class="wireframe-wrapper" style="margin-top: 40px;">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <div class="logo">PEA</div>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div class="greeting">Dashboard - Ms. Ellis</div>
+                        <div class="subtext">Voucher holder view</div>
+
+                        <div class="progress-card">
+                            <div class="progress-header">
+                                <strong>Find Apartment with Voucher</strong>
+                                <span class="step-indicator">Step 4 of 7</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 57%;"></div>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <strong style="color: #667eea;">Next: Share profile with landlords</strong>
+                            </div>
+                            <button class="btn-primary" style="margin-top: 10px;">Continue</button>
+                        </div>
+
+                        <div class="emergency-banner" style="background: #17a2b8;">
+                            <strong>✓ Your tenant profile is ready!</strong>
+                            <div style="font-size: 0.9em;">Landlords can see your credentials before meeting you</div>
+                        </div>
+
+                        <div style="font-weight: bold; margin-bottom: 10px;">Recommended Apartments</div>
+                        <div class="action-card">
+                            <div class="action-title">2BR in Manhattan - $2,400/mo</div>
+                            <div class="action-desc">
+                                ✓ Accepts vouchers • 4.5★ landlord rating<br>
+                                <span style="color: #28a745; font-weight: bold;">No broker fee</span>
+                            </div>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-title">1BR in Upper West Side - $2,100/mo</div>
+                            <div class="action-desc">
+                                ✓ Accepts vouchers • 4.2★ landlord rating<br>
+                                Responds within 24 hours
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Dashboard (Ms. Ellis View)</h3>
+                    <div class="annotation-item">
+                        <strong>Personalized to journey:</strong> Different users see different dashboards
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Profile completion highlight:</strong> Celebrates progress, builds confidence
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Ms. Ellis's #1 request: "landlords to have information before meeting" - status banner shows this
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Voucher-accepting apartments:</strong> Filtered automatically, no discrimination risk
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Landlord ratings visible:</strong> Community-powered trust building
+                    </div>
+                    <div class="annotation-item">
+                        <strong>No broker fee highlighted:</strong> Addresses Mr. Patterson's concern too
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Mr. Patterson's #1 priority - "avoid large broker fees"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wireframe 3: Action Plan -->
+        <div class="wireframe-container" id="action-plan">
+            <h2 style="margin-bottom: 30px; color: #333;">Wireframe 3: Step-by-Step Action Plan</h2>
+
+            <div class="wireframe-wrapper">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <div class="logo">PEA</div>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <div style="font-size: 1.3em; font-weight: bold;">Emergency Housing</div>
+                            <div style="color: #666; font-size: 0.9em;">2 of 5 steps</div>
+                        </div>
+
+                        <div class="progress-bar" style="margin-bottom: 20px;">
+                            <div class="progress-fill" style="width: 40%;"></div>
+                        </div>
+
+                        <div class="step-list">
+                            <div class="step-item completed">
+                                <div class="step-number completed">✓</div>
+                                <div class="step-content">
+                                    <div class="step-title">Call DHS Hotline</div>
+                                    <div class="step-desc">You called and got your reference number</div>
+                                </div>
+                            </div>
+
+                            <div class="step-item current">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <div class="step-title">Gather Required Documents</div>
+                                    <div class="step-desc">
+                                        You need these 4 documents for your intake appointment:
+                                        <ul style="margin: 8px 0 8px 20px; font-size: 0.9em;">
+                                            <li>Photo ID (driver's license or state ID)</li>
+                                            <li>Proof of income (pay stubs, benefit letter)</li>
+                                            <li>Proof of NYC residency</li>
+                                            <li>Social Security card</li>
+                                        </ul>
+                                    </div>
+                                    <div class="community-tip">
+                                        💡 <strong>Tip from others:</strong> Bring extra copies of everything. The office doesn't have a copier.
+                                        <span class="verified-badge">✓ Verified by official source</span>
+                                    </div>
+                                    <button class="btn-primary" style="margin-top: 10px;">📸 Upload Documents</button>
+                                    <button class="btn-secondary">❓ I'm missing a document</button>
+                                </div>
+                            </div>
+
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <div class="step-title">Go to Intake Center</div>
+                                    <div class="step-desc">We'll help you prepare when you're ready</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn-secondary">💬 I'm stuck - talk to someone</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Action Plan View</h3>
+                    <div class="annotation-item">
+                        <strong>Visual progress:</strong> Progress bar + "2 of 5" = multiple ways to understand
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 100% found step-by-step plans valuable - this is the core feature
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Completed steps shown:</strong> Builds confidence, shows progress
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Current step highlighted:</strong> Thick border, white background = clear focus
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Plain language:</strong> "You need these 4 documents" not "Required documentation"
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Specific, actionable:</strong> Lists exact documents, not vague categories
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 33% had missing documents as challenge - "I'm missing a document" button addresses this
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Community tips integrated:</strong> Real advice from peers
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Verification badge:</strong> 75% trust tips if verified - shows official confirmation
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Multiple CTAs:</strong> Upload docs OR get help if missing - no dead end
+                    </div>
+                    <div class="annotation-item">
+                        <strong>"I'm stuck" button prominent:</strong> 100% want human support option
+                    </div>
+                </div>
+            </div>
+
+            <div class="wireframe-wrapper" style="margin-top: 40px;">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <div class="logo">PEA</div>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 15px;">
+                            Missing a Document?
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                            <div style="font-weight: bold; margin-bottom: 10px;">Which document do you need help with?</div>
+                            <button class="option-btn">Photo ID</button>
+                            <button class="option-btn">Proof of Income</button>
+                            <button class="option-btn">Proof of NYC Residency</button>
+                            <button class="option-btn">Social Security Card</button>
+                        </div>
+
+                        <div style="border: 2px solid #667eea; padding: 15px; border-radius: 10px; background: #f0f0ff;">
+                            <div style="font-weight: bold; margin-bottom: 10px;">How to Get Photo ID:</div>
+                            <div style="font-size: 0.9em; line-height: 1.6; color: #333;">
+                                <strong>Option 1: NYC ID Card (IDNYC)</strong><br>
+                                • Free for all NYC residents<br>
+                                • Accepted everywhere<br>
+                                <br>
+                                <strong>What you need:</strong><br>
+                                • Proof of identity (birth certificate, passport)<br>
+                                • Proof of residency (utility bill, lease)<br>
+                                <br>
+                                <strong>Where to go:</strong><br>
+                                IDNYC Enrollment Center<br>
+                                Hours: Mon-Fri 9am-5pm<br>
+                                <br>
+                                <button class="btn-primary">📍 Find Nearest Location</button>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn-secondary">💬 Still confused? Chat with us</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Missing Document Flow</h3>
+                    <div class="annotation-item">
+                        <strong>Contextual help:</strong> Clicked "I'm missing a document" → Gets specific guidance
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Choose your problem:</strong> Doesn't assume which document is missing
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Multiple options:</strong> Shows different ways to get same document
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Complete information:</strong> What you need, where to go, hours
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Mr. L cited "missing required documents" as top challenge - this removes that barrier
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Action button:</strong> "Find Nearest Location" = immediate next step
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Human backup:</strong> "Still confused?" connects to support
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wireframe 4: Human Support -->
+        <div class="wireframe-container" id="human-support">
+            <h2 style="margin-bottom: 30px; color: #333;">Wireframe 4: Human Support Hub</h2>
+
+            <div class="wireframe-wrapper">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <div class="logo">PEA</div>
+                            <button class="help-button" style="background: #28a745;">✓ Help Active</button>
+                        </div>
+
+                        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">
+                            How can we help you?
+                        </div>
+                        <div class="subtext">Choose the way that works best for you</div>
+
+                        <div class="support-options">
+                            <div class="support-card">
+                                <div class="support-icon">💬</div>
+                                <div class="support-label">Live Chat</div>
+                                <div class="support-time">Response: 2 min</div>
+                                <div class="available-now">● Available now</div>
+                            </div>
+
+                            <div class="support-card">
+                                <div class="support-icon">📞</div>
+                                <div class="support-label">Phone Call</div>
+                                <div class="support-time">Response: 5 min</div>
+                                <div class="available-now">● Available now</div>
+                            </div>
+
+                            <div class="support-card">
+                                <div class="support-icon">📹</div>
+                                <div class="support-label">Video Call</div>
+                                <div class="support-time">Response: 10 min</div>
+                                <div class="available-now">● Available now</div>
+                            </div>
+
+                            <div class="support-card">
+                                <div class="support-icon">📱</div>
+                                <div class="support-label">Text Message</div>
+                                <div class="support-time">Response: 1 hour</div>
+                                <div style="color: #666; font-size: 0.85em;">Available 24/7</div>
+                            </div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div style="font-weight: bold; margin-bottom: 10px;">Common Questions</div>
+                        <div class="faq-item">
+                            <div class="faq-question">❓ What documents do I need?</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">❓ How long does the process take?</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">❓ What if I was denied?</div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="emergency-banner">
+                            <strong>🚨 In Crisis?</strong>
+                            <div style="font-size: 0.9em;">Call 311 for immediate emergency housing</div>
+                            <button class="btn-primary" style="background: white; color: #dc3545; margin-top: 10px;">📞 Call 311 Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Human Support Hub</h3>
+                    <div class="annotation-item">
+                        <strong>Multiple support channels:</strong> Chat, phone, video, text
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Information preferences varied - 50% email, 25% each for other channels. Support must be multimodal.
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Response time visible:</strong> Sets expectations, reduces anxiety
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Availability status:</strong> "Available now" vs "24/7" - clear communication
+                    </div>
+                    <div class="annotation-item">
+                        <strong>FAQ before live support:</strong> Faster resolution for common questions
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Emergency option prominent:</strong> Crisis users (like Mr. L) get immediate help
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 100% want option to speak with real person - this screen delivers on that promise
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Button state change:</strong> "Get Help" → "Help Active" shows user is supported
+                    </div>
+                </div>
+            </div>
+
+            <div class="wireframe-wrapper" style="margin-top: 40px;">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <div class="logo">PEA</div>
+                            <div style="color: #28a745; font-weight: bold; font-size: 0.9em;">✓ Connected</div>
+                        </div>
+
+                        <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 15px;">
+                            Chat with Maria
+                        </div>
+
+                        <div class="chat-window">
+                            <div class="chat-message support">
+                                <div class="message-sender">Maria (Housing Counselor)</div>
+                                <div class="message-text">
+                                    Hi! I'm here to help. I see you're on Step 2 of your emergency housing application. What can I clarify for you?
+                                </div>
+                            </div>
+
+                            <div class="chat-message">
+                                <div class="message-sender">You</div>
+                                <div class="message-text">
+                                    I don't have a social security card. Can I still apply?
+                                </div>
+                            </div>
+
+                            <div class="chat-message support">
+                                <div class="message-sender">Maria (Housing Counselor)</div>
+                                <div class="message-text">
+                                    Yes! You have options. You can bring a letter from Social Security Administration showing your number, or we can help you get a replacement card. Which would work better for you?
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chat-input">
+                            <input type="text" placeholder="Type your message...">
+                            <button class="btn-primary" style="width: auto; padding: 10px 20px;">Send</button>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 15px;">
+                            <button class="btn-secondary">🎤 Use voice instead</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Live Chat</h3>
+                    <div class="annotation-item">
+                        <strong>Context-aware greeting:</strong> "I see you're on Step 2..." - counselor knows user's situation
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Named counselor:</strong> "Maria" not "Agent 437" - humanizes interaction
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Role visible:</strong> "(Housing Counselor)" builds credibility
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Empathetic response:</strong> "Yes! You have options." - positive, supportive
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Clear alternatives:</strong> Offers two paths, asks user preference
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> Mr. L said "Let me chat directly with someone" - this delivers exactly that
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Voice-to-text option:</strong> Accessibility feature for users uncomfortable typing
+                    </div>
+                    <div class="research-note">
+                        <strong>Research:</strong> 50% use voice-to-text messaging - should offer in chat too
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Connected status:</strong> Header shows "Connected" - reassures user
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showWireframe(id) {
+            // Hide all wireframes
+            document.querySelectorAll('.wireframe-container').forEach(container => {
+                container.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-tabs button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected wireframe
+            document.getElementById(id).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

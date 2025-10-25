@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEA Project - 10-Slide Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .presentation-wrapper {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .slide {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 4rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            min-height: 600px;
+            animation: slideIn 0.5s ease;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide h1 {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 1rem;
+        }
+
+        .slide h2 {
+            font-size: 2rem;
+            color: #5568d3;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .slide h3 {
+            font-size: 1.5rem;
+            color: #4c51bf;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .slide p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .slide ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #666;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .highlight-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box.warning {
+            background: #fffbeb;
+            border-left-color: #ffc107;
+        }
+
+        .highlight-box.success {
+            background: #f0fdf4;
+            border-left-color: #28a745;
+        }
+
+        .quote-box {
+            background: #fff9e6;
+            border: 3px solid #ffc107;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            text-align: center;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: #555;
+        }
+
+        .quote-author {
+            margin-top: 1rem;
+            font-weight: bold;
+            font-style: normal;
+            color: #667eea;
+        }
+
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .persona-card {
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .persona-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .persona-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .persona-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.25rem;
+        }
+
+        .persona-role {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .persona-quote {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: #f8f9ff;
+            border-radius: 6px;
+        }
+
+        .feature-list li {
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .pain-list li {
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .pain-list li:before {
+            content: "⚠";
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .nav-btn {
+            padding: 1rem 2rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            font-size: 1.2rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .title-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 600px;
+        }
+
+        .title-slide h1 {
+            font-size: 4rem;
+            border: none;
+            margin-bottom: 1rem;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .principle-box {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .principle-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .principle-desc {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 2rem;
+                min-height: auto;
+            }
+
+            .slide h1 {
+                font-size: 2rem;
+            }
+
+            .title-slide h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid, .persona-grid, .grid-2col {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .slide {
+                display: block !important;
+                page-break-after: always;
+                box-shadow: none;
+                margin-bottom: 2rem;
+            }
+
+            .navigation {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-wrapper">
+
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <h1>People Empowering App</h1>
+            <p class="subtitle">Empowering NYC Residents to Navigate Housing Insecurity</p>
+            <div class="stats-grid" style="margin-top: 3rem;">
+                <div class="stat-box">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Research Participants</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">User Personas</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Wireframe Screens</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Feature Validation</div>
+                </div>
+            </div>
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousSlide()" disabled>← Previous</button>
+                <span class="slide-counter">Slide <span id="current-slide">1</span> of 10</span>
+                <button class="nav-btn" onclick="nextSlide()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Problem -->
+        <div class="slide">
+            <h1>The Problem</h1>
+            <p>Housing insecurity in New York City is a complex, multi-faceted challenge affecting thousands of residents. Current resources are fragmented, overwhelming, and often inaccessible to those who need them most.</p>
+
+            <h2>Critical Pain Points</h2>
+            <ul class="pain-list">
+                <li><strong>Information Overload:</strong> Too many disconnected resources and websites</li>
+                <li><strong>System Complexity:</strong> Navigating government programs requires expertise</li>
+                <li><strong>Landlord Discrimination:</strong> Voucher holders face systemic rejection</li>
+                <li><strong>Hidden Costs:</strong> Broker fees can equal 15% of annual rent</li>
+                <li><strong>Lack of Human Support:</strong> Critical need for guidance and emotional support</li>
+            </ul>
+
+            <div class="quote-box">
+                "Don't make me more confused than I already am."
+                <div class="quote-author">- Mr. L, Emergency Housing Seeker</div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+                <span class="slide-counter">Slide <span id="current-slide">2</span> of 10</span>
+                <button class="nav-btn" onclick="nextSlide()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Slide 3: Research Methodology -->
+        <div class="slide">
+            <h1>Research Methodology</h1>
+            <p>We employed a comprehensive mixed-methods approach combining qualitative depth with quantitative validation.</p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">In-Depth Interviews</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Structured Surveys</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">User Segments</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Core Feature Validation</div>
+                </div>
+            </div>
+
+            <div class="grid-2col">
+                <div>
+                    <h3>Qualitative Phase</h3>
+                    <ul>
+                        <li>Semi-structured interviews</li>
+                        <li>30-45 minute sessions</li>
+                        <li>Focus on pain points & barriers</li>
+                        <li>Thematic analysis</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Quantitative Phase</h3>
+                    <ul>
+                        <li>Structured surveys</li>
+                        <li>Likert scales & rankings</li>
+                        <li>Feature validation</li>
+                        <li>Statistical analysis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box success">
+                <strong>Ethical Considerations:</strong> Informed consent, anonymity, trauma-informed approach, appropriate compensation, right to withdraw
+            </div>
+
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+                <span class="slide-counter">Slide <span id="current-slide">3</span> of 10</span>
+                <button class="nav-btn" onclick="nextSlide()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Slide 4: Key Findings -->
+        <div class="slide">
+            <h1>Key Research Findings</h1>
+
+            <h2>100% Validation for Core Features</h2>
+            <ul class="feature-list">
+                <li><strong>Step-by-Step Action Plans:</strong> Clear, sequential guidance through complex processes</li>
+                <li><strong>24/7 Human Support Access:</strong> Multiple channels (chat, phone, video, text) for connection</li>
+                <li><strong>Proactive Personalized Suggestions:</strong> Smart recommendations based on user situation</li>
+            </ul>
+
+            <h2>Technology Access</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Have Smartphones</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">80%</div>
+                    <div class="stat-label">Prefer Mobile Apps</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">60%</div>
+                    <div class="stat-label">Limited Computer Access</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">Mixed</div>
+                    <div class="stat-label">Tech Comfort Levels</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Key Insight:</strong> Mobile-first design is non-negotiable. All users have smartphones but limited computer access. Mixed tech comfort requires intuitive, forgiving design.
+            </div>
+
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+                <span class="slide-counter">Slide <span id="current-slide">4</span> of 10</span>
+                <button class="nav-btn" onclick="nextSlide()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Slide 5: User Personas -->
+        <div class="slide">
+            <h1>User Personas</h1>
+            <p>We identified three distinct user segments, each with unique needs and challenges:</p>
+
+            <div class="persona-grid">
+                <div class="persona-card">
+                    <div class="persona-icon">👨</div>
+                    <div class="persona-name">Mr. L</div>
+                    <div class="persona-role">Emergency Housing Seeker</div>
+                    <div class="persona-quote">"Don't make me more confused than I already am."</div>
+                    <p><strong>Age:</strong> 45-55 | <strong>Tech:</strong> Low</p>
+                    <p><strong>Needs:</strong> Extreme simplicity, clear next steps, human guidance, emergency resources</p>
+                </div>
+
+                <div class="persona-card">
+                    <div class="persona-icon">👩</div>
+                    <div class="persona-name">Ms. Ellis</div>
+                    <div class="persona-role">Voucher Holder</div>
+                    <div class="persona-quote">"Landlords won't even show me apartments."</div>
+                    <p><strong>Age:</strong> 35-45 | <strong>Tech:</strong> Medium</p>
+                    <p><strong>Needs:</strong> Voucher-accepting landlords, engagement strategies, rights information</p>
+                </div>
+
+                <div class="persona-card">
+                    <div class="persona-icon">👨‍💼</div>
+                    <div class="persona-name">Mr. Patterson</div>
+                    <div class="persona-role">Cost-Conscious Renter</div>
+                    <div class="persona-quote">"Broker fees are thousands of dollars I don't have."</div>
+                    <p><strong>Age:</strong> 25-35 | <strong>Tech:</strong> High</p>
+                    <p><strong>Needs:</strong> No-fee listings, cost transparency, savings calculators</p>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+                <span class="slide-counter">Slide <span id="current-slide">5</span> of 10</span>
+                <button class="nav-btn" onclick="nextSlide()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Slide 6: Design Principles -->
+        <div class="slide">
+            <h1>Design Principles</h1>
+
+            <div class="principle-box">
+                <div class="principle-title">Trauma-Informed Design</div>
+                <div class="principle-desc">Respectful of vulnerable populations experiencing crisis. Never patronizing, always empowering.</div>
+            </div>
+
+            <div class="principle-box">
+                <div class="principle-title">User-Centered Approach</div>
+                <div class="principle-desc">Every design decision validated by research findings. Real user quotes guide the design.</div>
+            </div>
+
+            <div class="principle-box">
+                <div class="principle-title">Accessibility First</div>
+                <div class="principle-desc">WCAG 2.1 AA compliance, plain language (8th grade level), mobile-first, minimum 44x44px touch targets.</div>
+            </div>
+
+            <div class="principle-box">
+                <div class="principle-title">Progressive Disclosure</div>
+                <div class="principle-desc">Show basic information first, details on demand. Reduce cognitive load while providing depth when needed.</div>
+            </div>
+
+            <div class="principle-box">
+                <div class="principle-title">Human-Centered Technology</div>
+                <div class="principle-desc">Technology supports, humans empower. 24/7 access to real people, not just algorithms.</div>
+            </div>
+
+            <div class="principle-box">
+                <div class="principle-title">Radical Simplicity</div>
+                <div class="principle-desc">"Don't make me more confused" - Every feature must reduce cognitive load, not add to it.</div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+                <span class="slide-counter">Slide <span id="current-slide">6</span> of 10</span>
+                <button class="nav-btn" onclick="nextSlide()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Slide 7: MVP Features -->
+        <div class="slide">
+            <h1>MVP Features (Phase 1)</h1>
+
+            <div class="principle-box">
+                <div class="principle-title">1. Personalized Action Plans</div>
+                <div class="principle-desc">
+                    <strong>Validation:</strong> 100% of participants needed clear, sequential guidance<br>
+                    <strong>Features:</strong> Step-by-step checklists tailored to user situation, progress tracking, time estimates, plain language<br>
+                    <strong>Impact:</strong> Reduces overwhelm, provides clarity, builds confidence
+                </div>
+            </div>
+
+            <div class="principle-box">
+                <div class="principle-title">2. 24/7 Human Support Hub</div>
+                <div class="principle-desc">
+                    <strong>Validation:</strong> 100% of participants needed human connection<br>
+                    <strong>Features:</strong> Four channels (chat, phone, video, SMS), always accessible, response time indicators<br>
+                    <strong>Impact:</strong> Provides emotional support, expert guidance, reduces isolation
+                </div>
+            </div>
+
+            <div class="principle-box">
+                <div class="principle-title">3. Smart Suggestions Engine</div>
+                <div class="principle-desc">
+                    <strong>Validation:</strong> 100% wanted proactive, personalized guidance<br>
+                    <strong>Features:</strong> AI-powered recommendations, contextual tips, deadline alerts<br>
+                    <strong>Impact:</strong> Fills knowledge gaps, prevents missed opportunities
+                </div>
+            </div>
+
+            <div class="principle-box">
+                <div class="principle-title">4. Housing Search & Filter</div>
+                <div class="principle-desc">
+                    <strong>Validation:</strong> Critical for voucher holders and cost-conscious renters<br>
+                    <strong>Features:</strong> No-fee filter, voucher-accepting landlords, acceptance rates, cost calculators<br>
+                    <strong>Impact:</strong> Saves thousands in broker fees, reduces discrimination
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+                <span class="slide-counter">Slide <span id="current-slide">7</span> of 10</span>
+                <button class="nav-btn" onclick="nextSlide()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Slide 8: Phase 2 Features -->
+        <div class="slide">
+            <h1>Phase 2 Features (Post-MVP)</h1>
+
+            <div class="grid-2col">
+                <div>
+                    <h3>5. Document Manager</h3>
+                    <p>Checklist of required documents, photo upload with OCR, progress tracking, secure storage</p>
+                    <p><strong>Value:</strong> Reduces anxiety about application completeness</p>
+                </div>
+                <div>
+                    <h3>6. Landlord Engagement Tools</h3>
+                    <p>Pre-qualification calculator, email templates, rights information, success stories</p>
+                    <p><strong>Value:</strong> Empowers voucher holders to engage confidently</p>
+                </div>
+            </div>
+
+            <div class="grid-2col">
+                <div>
+                    <h3>7. Community & Resources</h3>
+                    <p>Success stories, peer forums (moderated), local resource directory, event calendar</p>
+                    <p><strong>Value:</strong> Builds community, reduces isolation</p>
+                </div>
+                <div>
+                    <h3>8. Rights & Protections</h3>
+                    <p>Plain-language rights explanations, discrimination reporting, legal connections</p>
+                    <p><strong>Value:</strong> Protects vulnerable users from exploitation</p>
+                </div>
+            </div>
+
+            <h2>Feature Priority Matrix</h2>
+            <ul>
+                <li><strong>Build First:</strong> Action Plans, Support Hub, Onboarding, Dashboard</li>
+                <li><strong>Build Next:</strong> Smart Suggestions, Housing Search, Document Manager</li>
+                <li><strong>Quick Wins:</strong> Cost Calculator, Resource Directory, FAQs</li>
+                <li><strong>Future:</strong> Peer Forum, Landlord Portal, Application Tracking</li>
+            </ul>
+
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+                <span class="slide-counter">Slide <span id="current-slide">8</span> of 10</span>
+                <button class="nav-btn" onclick="nextSlide()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Slide 9: Design Solutions -->
+        <div class="slide">
+            <h1>Design Solutions</h1>
+
+            <h2>Persona-Specific Design Strategies</h2>
+
+            <div class="highlight-box">
+                <h3>For Mr. L: Radical Simplicity</h3>
+                <p>Dashboard shows only 3-4 urgent actions. Large buttons. Minimal text. Prominent "Get Help Now" button. Progressive disclosure of complexity.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>For Ms. Ellis: Strategic Information</h3>
+                <p>Prominent voucher filter. Landlord acceptance rates visible. Rights information accessible. Success stories for motivation. Tools to build landlord relationships.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>For Mr. Patterson: Financial Transparency</h3>
+                <p>No-fee listings prominently featured. Cost calculators and comparisons. Savings tracking. Hidden cost warnings. Neighborhood affordability data.</p>
+            </div>
+
+            <h2>Universal Features Across All Personas</h2>
+            <ul class="feature-list">
+                <li><strong>Human Support:</strong> All personas need access to real people for guidance</li>
+                <li><strong>Transparency:</strong> Clear information about costs, processes, and options</li>
+                <li><strong>Trust:</strong> System must be reliable, honest, and advocate for the user</li>
+                <li><strong>Mobile Access:</strong> All users have smartphones, prefer mobile experience</li>
+                <li><strong>Empowerment:</strong> Want to feel capable and confident, not patronized</li>
+            </ul>
+
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+                <span class="slide-counter">Slide <span id="current-slide">9</span> of 10</span>
+                <button class="nav-btn" onclick="nextSlide()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Slide 10: Impact & Next Steps -->
+        <div class="slide">
+            <h1>Project Impact & Next Steps</h1>
+
+            <h2>Design Deliverables Completed</h2>
+            <ul class="feature-list">
+                <li>Research synthesis from 5 participants (mixed methods)</li>
+                <li>3 validated user personas with distinct needs</li>
+                <li>12 wireframe screens (Phase 1 & Phase 2)</li>
+                <li>Interactive clickable prototype</li>
+                <li>Complete design system with accessibility standards</li>
+                <li>Comprehensive user testing plan</li>
+            </ul>
+
+            <h2>Expected Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">$3,600</div>
+                    <div class="stat-label">Avg. Savings per User (No Broker Fees)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">80%</div>
+                    <div class="stat-label">Target Task Completion Rate</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Human Support Access</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Mobile Accessible</div>
+                </div>
+            </div>
+
+            <h2>Next Steps</h2>
+            <ol>
+                <li><strong>User Testing (Weeks 1-3):</strong> Validate design with 6-15 participants across three personas</li>
+                <li><strong>Design Iteration (Week 4):</strong> Refine based on testing feedback</li>
+                <li><strong>High-Fidelity Mockups (Weeks 5-8):</strong> Apply design system, create production-ready designs</li>
+                <li><strong>MVP Development (Months 3-6):</strong> Build Phase 1 features with development team</li>
+            </ol>
+
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+                <span class="slide-counter">Slide <span id="current-slide">10</span> of 10</span>
+                <button class="nav-btn" onclick="nextSlide()" disabled>Next →</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 10;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+
+            if (n > totalSlides) {
+                currentSlide = totalSlides;
+            } else if (n < 1) {
+                currentSlide = 1;
+            } else {
+                currentSlide = n;
+            }
+
+            slides[currentSlide - 1].classList.add('active');
+            updateSlideCounter();
+            updateNavigationButtons();
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function updateSlideCounter() {
+            const counters = document.querySelectorAll('#current-slide');
+            counters.forEach(counter => {
+                counter.textContent = currentSlide;
+            });
+        }
+
+        function updateNavigationButtons() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, index) => {
+                const prevBtn = slide.querySelector('.nav-btn:first-child');
+                const nextBtn = slide.querySelector('.nav-btn:last-child');
+
+                if (prevBtn) {
+                    prevBtn.disabled = (index === 0);
+                }
+                if (nextBtn) {
+                    nextBtn.disabled = (index === totalSlides - 1);
+                }
+            });
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        updateSlideCounter();
+        updateNavigationButtons();
+
+        // Print support - show all slides
+        window.addEventListener('beforeprint', function() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.style.display = 'block');
+        });
+
+        window.addEventListener('afterprint', function() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, index) => {
+                if (index !== currentSlide - 1) {
+                    slide.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

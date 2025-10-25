@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People Empowering App - Project Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .presentation-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .presentation-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .presentation-header .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .presentation-header .byline {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .slide-navigation {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .slide-navigation h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .nav-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1rem;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .nav-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .slide {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: slideIn 0.5s ease;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .slide h3 {
+            font-size: 1.8rem;
+            color: #5568d3;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .slide h4 {
+            font-size: 1.3rem;
+            color: #4c51bf;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .slide p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .slide ul, .slide ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box.success {
+            background: #f0fdf4;
+            border-left-color: #28a745;
+        }
+
+        .highlight-box.warning {
+            background: #fffbeb;
+            border-left-color: #ffc107;
+        }
+
+        .highlight-box.info {
+            background: #f0f9ff;
+            border-left-color: #17a2b8;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .persona-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .persona-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .persona-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .persona-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-right: 1.5rem;
+        }
+
+        .persona-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .persona-role {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .persona-quote {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: #555;
+            border-radius: 4px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .feature-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .pain-point-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .pain-point-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .pain-point-list li:before {
+            content: "⚠";
+            position: absolute;
+            left: 0;
+            color: #dc3545;
+            font-size: 1.3rem;
+        }
+
+        .wireframe-preview {
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .wireframe-preview img {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+
+        .wireframe-preview .caption {
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+
+        .timeline:before {
+            content: "";
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #667eea;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -2.35rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-item.completed:before {
+            background: #28a745;
+            box-shadow: 0 0 0 3px #28a745;
+        }
+
+        .timeline-content {
+            background: #f8f9ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .progress-indicator {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+            color: #666;
+        }
+
+        .key-metric {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .metric-value.success {
+            color: #28a745;
+        }
+
+        .design-principle {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .principle-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .principle-description {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .slide-navigation {
+                display: none;
+            }
+
+            .slide {
+                display: block !important;
+                page-break-after: always;
+                box-shadow: none;
+                margin-bottom: 2rem;
+            }
+
+            .presentation-header {
+                color: #667eea;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .presentation-header h1 {
+                font-size: 2rem;
+            }
+
+            .presentation-header .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .slide {
+                padding: 1.5rem;
+            }
+
+            .slide h2 {
+                font-size: 1.8rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .persona-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="presentation-header">
+            <h1>People Empowering App (PEA)</h1>
+            <div class="subtitle">Empowering NYC Residents to Navigate Housing Insecurity</div>
+            <div class="byline">HCI Design Project - Complete Research & Design Process</div>
+        </div>
+
+        <div class="slide-navigation">
+            <h2>Presentation Navigation</h2>
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="goToSlide('overview')">1. Project Overview</button>
+                <button class="nav-btn" onclick="goToSlide('research')">2. Research Process</button>
+                <button class="nav-btn" onclick="goToSlide('findings')">3. Key Findings</button>
+                <button class="nav-btn" onclick="goToSlide('personas')">4. User Personas</button>
+                <button class="nav-btn" onclick="goToSlide('features')">5. Prioritized Features</button>
+                <button class="nav-btn" onclick="goToSlide('design')">6. Design Solutions</button>
+                <button class="nav-btn" onclick="goToSlide('prototype')">7. Interactive Prototype</button>
+                <button class="nav-btn" onclick="goToSlide('design-system')">8. Design System</button>
+                <button class="nav-btn" onclick="goToSlide('testing')">9. User Testing Plan</button>
+                <button class="nav-btn" onclick="goToSlide('next-steps')">10. Next Steps</button>
+            </div>
+        </div>
+
+        <!-- Slide 1: Overview -->
+        <div id="slide-overview" class="slide active">
+            <h2>Project Overview</h2>
+
+            <h3>The Problem</h3>
+            <p>Housing insecurity in New York City is a complex, multi-faceted challenge affecting thousands of residents. Current resources are fragmented, overwhelming, and often inaccessible to those who need them most.</p>
+
+            <div class="highlight-box warning">
+                <h4>Critical Pain Points Identified</h4>
+                <ul class="pain-point-list">
+                    <li><strong>Information Overload:</strong> Too many disconnected resources and websites</li>
+                    <li><strong>System Complexity:</strong> Navigating government programs requires expertise</li>
+                    <li><strong>Landlord Discrimination:</strong> Voucher holders face systemic rejection</li>
+                    <li><strong>Hidden Costs:</strong> Broker fees can equal 15% of annual rent</li>
+                    <li><strong>Lack of Human Support:</strong> Critical need for guidance and emotional support</li>
+                </ul>
+            </div>
+
+            <h3>Our Solution</h3>
+            <p>The <strong>People Empowering App (PEA)</strong> is a mobile-first application designed to:</p>
+            <ul>
+                <li>Simplify the housing search process with step-by-step guidance</li>
+                <li>Provide 24/7 access to human support through multiple channels</li>
+                <li>Deliver proactive, personalized suggestions based on user situation</li>
+                <li>Connect users with no-fee listings and voucher-accepting landlords</li>
+                <li>Empower users with transparency about costs, rights, and options</li>
+            </ul>
+
+            <h3>Design Approach</h3>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Research Participants</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">User Personas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Wireframe Screens</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Feature Validation</div>
+                </div>
+            </div>
+
+            <div class="highlight-box info">
+                <h4>Design Principles</h4>
+                <ul>
+                    <li><strong>Trauma-Informed:</strong> Respectful of vulnerable populations experiencing crisis</li>
+                    <li><strong>User-Centered:</strong> Every design decision validated by research findings</li>
+                    <li><strong>Accessible:</strong> WCAG 2.1 AA compliance, plain language, mobile-first</li>
+                    <li><strong>Empowering:</strong> Builds confidence through clarity and human connection</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 2: Research Process -->
+        <div id="slide-research" class="slide">
+            <h2>Research Process</h2>
+
+            <h3>Mixed-Methods Research Design</h3>
+            <p>We employed a comprehensive mixed-methods approach combining qualitative depth with quantitative validation:</p>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">In-Depth Interviews</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Structured Surveys</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Distinct User Segments</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Core Feature Validation</div>
+                </div>
+            </div>
+
+            <h3>Research Methodology</h3>
+
+            <h4>Phase 1: Qualitative Interviews</h4>
+            <div class="highlight-box">
+                <p><strong>Approach:</strong> Semi-structured interviews with open-ended questions</p>
+                <p><strong>Participants:</strong> Ms. Jay (advocacy organization director)</p>
+                <p><strong>Duration:</strong> 30-45 minutes per interview</p>
+                <p><strong>Focus Areas:</strong></p>
+                <ul>
+                    <li>Current pain points in housing search process</li>
+                    <li>Emotional and practical barriers</li>
+                    <li>Existing resource usage and gaps</li>
+                    <li>Technology comfort and access</li>
+                    <li>Support needs and preferences</li>
+                </ul>
+            </div>
+
+            <h4>Phase 2: Quantitative Surveys</h4>
+            <div class="highlight-box">
+                <p><strong>Approach:</strong> Structured questionnaires with Likert scales and multiple choice</p>
+                <p><strong>Participants:</strong> 4 individuals currently experiencing housing insecurity</p>
+                <p><strong>Distribution:</strong> Digital forms (Google Forms)</p>
+                <p><strong>Validation Areas:</strong></p>
+                <ul>
+                    <li>Feature priority ranking</li>
+                    <li>Technology access and comfort</li>
+                    <li>Support channel preferences</li>
+                    <li>Pain point severity ratings</li>
+                </ul>
+            </div>
+
+            <h3>Ethical Considerations</h3>
+            <div class="highlight-box success">
+                <ul>
+                    <li><strong>Informed Consent:</strong> All participants provided written consent</li>
+                    <li><strong>Anonymity:</strong> Personal identifiers removed from all data</li>
+                    <li><strong>Compensation:</strong> Appropriate compensation for time and expertise</li>
+                    <li><strong>Trauma-Informed:</strong> Questions designed to avoid re-traumatization</li>
+                    <li><strong>Right to Withdraw:</strong> Participants could stop at any time without penalty</li>
+                </ul>
+            </div>
+
+            <h3>Analysis Process</h3>
+            <p>We employed rigorous analysis techniques to extract actionable insights:</p>
+            <ol>
+                <li><strong>Thematic Analysis:</strong> Coded interview transcripts for recurring themes</li>
+                <li><strong>Affinity Mapping:</strong> Grouped similar pain points and needs</li>
+                <li><strong>Statistical Analysis:</strong> Calculated feature validation percentages</li>
+                <li><strong>Persona Development:</strong> Synthesized patterns into representative archetypes</li>
+                <li><strong>Priority Matrix:</strong> Ranked features by impact and feasibility</li>
+            </ol>
+        </div>
+
+        <!-- Slide 3: Key Findings -->
+        <div id="slide-findings" class="slide">
+            <h2>Key Research Findings</h2>
+
+            <h3>100% Validation for Core Features</h3>
+            <div class="highlight-box success">
+                <p>All research participants validated the need for three critical features:</p>
+                <ul class="feature-list">
+                    <li><strong>Step-by-Step Action Plans:</strong> Clear, sequential guidance through complex processes</li>
+                    <li><strong>24/7 Human Support Access:</strong> Multiple channels (chat, phone, video, text) for connection</li>
+                    <li><strong>Proactive Personalized Suggestions:</strong> Smart recommendations based on user situation</li>
+                </ul>
+            </div>
+
+            <h3>Critical Pain Points Discovered</h3>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">Information Overload</span>
+                    <span class="metric-value">Severity: 9/10</span>
+                </div>
+                <p>"There are so many websites, so many programs... I don't know where to start. It makes me feel stupid."</p>
+            </div>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">Landlord Discrimination</span>
+                    <span class="metric-value">Severity: 10/10</span>
+                </div>
+                <p>"I have a Section 8 voucher, but landlords won't even show me apartments. They say it's already rented."</p>
+            </div>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">Broker Fee Burden</span>
+                    <span class="metric-value">Cost Impact: 15% annual rent</span>
+                </div>
+                <p>"Broker fees are 15% of the annual rent. For a $2,400/month apartment, that's $4,320 just to get in the door."</p>
+            </div>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">System Forces Dishonesty</span>
+                    <span class="metric-value">Ethical Dilemma</span>
+                </div>
+                <p>"I have to lie about having a voucher just to get my foot in the door. It feels wrong, but it's the only way."</p>
+            </div>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">Need for Human Connection</span>
+                    <span class="metric-value">Priority: Critical</span>
+                </div>
+                <p>"I need someone to talk to who understands. Not just a website, a real person who can help me figure this out."</p>
+            </div>
+
+            <h3>Technology Access Findings</h3>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Have Smartphones</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">80%</div>
+                    <div class="stat-label">Prefer Mobile Apps</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">60%</div>
+                    <div class="stat-label">Limited Computer Access</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Mixed</div>
+                    <div class="stat-label">Tech Comfort Levels</div>
+                </div>
+            </div>
+
+            <h3>Design Implications</h3>
+            <div class="highlight-box info">
+                <h4>What This Means for Our Design</h4>
+                <ol>
+                    <li><strong>Mobile-First is Non-Negotiable:</strong> All users have smartphones, limited computer access</li>
+                    <li><strong>Simplicity Over Features:</strong> "Don't make me more confused" - Mr. L</li>
+                    <li><strong>Human Support is Essential:</strong> Technology alone is insufficient for vulnerable populations</li>
+                    <li><strong>Transparency Builds Trust:</strong> Show costs, explain processes, reveal options</li>
+                    <li><strong>Accessibility is Critical:</strong> Mixed tech comfort requires intuitive, forgiving design</li>
+                </ol>
+            </div>
+
+            <h3>Most Impactful Quote</h3>
+            <div class="highlight-box warning">
+                <p style="font-size: 1.3rem; font-style: italic; text-align: center; padding: 1rem;">
+                    "Don't make me more confused than I already am."
+                    <br><br>
+                    <span style="font-size: 1rem; font-weight: bold;">- Mr. L, Emergency Housing Seeker</span>
+                </p>
+                <p style="margin-top: 1rem; text-align: center;">This quote became our North Star - guiding every design decision.</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Personas -->
+        <div id="slide-personas" class="slide">
+            <h2>User Personas</h2>
+
+            <p>We identified three distinct user segments, each with unique needs and challenges:</p>
+
+            <div class="persona-grid">
+                <div class="persona-card">
+                    <div class="persona-header">
+                        <div class="persona-avatar">👨</div>
+                        <div>
+                            <div class="persona-name">Mr. L</div>
+                            <div class="persona-role">Emergency Housing Seeker</div>
+                        </div>
+                    </div>
+
+                    <div class="persona-quote">
+                        "Don't make me more confused than I already am."
+                    </div>
+
+                    <h4>Demographics</h4>
+                    <ul>
+                        <li>Age: 45-55</li>
+                        <li>Status: Facing imminent eviction</li>
+                        <li>Tech Comfort: Low</li>
+                        <li>Income: Very limited</li>
+                    </ul>
+
+                    <h4>Pain Points</h4>
+                    <ul class="pain-point-list">
+                        <li>Overwhelmed by information</li>
+                        <li>Doesn't know where to start</li>
+                        <li>Needs immediate solutions</li>
+                        <li>Feels "stupid" using complex systems</li>
+                    </ul>
+
+                    <h4>Needs</h4>
+                    <ul class="feature-list">
+                        <li>Extreme simplicity</li>
+                        <li>Clear next steps</li>
+                        <li>Human guidance</li>
+                        <li>Emergency resources first</li>
+                    </ul>
+
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Urgent Action Plan</li>
+                        <li>24/7 Support Hotline</li>
+                        <li>Large buttons, minimal text</li>
+                        <li>Emergency shelter finder</li>
+                    </ul>
+                </div>
+
+                <div class="persona-card">
+                    <div class="persona-header">
+                        <div class="persona-avatar">👩</div>
+                        <div>
+                            <div class="persona-name">Ms. Ellis</div>
+                            <div class="persona-role">Voucher Holder</div>
+                        </div>
+                    </div>
+
+                    <div class="persona-quote">
+                        "I have a Section 8 voucher, but landlords won't even show me apartments."
+                    </div>
+
+                    <h4>Demographics</h4>
+                    <ul>
+                        <li>Age: 35-45</li>
+                        <li>Status: Has housing voucher (Section 8)</li>
+                        <li>Tech Comfort: Medium</li>
+                        <li>Income: Fixed, limited</li>
+                    </ul>
+
+                    <h4>Pain Points</h4>
+                    <ul class="pain-point-list">
+                        <li>Landlord discrimination</li>
+                        <li>System forces dishonesty</li>
+                        <li>Voucher stigma</li>
+                        <li>Limited apartment options</li>
+                    </ul>
+
+                    <h4>Needs</h4>
+                    <ul class="feature-list">
+                        <li>Voucher-accepting landlords</li>
+                        <li>Landlord engagement strategies</li>
+                        <li>Rights information</li>
+                        <li>Success stories</li>
+                    </ul>
+
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Voucher-friendly search filter</li>
+                        <li>Landlord acceptance rates</li>
+                        <li>Rights & protections info</li>
+                        <li>Pre-qualification tools</li>
+                    </ul>
+                </div>
+
+                <div class="persona-card">
+                    <div class="persona-header">
+                        <div class="persona-avatar">👨‍💼</div>
+                        <div>
+                            <div class="persona-name">Mr. Patterson</div>
+                            <div class="persona-role">Cost-Conscious Renter</div>
+                        </div>
+                    </div>
+
+                    <div class="persona-quote">
+                        "Broker fees are 15% of annual rent. That's thousands of dollars I don't have."
+                    </div>
+
+                    <h4>Demographics</h4>
+                    <ul>
+                        <li>Age: 25-35</li>
+                        <li>Status: Employed, tight budget</li>
+                        <li>Tech Comfort: High</li>
+                        <li>Income: Moderate but constrained</li>
+                    </ul>
+
+                    <h4>Pain Points</h4>
+                    <ul class="pain-point-list">
+                        <li>Broker fees too expensive</li>
+                        <li>Hidden costs add up</li>
+                        <li>Hard to find no-fee listings</li>
+                        <li>Needs cost transparency</li>
+                    </ul>
+
+                    <h4>Needs</h4>
+                    <ul class="feature-list">
+                        <li>No-fee apartment filter</li>
+                        <li>Total cost calculator</li>
+                        <li>Cost comparisons</li>
+                        <li>Savings tracking</li>
+                    </ul>
+
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>No-fee listings prominent</li>
+                        <li>Cost breakdown tools</li>
+                        <li>Savings calculator</li>
+                        <li>Neighborhood cost comparison</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Cross-Persona Insights</h3>
+            <div class="highlight-box">
+                <h4>Universal Needs Across All Personas</h4>
+                <ul class="feature-list">
+                    <li><strong>Human Support:</strong> All three personas need access to real people for guidance</li>
+                    <li><strong>Transparency:</strong> Clear information about costs, processes, and options</li>
+                    <li><strong>Trust:</strong> System must be reliable, honest, and advocate for the user</li>
+                    <li><strong>Mobile Access:</strong> All users have smartphones, prefer mobile experience</li>
+                    <li><strong>Empowerment:</strong> Want to feel capable and confident, not patronized</li>
+                </ul>
+            </div>
+
+            <h3>Design Strategy by Persona</h3>
+            <div class="design-principle">
+                <div class="principle-title">For Mr. L: Radical Simplicity</div>
+                <div class="principle-description">
+                    Dashboard shows only 3-4 urgent actions. Large buttons. Minimal text. Prominent "Get Help Now" button. Progressive disclosure of complexity.
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">For Ms. Ellis: Strategic Information</div>
+                <div class="principle-description">
+                    Prominent voucher filter. Landlord acceptance rates visible. Rights information accessible. Success stories for motivation. Tools to build landlord relationships.
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">For Mr. Patterson: Financial Transparency</div>
+                <div class="principle-description">
+                    No-fee listings prominently featured. Cost calculators and comparisons. Savings tracking. Hidden cost warnings. Neighborhood affordability data.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Features -->
+        <div id="slide-features" class="slide">
+            <h2>Prioritized Features</h2>
+
+            <h3>Feature Validation Results</h3>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Step-by-Step Plans</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Human Support</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Proactive Suggestions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Mobile-First</div>
+                </div>
+            </div>
+
+            <h3>MVP Features (Phase 1)</h3>
+
+            <div class="design-principle">
+                <div class="principle-title">1. Personalized Action Plans</div>
+                <div class="principle-description">
+                    <strong>Research Validation:</strong> 100% of participants needed clear, sequential guidance<br>
+                    <strong>Implementation:</strong> Step-by-step checklists tailored to user situation (emergency, voucher holder, cost-conscious). Progress tracking. Time estimates for each step. Plain language explanations.<br>
+                    <strong>Key Insight:</strong> "Don't make me more confused" - Mr. L
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">2. 24/7 Human Support Hub</div>
+                <div class="principle-description">
+                    <strong>Research Validation:</strong> 100% of participants needed human connection<br>
+                    <strong>Implementation:</strong> Four support channels: Live chat, phone hotline, video call, SMS. Always accessible from any screen. Response time indicators. Warm handoffs between channels.<br>
+                    <strong>Key Insight:</strong> "I need someone who understands" - Ms. Jay
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">3. Smart Suggestions Engine</div>
+                <div class="principle-description">
+                    <strong>Research Validation:</strong> 100% wanted proactive, personalized guidance<br>
+                    <strong>Implementation:</strong> AI-powered recommendations based on user profile, progress, and situation. Contextual tips at decision points. Alerts for deadlines and opportunities.<br>
+                    <strong>Key Insight:</strong> Users don't know what they don't know - proactive guidance fills gaps
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">4. Housing Search & Filter</div>
+                <div class="principle-description">
+                    <strong>Research Validation:</strong> Critical for voucher holders and cost-conscious renters<br>
+                    <strong>Implementation:</strong> Prominent filters for no-fee listings and voucher-accepting landlords. Landlord acceptance rate data. Cost calculators. Map view with transit access.<br>
+                    <strong>Key Insight:</strong> "Broker fees are 15% of annual rent" - Mr. Patterson
+                </div>
+            </div>
+
+            <h3>Phase 2 Features (Post-MVP)</h3>
+
+            <div class="design-principle">
+                <div class="principle-title">5. Document Manager</div>
+                <div class="principle-description">
+                    <strong>Need:</strong> Application documents are complex and overwhelming<br>
+                    <strong>Implementation:</strong> Checklist of required documents. Photo upload with OCR. Progress tracking. Document templates. Secure storage.<br>
+                    <strong>Value:</strong> Reduces anxiety about application completeness
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">6. Landlord Engagement Tools</div>
+                <div class="principle-description">
+                    <strong>Need:</strong> Voucher holders face discrimination and need strategies<br>
+                    <strong>Implementation:</strong> Pre-qualification calculator. Email templates. Rights information. Success stories. Landlord acceptance rates.<br>
+                    <strong>Value:</strong> Empowers users to confidently engage with landlords
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">7. Community & Resources</div>
+                <div class="principle-description">
+                    <strong>Need:</strong> Users feel isolated and need peer support<br>
+                    <strong>Implementation:</strong> Success stories. Peer forums (moderated). Local resource directory. Event calendar. FAQs.<br>
+                    <strong>Value:</strong> Builds community and reduces isolation
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">8. Rights & Protections Info</div>
+                <div class="principle-description">
+                    <strong>Need:</strong> Users don't know their rights and are vulnerable to exploitation<br>
+                    <strong>Implementation:</strong> Plain-language rights explanations. Discrimination reporting. Legal resource connections. Red flag warnings.<br>
+                    <strong>Value:</strong> Protects vulnerable users from exploitation
+                </div>
+            </div>
+
+            <h3>Feature Priority Matrix</h3>
+            <div class="highlight-box info">
+                <h4>High Impact + High Feasibility (Build First)</h4>
+                <ul>
+                    <li>Personalized Action Plans</li>
+                    <li>Human Support Hub</li>
+                    <li>Onboarding & Assessment</li>
+                    <li>Dashboard</li>
+                </ul>
+
+                <h4>High Impact + Medium Feasibility (Build Next)</h4>
+                <ul>
+                    <li>Smart Suggestions Engine</li>
+                    <li>Housing Search & Filter</li>
+                    <li>Document Manager</li>
+                </ul>
+
+                <h4>Medium Impact + High Feasibility (Quick Wins)</h4>
+                <ul>
+                    <li>Cost Calculator</li>
+                    <li>Resource Directory</li>
+                    <li>FAQs</li>
+                </ul>
+
+                <h4>Future Considerations</h4>
+                <ul>
+                    <li>Peer Community Forum (requires moderation)</li>
+                    <li>Landlord Portal (two-sided marketplace complexity)</li>
+                    <li>Application Tracking (API integrations needed)</li>
+                </ul>
+            </div>
+
+            <h3>Design Principles Guiding Feature Development</h3>
+            <ol>
+                <li><strong>Simplicity First:</strong> Every feature must reduce cognitive load, not add to it</li>
+                <li><strong>Human-Centered:</strong> Technology supports, humans empower</li>
+                <li><strong>Progressive Disclosure:</strong> Show basic info first, details on demand</li>
+                <li><strong>Mobile-First:</strong> All features must work perfectly on smartphones</li>
+                <li><strong>Accessible:</strong> WCAG 2.1 AA minimum, plain language, inclusive design</li>
+                <li><strong>Trustworthy:</strong> Transparent about costs, processes, data usage</li>
+                <li><strong>Empowering:</strong> Build user confidence and agency</li>
+            </ol>
+        </div>
+
+        <!-- Slide 6: Design Solutions -->
+        <div id="slide-design" class="slide">
+            <h2>Design Solutions</h2>
+
+            <h3>User Flows</h3>
+            <p>We mapped complete user journeys for all three personas, identifying touchpoints, decision points, and support needs:</p>
+
+            <div class="highlight-box">
+                <h4>Mr. L's Emergency Flow</h4>
+                <ol>
+                    <li>Opens app feeling overwhelmed → Simple welcome screen</li>
+                    <li>Quick situation assessment → 3 questions maximum</li>
+                    <li>Urgent action plan generated → Clear next steps</li>
+                    <li>Emergency resources highlighted → Shelter, food, legal aid</li>
+                    <li>Human support available → Prominent "Get Help" button</li>
+                    <li>Progress tracked → Small wins celebrated</li>
+                </ol>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Ms. Ellis's Voucher Holder Flow</h4>
+                <ol>
+                    <li>Onboarding identifies voucher holder status</li>
+                    <li>Dashboard shows voucher-specific action plan</li>
+                    <li>Search filtered for voucher-accepting landlords</li>
+                    <li>Landlord acceptance rates visible on listings</li>
+                    <li>Pre-qualification tools help build confidence</li>
+                    <li>Rights information accessible throughout</li>
+                    <li>Success stories provide motivation</li>
+                </ol>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Mr. Patterson's Cost-Conscious Flow</h4>
+                <ol>
+                    <li>Onboarding captures budget constraints</li>
+                    <li>Dashboard prioritizes no-fee listings</li>
+                    <li>Search prominently features no-fee filter</li>
+                    <li>Cost calculator shows total move-in costs</li>
+                    <li>Savings comparison highlights value</li>
+                    <li>Neighborhood affordability data available</li>
+                    <li>Hidden cost warnings protect from surprises</li>
+                </ol>
+            </div>
+
+            <h3>Wireframes Created</h3>
+            <p>We designed 12 screens across two phases:</p>
+
+            <h4>Phase 1: Core Screens (4 screens)</h4>
+            <ul>
+                <li><strong>Onboarding Flow (3 screens):</strong> Welcome → Situation Assessment → Let's Begin</li>
+                <li><strong>Dashboard (2 variations):</strong> Mr. L emergency version, Ms. Ellis voucher version</li>
+                <li><strong>Action Plan View:</strong> Step-by-step checklist with progress tracking</li>
+                <li><strong>Human Support Hub:</strong> Four support channels (chat, phone, video, text)</li>
+            </ul>
+
+            <h4>Phase 2: Additional Screens (8 screens)</h4>
+            <ul>
+                <li><strong>Search & Filter:</strong> No-fee and voucher filters prominent</li>
+                <li><strong>Search Results (3 variations):</strong> Standard results, no results found, filtered results</li>
+                <li><strong>Listing Detail & Landlord Profile (2 screens):</strong> Cost calculator, voucher acceptance rate</li>
+                <li><strong>Document Manager (3 screens):</strong> Checklist, upload interface, progress view</li>
+            </ul>
+
+            <h3>Key Design Decisions</h3>
+
+            <div class="design-principle">
+                <div class="principle-title">Decision 1: Dashboard Personalization</div>
+                <div class="principle-description">
+                    <strong>Problem:</strong> Different personas have dramatically different needs<br>
+                    <strong>Solution:</strong> Created persona-specific dashboard variations (Mr. L sees 3 urgent actions, Ms. Ellis sees voucher resources, Mr. Patterson sees no-fee listings)<br>
+                    <strong>Research Support:</strong> "Don't make me more confused" - Mr. L needs simplicity, Ms. Ellis needs voucher tools
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Decision 2: Persistent Support Access</div>
+                <div class="principle-description">
+                    <strong>Problem:</strong> 100% of users need human support, but might not seek it proactively<br>
+                    <strong>Solution:</strong> "Get Help" button in header on every screen, support hub offers 4 channels (chat, phone, video, text)<br>
+                    <strong>Research Support:</strong> "I need someone to talk to" - Ms. Jay, users need low-barrier access
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Decision 3: Progressive Disclosure</div>
+                <div class="principle-description">
+                    <strong>Problem:</strong> Too much information overwhelms, too little frustrates<br>
+                    <strong>Solution:</strong> Dashboard shows top 3-4 actions, "View Full Plan" expands for details. Listing cards show essential info, tap for full details.<br>
+                    <strong>Research Support:</strong> Mr. L has low tech comfort, Ms. Ellis wants depth when ready
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Decision 4: Cost Transparency</div>
+                <div class="principle-description">
+                    <strong>Problem:</strong> Hidden costs (broker fees) are major barrier<br>
+                    <strong>Solution:</strong> Cost calculator on every listing detail, comparison showing savings vs. broker fee apartments<br>
+                    <strong>Research Support:</strong> "Broker fees are 15% of annual rent" - Mr. Patterson, transparency builds trust
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Decision 5: Voucher Filter Prominence</div>
+                <div class="principle-description">
+                    <strong>Problem:</strong> Landlord discrimination is severe barrier for voucher holders<br>
+                    <strong>Solution:</strong> Voucher filter is prominently placed at top of search (not buried), landlord acceptance rates visible on listings<br>
+                    <strong>Research Support:</strong> "Landlords won't even show me apartments" - Ms. Ellis
+                </div>
+            </div>
+
+            <h3>Accessibility Considerations</h3>
+            <div class="highlight-box success">
+                <h4>WCAG 2.1 AA Compliance</h4>
+                <ul class="feature-list">
+                    <li><strong>Color Contrast:</strong> Minimum 4.5:1 for normal text, 3:1 for large text</li>
+                    <li><strong>Touch Targets:</strong> Minimum 44x44px for all interactive elements</li>
+                    <li><strong>Text Size:</strong> Minimum 16px base size, scalable to 200% without breaking layout</li>
+                    <li><strong>Plain Language:</strong> 8th grade reading level maximum</li>
+                    <li><strong>Focus Indicators:</strong> Clear visual focus states for keyboard navigation</li>
+                    <li><strong>Screen Reader Support:</strong> Semantic HTML, ARIA labels where needed</li>
+                    <li><strong>Error Prevention:</strong> Confirmations for destructive actions, helpful error messages</li>
+                </ul>
+            </div>
+
+            <h3>Mobile-First Design Strategy</h3>
+            <div class="highlight-box info">
+                <h4>Why Mobile-First</h4>
+                <ul>
+                    <li>100% of research participants have smartphones</li>
+                    <li>60% have limited computer access</li>
+                    <li>Housing search happens on-the-go (viewing apartments, at shelters, on buses)</li>
+                    <li>Users need access 24/7, from anywhere</li>
+                </ul>
+
+                <h4>Mobile Design Principles</h4>
+                <ul>
+                    <li><strong>Thumb-Friendly:</strong> Primary actions within thumb zone</li>
+                    <li><strong>Scannable:</strong> Important info above the fold</li>
+                    <li><strong>Large Touch Targets:</strong> Minimum 44x44px, 8px spacing</li>
+                    <li><strong>Minimal Input:</strong> Reduce typing with smart defaults, selections, autofill</li>
+                    <li><strong>Offline Support:</strong> Core features work without internet (future consideration)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7: Prototype -->
+        <div id="slide-prototype" class="slide">
+            <h2>Interactive Prototype</h2>
+
+            <h3>Prototype Overview</h3>
+            <p>We built a fully clickable HTML prototype that connects all 12 wireframe screens, allowing stakeholders and users to experience the complete flow.</p>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Connected Screens</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Persona Flows</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Interactive Elements</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Clickable Prototype</div>
+                </div>
+            </div>
+
+            <h3>Prototype Features</h3>
+
+            <div class="design-principle">
+                <div class="principle-title">Persona Switching</div>
+                <div class="principle-description">
+                    Users can switch between Mr. L, Ms. Ellis, and Mr. Patterson to see how the interface adapts to different user needs. Dashboard content, suggestions, and priorities change based on persona.
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Full Navigation</div>
+                <div class="principle-description">
+                    Every button and link is functional. Users can navigate the complete flow from onboarding → dashboard → action plans → search → listings → documents → support hub. Back button works correctly with history tracking.
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Screen Indicator</div>
+                <div class="principle-description">
+                    Shows current location in the app (e.g., "Screen 3/12: Dashboard"). Helps users and testers understand the flow structure and progress.
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">State Management</div>
+                <div class="principle-description">
+                    Prototype maintains state across screens (selected persona, navigation history). This allows for realistic testing of the user experience.
+                </div>
+            </div>
+
+            <h3>Testing the Prototype</h3>
+            <p>The interactive prototype enables several types of validation:</p>
+
+            <h4>Stakeholder Review</h4>
+            <ul>
+                <li>Present to advocacy organizations for feedback</li>
+                <li>Demonstrate to potential funders and partners</li>
+                <li>Validate with NYC housing authorities</li>
+                <li>Show to community organizations serving target users</li>
+            </ul>
+
+            <h4>User Testing</h4>
+            <ul>
+                <li>Conduct think-aloud usability sessions</li>
+                <li>Test with 6-15 participants across three personas</li>
+                <li>Measure task completion, confusion points, satisfaction</li>
+                <li>Validate design decisions with real users</li>
+            </ul>
+
+            <h4>Developer Handoff</h4>
+            <ul>
+                <li>Developers can click through complete flows</li>
+                <li>Understand interaction patterns and state management</li>
+                <li>Reference for building production version</li>
+                <li>Clarifies ambiguous requirements</li>
+            </ul>
+
+            <h3>Key Flows to Test</h3>
+
+            <div class="highlight-box">
+                <h4>Flow 1: First-Time User Onboarding</h4>
+                <p><strong>Path:</strong> Landing → Welcome → Assessment → Dashboard</p>
+                <p><strong>Success Criteria:</strong> User understands app purpose in 15 seconds, completes onboarding without confusion</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Flow 2: Finding Emergency Resources (Mr. L)</h4>
+                <p><strong>Path:</strong> Dashboard → Action Plan → Support Hub → Get Help</p>
+                <p><strong>Success Criteria:</strong> Finds emergency shelter info in under 30 seconds, never says "I'm confused"</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Flow 3: Searching Voucher-Friendly Apartments (Ms. Ellis)</h4>
+                <p><strong>Path:</strong> Dashboard → Search → Apply Voucher Filter → View Listing → Check Landlord Acceptance</p>
+                <p><strong>Success Criteria:</strong> Finds voucher filter immediately, understands landlord acceptance rate</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Flow 4: Finding No-Fee Apartments (Mr. Patterson)</h4>
+                <p><strong>Path:</strong> Dashboard → Search → Apply No-Fee Filter → View Listing → See Cost Comparison</p>
+                <p><strong>Success Criteria:</strong> Understands savings vs. broker fee apartments, trusts cost calculator</p>
+            </div>
+
+            <h3>Prototype Limitations</h3>
+            <div class="highlight-box warning">
+                <p><strong>Note:</strong> This is a clickable wireframe prototype, not a high-fidelity mockup. It demonstrates:</p>
+                <ul>
+                    <li>✓ Information architecture and navigation flow</li>
+                    <li>✓ Content hierarchy and layout</li>
+                    <li>✓ Feature interactions and state changes</li>
+                    <li>✗ Final visual design (colors, typography, images)</li>
+                    <li>✗ Animations and micro-interactions</li>
+                    <li>✗ Real data or API integrations</li>
+                </ul>
+                <p><strong>Next Step:</strong> Apply design system to create high-fidelity mockups</p>
+            </div>
+
+            <div class="button-group">
+                <a href="interactive_prototype.html" class="btn btn-primary" target="_blank">Open Interactive Prototype</a>
+                <a href="wireframes_core_screens.html" class="btn btn-secondary" target="_blank">View Phase 1 Wireframes</a>
+                <a href="wireframes_phase2_screens.html" class="btn btn-secondary" target="_blank">View Phase 2 Wireframes</a>
+            </div>
+        </div>
+
+        <!-- Slide 8: Design System -->
+        <div id="slide-design-system" class="slide">
+            <h2>Design System</h2>
+
+            <h3>Why a Design System?</h3>
+            <p>A comprehensive design system ensures consistency, accessibility, and efficiency across all screens and future features. It serves as the single source of truth for designers and developers.</p>
+
+            <h3>Design System Components</h3>
+
+            <h4>1. Color System</h4>
+            <div class="highlight-box">
+                <p><strong>Primary Colors:</strong> Purple gradient (‌#667eea → #764ba2) for brand identity and primary actions</p>
+                <p><strong>Semantic Colors:</strong> Green (success), red (danger), yellow (warning), blue (info)</p>
+                <p><strong>Neutral Palette:</strong> 9 shades from white to black for text, backgrounds, borders</p>
+                <p><strong>Accessibility:</strong> All color combinations meet WCAG 2.1 AA standards (4.5:1 minimum contrast)</p>
+            </div>
+
+            <h4>2. Typography</h4>
+            <div class="highlight-box">
+                <p><strong>Font Family:</strong> System fonts (-apple-system, Segoe UI, Roboto) for speed and familiarity</p>
+                <p><strong>Base Size:</strong> 16px minimum (1rem) for readability</p>
+                <p><strong>Scale:</strong> 6 sizes from 0.875rem (14px) to 2.5rem (40px)</p>
+                <p><strong>Weights:</strong> Regular (400), Medium (500), Semibold (600), Bold (700)</p>
+                <p><strong>Line Height:</strong> 1.5 for body text, 1.2 for headings</p>
+                <p><strong>Plain Language:</strong> Maximum 8th grade reading level</p>
+            </div>
+
+            <h4>3. Spacing System</h4>
+            <div class="highlight-box">
+                <p><strong>Base Unit:</strong> 4px (0.25rem) for mathematical consistency</p>
+                <p><strong>Scale:</strong> 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24 (units of 4px)</p>
+                <p><strong>Usage:</strong> Padding, margins, gaps - all use multiples of 4px</p>
+                <p><strong>Touch Targets:</strong> Minimum 44x44px (11 spacing units) for mobile</p>
+            </div>
+
+            <h4>4. Components</h4>
+
+            <div class="design-principle">
+                <div class="principle-title">Buttons</div>
+                <div class="principle-description">
+                    <strong>Variants:</strong> Primary (purple, high emphasis), Secondary (outline, medium emphasis), Ghost (text only, low emphasis), Danger (red, destructive actions)<br>
+                    <strong>States:</strong> Default, Hover, Active, Disabled<br>
+                    <strong>Sizes:</strong> Small (36px), Medium (44px), Large (52px)<br>
+                    <strong>Accessibility:</strong> Minimum 44x44px touch target, clear focus indicators
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Input Fields</div>
+                <div class="principle-description">
+                    <strong>Variants:</strong> Text, textarea, select, checkbox, radio<br>
+                    <strong>States:</strong> Default, Focus, Filled, Error, Disabled<br>
+                    <strong>Features:</strong> Helper text, error messages, character counters, placeholder text<br>
+                    <strong>Accessibility:</strong> Clear labels, error announcements, keyboard navigation
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Cards</div>
+                <div class="principle-description">
+                    <strong>Usage:</strong> Listing previews, action items, content containers<br>
+                    <strong>Features:</strong> Shadow on hover, clickable states, badges for status<br>
+                    <strong>Variants:</strong> Default, elevated, outlined, interactive
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Progress Indicators</div>
+                <div class="principle-description">
+                    <strong>Types:</strong> Progress bars, step indicators, completion percentages<br>
+                    <strong>Usage:</strong> Action plan progress, document upload status, onboarding steps<br>
+                    <strong>Features:</strong> Animated fills, success states, labels
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Badges & Tags</div>
+                <div class="principle-description">
+                    <strong>Usage:</strong> "No Fee", "Voucher Accepted", "Urgent", "New"<br>
+                    <strong>Colors:</strong> Semantic (success green, warning yellow, info blue, neutral gray)<br>
+                    <strong>Sizes:</strong> Small, medium<br>
+                    <strong>Features:</strong> Optional close button, icons
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Alerts & Notifications</div>
+                <div class="principle-description">
+                    <strong>Types:</strong> Success, warning, error, info<br>
+                    <strong>Variants:</strong> Inline (embedded in page), toast (temporary popup), banner (top of screen)<br>
+                    <strong>Features:</strong> Dismissable, action buttons, icons<br>
+                    <strong>Accessibility:</strong> Announced to screen readers, keyboard dismissable
+                </div>
+            </div>
+
+            <h4>5. Accessibility Standards</h4>
+            <div class="highlight-box success">
+                <h4>WCAG 2.1 AA Compliance (Minimum)</h4>
+                <ul class="feature-list">
+                    <li>Color contrast: 4.5:1 for normal text, 3:1 for large text</li>
+                    <li>Focus indicators: Visible focus states for keyboard navigation</li>
+                    <li>Touch targets: Minimum 44x44px for interactive elements</li>
+                    <li>Text sizing: Scalable to 200% without horizontal scrolling</li>
+                    <li>Screen readers: Semantic HTML, ARIA labels where needed</li>
+                    <li>Keyboard navigation: All features accessible without mouse</li>
+                    <li>Error handling: Clear, helpful error messages</li>
+                    <li>Plain language: Maximum 8th grade reading level</li>
+                </ul>
+            </div>
+
+            <h4>6. Implementation</h4>
+            <div class="highlight-box info">
+                <p><strong>CSS Variables:</strong> Complete design token system using CSS custom properties</p>
+                <p><strong>Usage:</strong> Import variables.css, use tokens (e.g., <code>var(--primary-500)</code>)</p>
+                <p><strong>Benefits:</strong> Consistent styling, easy theme updates, reduced code duplication</p>
+                <p><strong>Components:</strong> Pre-built component classes for rapid development</p>
+            </div>
+
+            <h3>Design Principles</h3>
+            <ol>
+                <li><strong>Clarity Over Cleverness:</strong> Users should never wonder what something does</li>
+                <li><strong>Consistency:</strong> Same patterns, same results, predictable behavior</li>
+                <li><strong>Accessibility First:</strong> Design for everyone, especially vulnerable populations</li>
+                <li><strong>Mobile-First:</strong> Small screen design forces prioritization</li>
+                <li><strong>Progressive Enhancement:</strong> Core features work everywhere, enhancements for capable devices</li>
+                <li><strong>Human-Centered:</strong> Technology serves people, not the other way around</li>
+                <li><strong>Trauma-Informed:</strong> Respectful, empowering, never patronizing</li>
+            </ol>
+
+            <div class="button-group">
+                <a href="design_system.html" class="btn btn-primary" target="_blank">View Complete Design System</a>
+                <button class="btn btn-secondary" onclick="alert('Design system CSS will be generated when viewing the full design system document')">Download CSS Variables</button>
+            </div>
+        </div>
+
+        <!-- Slide 9: Testing Plan -->
+        <div id="slide-testing" class="slide">
+            <h2>User Testing Plan</h2>
+
+            <h3>Testing Overview</h3>
+            <p>We've developed a comprehensive user testing protocol to validate design decisions with real users from our target population.</p>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">6-15</div>
+                    <div class="stat-label">Participants</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Task Scenarios</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">60min</div>
+                    <div class="stat-label">Session Duration</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$50</div>
+                    <div class="stat-label">Participant Compensation</div>
+                </div>
+            </div>
+
+            <h3>Success Criteria</h3>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">Task Completion Rate</span>
+                    <span class="metric-value success">≥80%</span>
+                </div>
+                <p>At least 80% of participants successfully complete each task without assistance</p>
+            </div>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">Time on Task</span>
+                    <span class="metric-value success">≤10 min</span>
+                </div>
+                <p>Users complete core flows within 10 minutes (excluding exploration)</p>
+            </div>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">Confusion Rate</span>
+                    <span class="metric-value success">≤20%</span>
+                </div>
+                <p>Users express confusion less than 20% of the time during tasks</p>
+            </div>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">System Usability Scale (SUS)</span>
+                    <span class="metric-value success">≥70</span>
+                </div>
+                <p>SUS score of 70+ indicates good usability (industry standard)</p>
+            </div>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">Critical Success Metric</span>
+                    <span class="metric-value">Mr. L Never Confused</span>
+                </div>
+                <p>Low-tech-comfort users (Mr. L persona) NEVER say "I'm confused" or equivalent</p>
+            </div>
+
+            <h3>Participant Recruitment</h3>
+
+            <div class="highlight-box">
+                <h4>Target Participants (6-15 total)</h4>
+                <ul>
+                    <li><strong>Mr. L Type (3-5 participants):</strong> Currently experiencing housing crisis, low tech comfort</li>
+                    <li><strong>Ms. Ellis Type (2-4 participants):</strong> Housing voucher holders (Section 8, FHEPS, CityFHEPS)</li>
+                    <li><strong>Mr. Patterson Type (2-3 participants):</strong> Cost-conscious renters, higher tech comfort</li>
+                    <li><strong>Control Group (1-2 participants):</strong> Not currently housing insecure (for comparison)</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box info">
+                <h4>Recruitment Criteria</h4>
+                <ul>
+                    <li>Age 25-60 (diverse age range)</li>
+                    <li>NYC residents (Bronx, Brooklyn, Queens, Manhattan)</li>
+                    <li>Mix of gender identities</li>
+                    <li>Mix of racial/ethnic backgrounds</li>
+                    <li>Mix of tech comfort levels (low to high)</li>
+                    <li>All participants must have smartphone</li>
+                    <li>Compensation: $50 gift card + transit reimbursement</li>
+                </ul>
+            </div>
+
+            <h3>7 Task Scenarios</h3>
+
+            <div class="design-principle">
+                <div class="principle-title">Task 1: First-Time Onboarding</div>
+                <div class="principle-description">
+                    <strong>Goal:</strong> Understand app purpose and complete onboarding<br>
+                    <strong>Success:</strong> Understands app purpose within 15 seconds, completes onboarding without confusion<br>
+                    <strong>Measures:</strong> Time to comprehension, completion rate, confusion points
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Task 2: Finding Emergency Resources (Mr. L)</div>
+                <div class="principle-description">
+                    <strong>Goal:</strong> Find emergency shelter information quickly<br>
+                    <strong>Success:</strong> Locates resource in under 30 seconds, never says "I'm confused"<br>
+                    <strong>Measures:</strong> Time to completion, path taken, confusion rate
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Task 3: Understanding Action Plan</div>
+                <div class="principle-description">
+                    <strong>Goal:</strong> View and understand personalized action plan<br>
+                    <strong>Success:</strong> Correctly explains next 3 steps, feels confident about next actions<br>
+                    <strong>Measures:</strong> Comprehension, confidence rating (1-5), willingness to proceed
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Task 4: Searching for Voucher-Friendly Apartments (Ms. Ellis)</div>
+                <div class="principle-description">
+                    <strong>Goal:</strong> Find apartments that accept housing vouchers<br>
+                    <strong>Success:</strong> Locates voucher filter immediately, understands landlord acceptance rates<br>
+                    <strong>Measures:</strong> Time to filter, comprehension of acceptance rate, satisfaction
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Task 5: Finding No-Fee Apartments (Mr. Patterson)</div>
+                <div class="principle-description">
+                    <strong>Goal:</strong> Find apartments without broker fees and understand savings<br>
+                    <strong>Success:</strong> Applies no-fee filter, understands cost comparison, trusts calculator<br>
+                    <strong>Measures:</strong> Time to filter, comprehension of savings, trust rating
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Task 6: Accessing Human Support</div>
+                <div class="principle-description">
+                    <strong>Goal:</strong> Find and initiate contact with human support<br>
+                    <strong>Success:</strong> Locates support hub in under 15 seconds, chooses appropriate channel<br>
+                    <strong>Measures:</strong> Time to locate, channel choice reasoning, comfort with process
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Task 7: Document Upload (Phase 2)</div>
+                <div class="principle-description">
+                    <strong>Goal:</strong> Understand document requirements and upload process<br>
+                    <strong>Success:</strong> Identifies required documents, understands upload process<br>
+                    <strong>Measures:</strong> Comprehension, anxiety level, perceived security
+                </div>
+            </div>
+
+            <h3>Testing Methodology</h3>
+
+            <h4>Think-Aloud Protocol</h4>
+            <p>Participants verbalize their thoughts, expectations, and reactions while using the prototype. This reveals:</p>
+            <ul>
+                <li>Mental models and expectations</li>
+                <li>Confusion points and frustrations</li>
+                <li>Positive reactions and delights</li>
+                <li>Assumed but unstated functionality</li>
+            </ul>
+
+            <h4>Session Structure (60 minutes)</h4>
+            <ol>
+                <li><strong>Introduction (5 min):</strong> Welcome, consent, explain process</li>
+                <li><strong>Background Questions (5 min):</strong> Housing situation, tech comfort</li>
+                <li><strong>Task Scenarios (35 min):</strong> 7 tasks with think-aloud</li>
+                <li><strong>SUS Questionnaire (5 min):</strong> Standardized usability survey</li>
+                <li><strong>Debrief Interview (10 min):</strong> Overall impressions, suggestions</li>
+            </ol>
+
+            <h3>Data Collection</h3>
+            <div class="highlight-box info">
+                <h4>Quantitative Metrics</h4>
+                <ul>
+                    <li>Task completion rate (success/fail per task)</li>
+                    <li>Time on task (seconds to complete)</li>
+                    <li>Error rate (wrong paths, mistakes)</li>
+                    <li>Confusion instances (verbal cues counted)</li>
+                    <li>SUS score (0-100 scale)</li>
+                    <li>Confidence ratings (1-5 Likert scale)</li>
+                </ul>
+
+                <h4>Qualitative Data</h4>
+                <ul>
+                    <li>Think-aloud transcript analysis</li>
+                    <li>Observed behaviors and reactions</li>
+                    <li>Pain points and friction moments</li>
+                    <li>Delight moments and positive feedback</li>
+                    <li>Feature requests and suggestions</li>
+                    <li>Direct quotes</li>
+                </ul>
+            </div>
+
+            <h3>Timeline & Budget</h3>
+
+            <div class="timeline">
+                <div class="timeline-item completed">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Week 1: Preparation</div>
+                        <p>Recruit participants, schedule sessions, prepare testing environment, train moderators</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Weeks 2-3: Testing Sessions</div>
+                        <p>Conduct 6-15 moderated sessions, collect quantitative and qualitative data</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Week 4: Analysis</div>
+                        <p>Analyze data, code qualitative feedback, calculate metrics, identify patterns</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Week 4-5: Reporting</div>
+                        <p>Create findings report, prioritize issues, propose design iterations</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Budget Estimate</h4>
+                <ul>
+                    <li>Participant compensation: $500-$750 (10-15 participants × $50)</li>
+                    <li>Transit reimbursement: $100-$150 ($10-15 per participant)</li>
+                    <li>Materials & space: $100 (snacks, printing, room rental if needed)</li>
+                    <li>Analysis tools: $50 (software subscriptions if needed)</li>
+                    <li><strong>Total: $750-$1,050</strong></li>
+                </ul>
+            </div>
+
+            <h3>Ethical Considerations</h3>
+            <div class="highlight-box warning">
+                <ul>
+                    <li><strong>Informed Consent:</strong> Written consent form explaining study purpose, data usage, rights</li>
+                    <li><strong>Right to Withdraw:</strong> Participants can stop at any time, keep compensation</li>
+                    <li><strong>Anonymity:</strong> No personal identifiers in reports, coded participant IDs</li>
+                    <li><strong>Trauma-Informed:</strong> Sensitive to housing crisis stress, offer breaks, avoid triggering language</li>
+                    <li><strong>Fair Compensation:</strong> $50 gift card respects participants' time and expertise</li>
+                    <li><strong>Data Security:</strong> Recordings encrypted, stored securely, deleted after analysis</li>
+                </ul>
+            </div>
+
+            <div class="button-group">
+                <a href="user_testing_plan.html" class="btn btn-primary" target="_blank">View Complete Testing Plan</a>
+                <button class="btn btn-secondary" onclick="alert('Testing protocol PDF will be generated from the HTML document')">Download Testing Protocol</button>
+            </div>
+        </div>
+
+        <!-- Slide 10: Next Steps -->
+        <div id="slide-next-steps" class="slide">
+            <h2>Next Steps</h2>
+
+            <h3>Project Status: Design Phase Complete</h3>
+            <div class="highlight-box success">
+                <h4>Completed Deliverables</h4>
+                <ul class="feature-list">
+                    <li>Research synthesis and analysis (5 participants, mixed methods)</li>
+                    <li>User personas (3 distinct segments with validated needs)</li>
+                    <li>User flows (complete journey maps for all personas)</li>
+                    <li>Wireframes (12 screens across 2 phases)</li>
+                    <li>Interactive prototype (fully clickable, persona switching)</li>
+                    <li>Design system (colors, typography, components, accessibility)</li>
+                    <li>User testing plan (complete protocol, recruitment, analysis framework)</li>
+                </ul>
+            </div>
+
+            <h3>Immediate Next Steps (Weeks 1-4)</h3>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Step 1: Stakeholder Review (Week 1)</div>
+                        <p><strong>Actions:</strong></p>
+                        <ul>
+                            <li>Present prototype to advocacy organizations</li>
+                            <li>Demo to potential partners (NYC housing agencies, nonprofits)</li>
+                            <li>Gather strategic feedback</li>
+                            <li>Validate business model and sustainability</li>
+                        </ul>
+                        <p><strong>Deliverable:</strong> Stakeholder feedback report, partnership opportunities list</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Step 2: User Testing (Weeks 2-3)</div>
+                        <p><strong>Actions:</strong></p>
+                        <ul>
+                            <li>Recruit 6-15 participants across three personas</li>
+                            <li>Conduct moderated usability sessions</li>
+                            <li>Collect quantitative metrics and qualitative feedback</li>
+                            <li>Identify critical usability issues</li>
+                        </ul>
+                        <p><strong>Deliverable:</strong> User testing report with prioritized issues and recommendations</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Step 3: Design Iteration (Week 4)</div>
+                        <p><strong>Actions:</strong></p>
+                        <ul>
+                            <li>Address critical usability issues</li>
+                            <li>Refine wireframes based on testing feedback</li>
+                            <li>Update prototype with improvements</li>
+                            <li>Validate changes with quick follow-up tests (3-5 users)</li>
+                        </ul>
+                        <p><strong>Deliverable:</strong> Refined prototype, iteration report</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Short-Term Goals (Months 2-3)</h3>
+
+            <h4>1. High-Fidelity Mockups</h4>
+            <div class="highlight-box">
+                <p>Apply design system to create pixel-perfect, production-ready mockups</p>
+                <ul>
+                    <li>Full color, typography, imagery</li>
+                    <li>Micro-interactions and animations specified</li>
+                    <li>Responsive designs for mobile, tablet, desktop</li>
+                    <li>Dark mode variations (accessibility)</li>
+                </ul>
+                <p><strong>Tools:</strong> Figma or Adobe XD</p>
+                <p><strong>Timeline:</strong> 3-4 weeks</p>
+            </div>
+
+            <h4>2. Developer Handoff</h4>
+            <div class="highlight-box">
+                <p>Create comprehensive technical specifications for development team</p>
+                <ul>
+                    <li>Annotated mockups with measurements and specifications</li>
+                    <li>Component library with variants and states</li>
+                    <li>Interaction specifications and animations</li>
+                    <li>API requirements and data structure</li>
+                    <li>Accessibility requirements checklist</li>
+                </ul>
+                <p><strong>Deliverable:</strong> Developer handoff package (Figma Dev Mode or Zeplin)</p>
+                <p><strong>Timeline:</strong> 1-2 weeks</p>
+            </div>
+
+            <h4>3. Content Strategy</h4>
+            <div class="highlight-box">
+                <p>Develop actual content for all screens (currently using placeholder text)</p>
+                <ul>
+                    <li>Microcopy for all UI elements</li>
+                    <li>Help text and tooltips</li>
+                    <li>Error messages and empty states</li>
+                    <li>Onboarding content and success messages</li>
+                    <li>Plain language review (8th grade level)</li>
+                </ul>
+                <p><strong>Collaborators:</strong> UX writer, housing policy experts</p>
+                <p><strong>Timeline:</strong> 2-3 weeks</p>
+            </div>
+
+            <h3>Medium-Term Goals (Months 3-6)</h3>
+
+            <h4>MVP Development</h4>
+            <div class="design-principle">
+                <div class="principle-title">Phase 1: Core Features</div>
+                <div class="principle-description">
+                    <strong>Scope:</strong> Onboarding, dashboard, action plans, human support hub<br>
+                    <strong>Timeline:</strong> 8-10 weeks<br>
+                    <strong>Team:</strong> 2-3 developers, 1 designer, 1 product manager<br>
+                    <strong>Technology:</strong> React Native (mobile), Node.js (backend), PostgreSQL (database)
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Phase 2: Search & Listings</div>
+                <div class="principle-description">
+                    <strong>Scope:</strong> Housing search, filters, listing details, cost calculator<br>
+                    <strong>Timeline:</strong> 6-8 weeks<br>
+                    <strong>Dependencies:</strong> Listing data partnerships, landlord database<br>
+                    <strong>Integrations:</strong> StreetEasy API, Zillow API, or custom scraping
+                </div>
+            </div>
+
+            <div class="design-principle">
+                <div class="principle-title">Phase 3: Documents & Advanced Features</div>
+                <div class="principle-description">
+                    <strong>Scope:</strong> Document manager, landlord engagement tools, community features<br>
+                    <strong>Timeline:</strong> 4-6 weeks<br>
+                    <strong>Dependencies:</strong> Phase 1 & 2 complete, user feedback from beta<br>
+                    <strong>Security:</strong> Document encryption, HIPAA-level security if needed
+                </div>
+            </div>
+
+            <h4>Beta Testing</h4>
+            <div class="highlight-box info">
+                <p>Soft launch with limited users to validate product-market fit</p>
+                <ul>
+                    <li><strong>Beta Users:</strong> 50-100 NYC residents from target personas</li>
+                    <li><strong>Duration:</strong> 4-8 weeks</li>
+                    <li><strong>Data Collection:</strong> Usage analytics, feedback surveys, support tickets</li>
+                    <li><strong>Metrics:</strong> Retention rate, task completion, support requests, SUS score</li>
+                    <li><strong>Iteration:</strong> Weekly updates based on feedback</li>
+                </ul>
+            </div>
+
+            <h3>Long-Term Vision (6+ Months)</h3>
+
+            <h4>1. Public Launch</h4>
+            <ul>
+                <li>Marketing and outreach campaign</li>
+                <li>Partnerships with NYC housing agencies and nonprofits</li>
+                <li>App Store and Google Play launch</li>
+                <li>Press coverage and community events</li>
+            </ul>
+
+            <h4>2. Scale and Sustainability</h4>
+            <ul>
+                <li><strong>Funding:</strong> Grant applications (city, state, federal), foundation funding</li>
+                <li><strong>Partnerships:</strong> NYC HPD, advocacy organizations, landlord associations</li>
+                <li><strong>Revenue Model:</strong> Nonprofit model (donations, grants) OR freemium (basic free, premium features)</li>
+                <li><strong>Team Growth:</strong> Hire support staff, expand development, add community managers</li>
+            </ul>
+
+            <h4>3. Geographic Expansion</h4>
+            <ul>
+                <li>Adapt for other US cities with housing crises (SF, LA, Boston, DC)</li>
+                <li>Localize content and resources for each market</li>
+                <li>Build partnerships with local organizations</li>
+                <li>Customize features for local policies (different voucher programs, laws)</li>
+            </ul>
+
+            <h4>4. Feature Expansion</h4>
+            <ul>
+                <li>Landlord portal (two-sided marketplace)</li>
+                <li>Application tracking and management</li>
+                <li>Credit building tools</li>
+                <li>Financial literacy resources</li>
+                <li>Peer support community</li>
+                <li>AI-powered housing recommendations</li>
+            </ul>
+
+            <h3>Success Metrics (1 Year Post-Launch)</h3>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">3-Month Retention</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">75+</div>
+                    <div class="stat-label">Average SUS Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1,000+</div>
+                    <div class="stat-label">Housing Placements</div>
+                </div>
+            </div>
+
+            <h3>Risks and Mitigation</h3>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">Risk: Data Partnerships</span>
+                    <span class="metric-value">Medium</span>
+                </div>
+                <p><strong>Challenge:</strong> Need access to landlord and listing data<br>
+                <strong>Mitigation:</strong> Partner with StreetEasy, build scraping tools, negotiate data sharing with housing agencies</p>
+            </div>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">Risk: Human Support Scaling</span>
+                    <span class="metric-value">High</span>
+                </div>
+                <p><strong>Challenge:</strong> 24/7 human support is expensive and hard to scale<br>
+                <strong>Mitigation:</strong> Partner with existing hotlines, train volunteers, use AI for tier 1 support, limit support hours initially</p>
+            </div>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">Risk: User Trust</span>
+                    <span class="metric-value">High</span>
+                </div>
+                <p><strong>Challenge:</strong> Vulnerable populations may distrust technology and new apps<br>
+                <strong>Mitigation:</strong> Partner with trusted community organizations, transparency about data usage, testimonials from real users</p>
+            </div>
+
+            <div class="key-metric">
+                <div class="metric-header">
+                    <span class="metric-label">Risk: Funding Sustainability</span>
+                    <span class="metric-value">High</span>
+                </div>
+                <p><strong>Challenge:</strong> Social impact apps struggle with long-term funding<br>
+                <strong>Mitigation:</strong> Diversify funding (grants, donations, partnerships), explore earned revenue models, build strong case for public funding</p>
+            </div>
+
+            <h3>Call to Action</h3>
+            <div class="highlight-box">
+                <p style="font-size: 1.2rem; font-weight: bold;">We have completed the design phase with validated user needs, comprehensive wireframes, and a clear roadmap.</p>
+                <p style="font-size: 1.1rem; margin-top: 1rem;">The next critical step is <strong>user testing</strong> to validate our design decisions with real users experiencing housing insecurity.</p>
+                <p style="margin-top: 1rem;"><strong>We need:</strong></p>
+                <ul>
+                    <li>Funding for user testing ($1,000-$1,500)</li>
+                    <li>Recruitment partnerships with advocacy organizations</li>
+                    <li>Buy-in from stakeholders for MVP development</li>
+                    <li>Development team commitment (2-3 developers, 4-6 months)</li>
+                </ul>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="alert('Contact: [Your Email]\nLet\'s discuss next steps and partnerships!')">Get Involved</button>
+                <button class="btn btn-secondary" onclick="window.print()">Download Full Presentation (PDF)</button>
+            </div>
+        </div>
+
+        <div class="progress-indicator">
+            <p>End of Presentation - Thank you for reviewing the People Empowering App project</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">For questions or collaboration: [Your Contact Information]</p>
+        </div>
+    </div>
+
+    <script>
+        function goToSlide(slideId) {
+            // Hide all slides
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            // Show target slide
+            const targetSlide = document.getElementById(`slide-${slideId}`);
+            if (targetSlide) {
+                targetSlide.classList.add('active');
+                targetSlide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            const slides = Array.from(document.querySelectorAll('.slide'));
+            const currentSlide = slides.findIndex(slide => slide.classList.contains('active'));
+
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                // Next slide
+                if (currentSlide < slides.length - 1) {
+                    slides[currentSlide].classList.remove('active');
+                    slides[currentSlide + 1].classList.add('active');
+                    slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    updateNavButtons(currentSlide + 1);
+                }
+            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                // Previous slide
+                if (currentSlide > 0) {
+                    slides[currentSlide].classList.remove('active');
+                    slides[currentSlide - 1].classList.add('active');
+                    slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    updateNavButtons(currentSlide - 1);
+                }
+            }
+        });
+
+        function updateNavButtons(index) {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            if (navButtons[index]) {
+                navButtons[index].classList.add('active');
+            }
+        }
+
+        // Print all slides when printing
+        window.addEventListener('beforeprint', function() {
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.style.display = 'block';
+            });
+        });
+
+        window.addEventListener('afterprint', function() {
+            document.querySelectorAll('.slide').forEach(slide => {
+                if (!slide.classList.contains('active')) {
+                    slide.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

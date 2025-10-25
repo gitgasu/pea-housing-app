@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEA User Testing Plan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            border-left: 6px solid #667eea;
+            padding-left: 20px;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: #495057;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .highlight-box {
+            background: #e7f3ff;
+            border-left: 5px solid #17a2b8;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+        }
+
+        .danger-box {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .task-card {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .task-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .script-section {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .moderator-note {
+            color: #dc3545;
+            font-style: italic;
+            font-size: 0.95em;
+            margin: 10px 0;
+        }
+
+        .participant-quote {
+            border-left: 3px solid #764ba2;
+            padding-left: 20px;
+            font-style: italic;
+            color: #495057;
+            margin: 15px 0;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .metric-card {
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-card h4 {
+            color: #667eea;
+            margin-top: 0;
+        }
+
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #28a745;
+            margin: 10px 0;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li:before {
+            content: "□ ";
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-right: 10px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -32px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 4px solid white;
+            box-shadow: 0 0 0 2px #667eea;
+        }
+
+        .timeline-item:after {
+            content: "";
+            position: absolute;
+            left: -24px;
+            top: 16px;
+            width: 2px;
+            height: calc(100% - 16px);
+            background: #dee2e6;
+        }
+
+        .timeline-item:last-child:after {
+            display: none;
+        }
+
+        .timeline-time {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 0.9em;
+        }
+
+        .persona-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .badge-mr-l {
+            background: #ffc107;
+            color: #000;
+        }
+
+        .badge-ms-ellis {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .badge-mr-patterson {
+            background: #28a745;
+            color: white;
+        }
+
+        .print-button {
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px 10px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .print-button:hover {
+            background: #5568d3;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .print-button {
+                display: none;
+            }
+            h2 {
+                page-break-before: always;
+            }
+        }
+
+        .rating-scale {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .rating-option {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .rating-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin: 0 auto 10px;
+        }
+
+        .observation-form {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .form-field {
+            margin-bottom: 20px;
+        }
+
+        .form-field label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+
+        .form-field input,
+        .form-field textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        .form-field textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>People Empowering App</h1>
+        <div class="subtitle">User Testing Plan & Protocol - Version 1.0</div>
+
+        <div class="success-box">
+            <strong>Testing Goal:</strong> Validate that the PEA prototype delivers on its core promise: making housing navigation simple, supportive, and accessible for NYC residents facing housing insecurity.
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="print-button" onclick="window.print()">🖨️ Print Testing Plan</button>
+            <button class="print-button" onclick="alert('Script exported!')">📋 Export Moderator Script</button>
+            <button class="print-button" onclick="alert('Forms exported!')">📊 Export Data Forms</button>
+        </div>
+
+        <h2>1. Testing Overview</h2>
+
+        <h3>Research Questions</h3>
+        <ol>
+            <li><strong>Usability:</strong> Can users complete core tasks without confusion or frustration?</li>
+            <li><strong>Value Proposition:</strong> Do users find the app helpful compared to current methods?</li>
+            <li><strong>Feature Validation:</strong> Do the validated features (action plans, human support, proactive suggestions) work as intended?</li>
+            <li><strong>Accessibility:</strong> Can users with varying tech comfort levels navigate successfully?</li>
+            <li><strong>Emotional Response:</strong> Does the app feel supportive rather than overwhelming?</li>
+        </ol>
+
+        <h3>Success Criteria</h3>
+        <div class="metric-grid">
+            <div class="metric-card">
+                <h4>Task Completion</h4>
+                <div class="metric-value">≥80%</div>
+                <p>Users complete primary tasks successfully</p>
+            </div>
+            <div class="metric-card">
+                <h4>Time on Task</h4>
+                <div class="metric-value">≤10min</div>
+                <p>Per complete user flow (onboarding to action)</p>
+            </div>
+            <div class="metric-card">
+                <h4>Confusion Rate</h4>
+                <div class="metric-value">≤20%</div>
+                <p>Users express confusion or need help</p>
+            </div>
+            <div class="metric-card">
+                <h4>SUS Score</h4>
+                <div class="metric-value">≥70</div>
+                <p>System Usability Scale score</p>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <strong>Key Validation Point:</strong> If Mr. L-type users (overwhelmed, tech-neutral) can navigate without saying "I'm confused," we've succeeded in our core mission.
+        </div>
+
+        <h2>2. Participant Recruitment</h2>
+
+        <h3>Target Sample Size</h3>
+        <p><strong>Minimum: 6-8 participants</strong> (2-3 per persona type)</p>
+        <p><strong>Recommended: 12-15 participants</strong> for saturation</p>
+
+        <h3>Participant Profiles</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Persona</th>
+                    <th>Recruitment Criteria</th>
+                    <th>Target N</th>
+                    <th>Key Characteristics</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="persona-badge badge-mr-l">Mr. L Type</span></td>
+                    <td>
+                        • Age 25-45<br>
+                        • Currently seeking housing or recently experienced housing crisis<br>
+                        • Neutral to somewhat uncomfortable with apps<br>
+                        • Juggling multiple life pressures
+                    </td>
+                    <td>3-5</td>
+                    <td>The Overwhelmed Survivor - needs simplicity</td>
+                </tr>
+                <tr>
+                    <td><span class="persona-badge badge-ms-ellis">Ms. Ellis Type</span></td>
+                    <td>
+                        • Age 45-65<br>
+                        • Has or had housing voucher<br>
+                        • Very comfortable with technology<br>
+                        • Faced landlord discrimination
+                    </td>
+                    <td>2-4</td>
+                    <td>The Resourceful Advocate - needs landlord engagement</td>
+                </tr>
+                <tr>
+                    <td><span class="persona-badge badge-mr-patterson">Mr. Patterson Type</span></td>
+                    <td>
+                        • Age 30-45<br>
+                        • Professional background<br>
+                        • Very comfortable with apps<br>
+                        • Cost-conscious, efficiency-focused
+                    </td>
+                    <td>2-3</td>
+                    <td>The Frustrated Renter - wants no-fee options</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warning-box">
+            <strong>⚠️ Critical Recruitment Requirements:</strong>
+            <ul style="margin-bottom: 0;">
+                <li>All participants must have NYC housing search experience within past 3 years</li>
+                <li>Mix of tech comfort levels (not all "very comfortable")</li>
+                <li>At least 2 participants who own smartphones but are "somewhat uncomfortable" with apps</li>
+                <li>Diversity in age, borough, language background</li>
+            </ul>
+        </div>
+
+        <h3>Recruitment Channels</h3>
+        <ul>
+            <li><strong>Community Organizations:</strong> Partner with housing assistance nonprofits</li>
+            <li><strong>Social Services:</strong> DHS, CUCS, local community centers</li>
+            <li><strong>Online:</strong> NYC-focused Facebook groups, Nextdoor, Craigslist</li>
+            <li><strong>Previous Research Participants:</strong> Re-recruit from initial research (already validated)</li>
+        </ul>
+
+        <h3>Compensation</h3>
+        <div class="highlight-box">
+            <strong>Recommended: $50 gift card</strong> (Amazon, Visa, Target, or grocery store)<br>
+            <strong>Session Length:</strong> 60 minutes<br>
+            <strong>Payment Timing:</strong> Immediately after session completion
+        </div>
+
+        <h2>3. Testing Methodology</h2>
+
+        <h3>Session Format</h3>
+        <p><strong>Method:</strong> Moderated usability testing with think-aloud protocol</p>
+        <p><strong>Location:</strong> In-person preferred (community center, library) OR remote via Zoom/video call</p>
+        <p><strong>Duration:</strong> 60 minutes per participant</p>
+
+        <h3>Session Timeline</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-time">0-5 min</div>
+                <strong>Introduction & Consent</strong>
+                <p>Welcome, consent form, recording permission, set expectations</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">5-10 min</div>
+                <strong>Background Questions</strong>
+                <p>Housing experience, technology comfort, current situation</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">10-45 min</div>
+                <strong>Task Scenarios (Core Testing)</strong>
+                <p>5-7 task scenarios with think-aloud, observation, probing questions</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">45-55 min</div>
+                <strong>Post-Task Interview</strong>
+                <p>Overall impressions, SUS questionnaire, comparison to current tools</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">55-60 min</div>
+                <strong>Wrap-up & Compensation</strong>
+                <p>Thank participant, provide gift card, answer questions</p>
+            </div>
+        </div>
+
+        <h3>Equipment & Setup</h3>
+        <ul class="checklist">
+            <li>Smartphone or tablet with prototype loaded (fully charged)</li>
+            <li>Backup device in case of technical issues</li>
+            <li>Audio recording device OR video camera (with consent)</li>
+            <li>Moderator script printed</li>
+            <li>Observation forms printed (one per task)</li>
+            <li>Consent forms (2 copies - one for participant, one for records)</li>
+            <li>SUS questionnaire printed</li>
+            <li>Gift cards ready</li>
+            <li>Water and snacks for participant comfort</li>
+            <li>Timer (phone or stopwatch)</li>
+        </ul>
+
+        <h2>4. Test Scenarios & Tasks</h2>
+
+        <div class="warning-box">
+            <strong>Think-Aloud Protocol:</strong> Remind participants to verbalize their thoughts as they complete tasks. Say: <em>"Please think out loud as you go - tell me what you're looking for, what you're thinking, what confuses you or makes sense."</em>
+        </div>
+
+        <h3>Task 1: First Impressions & Onboarding</h3>
+        <div class="task-card">
+            <div><span class="task-number">1</span><strong>Task:</strong> Open the app for the first time and get started</div>
+
+            <h4>Scenario:</h4>
+            <p class="participant-quote">
+                "You've just downloaded the People Empowering App on your phone. You need help finding housing in NYC. Open the app and see if it can help you."
+            </p>
+
+            <h4>Success Criteria:</h4>
+            <ul>
+                <li>✓ Understands app purpose within 15 seconds</li>
+                <li>✓ Completes onboarding without confusion</li>
+                <li>✓ Selects appropriate need category</li>
+                <li>✓ Reaches dashboard successfully</li>
+            </ul>
+
+            <h4>Observation Points:</h4>
+            <ul>
+                <li>Does user read welcome text or skip immediately?</li>
+                <li>Can user identify which option matches their need?</li>
+                <li>Does "I'm not sure → talk to someone" option make sense?</li>
+                <li>Any hesitation or confusion expressed?</li>
+            </ul>
+
+            <h4>Follow-up Questions:</h4>
+            <ol>
+                <li>"What did you think this app was for after reading the welcome screen?"</li>
+                <li>"Was it clear which option to choose? Why or why not?"</li>
+                <li>"Did anything confuse you or make you unsure?"</li>
+            </ol>
+
+            <p class="moderator-note"><strong>Moderator Note:</strong> This tests the core "Don't make me more confused" principle. If users express confusion here, we've failed immediately.</p>
+        </div>
+
+        <h3>Task 2: Finding the Help Button</h3>
+        <div class="task-card">
+            <div><span class="task-number">2</span><strong>Task:</strong> Get help from a real person</div>
+
+            <h4>Scenario:</h4>
+            <p class="participant-quote">
+                "You're on the dashboard and you have a question. You want to talk to someone who can help you. How would you do that?"
+            </p>
+
+            <h4>Success Criteria:</h4>
+            <ul>
+                <li>✓ Finds help button within 10 seconds</li>
+                <li>✓ Understands multiple support channels available</li>
+                <li>✓ Can identify which channel works best for them</li>
+            </ul>
+
+            <h4>Observation Points:</h4>
+            <ul>
+                <li>Do they find the help button immediately or search around?</li>
+                <li>Is the yellow "Get Help" button visible enough?</li>
+                <li>Do they understand chat vs. phone vs. video options?</li>
+                <li>Which support channel would they choose and why?</li>
+            </ul>
+
+            <h4>Follow-up Questions:</h4>
+            <ol>
+                <li>"Was it easy or hard to find how to get help?"</li>
+                <li>"Which way would you prefer to get help? Why?"</li>
+                <li>"Do you feel confident you could reach a real person if you needed to?"</li>
+            </ol>
+
+            <p class="moderator-note"><strong>Moderator Note:</strong> 100% of research participants wanted human support option. This tests visibility and accessibility of this critical feature.</p>
+        </div>
+
+        <h3>Task 3: Understanding Action Plan</h3>
+        <div class="task-card">
+            <div><span class="task-number">3</span><strong>Task:</strong> Navigate the step-by-step action plan</div>
+
+            <h4>Scenario:</h4>
+            <p class="participant-quote">
+                "You're on Step 2 of your housing application. Look at the action plan and tell me what you need to do next."
+            </p>
+
+            <h4>Success Criteria:</h4>
+            <ul>
+                <li>✓ Identifies current step clearly</li>
+                <li>✓ Understands what documents are needed</li>
+                <li>✓ Knows how to proceed if stuck or missing something</li>
+                <li>✓ Recognizes progress made (completed steps)</li>
+            </ul>
+
+            <h4>Observation Points:</h4>
+            <ul>
+                <li>Can they articulate what Step 2 requires without re-reading?</li>
+                <li>Do they notice the community tip? Do they trust it?</li>
+                <li>Do they see the "I'm missing a document" button?</li>
+                <li>Does progress bar make sense to them?</li>
+            </ul>
+
+            <h4>Follow-up Questions:</h4>
+            <ol>
+                <li>"In your own words, what do you need to do for Step 2?"</li>
+                <li>"How do you feel about the community tip from other users?"</li>
+                <li>"If you were missing one of the documents, what would you do?"</li>
+                <li>"Does seeing Step 1 marked as complete make you feel any particular way?"</li>
+            </ol>
+
+            <p class="moderator-note"><strong>Moderator Note:</strong> Step-by-step plans were rated valuable by 100% of participants. This tests if the execution matches the need.</p>
+        </div>
+
+        <h3>Task 4: Searching for Housing</h3>
+        <div class="task-card">
+            <div><span class="task-number">4</span><strong>Task:</strong> Find a no-fee apartment that accepts vouchers</div>
+
+            <h4>Scenario (Ms. Ellis / Mr. Patterson types):</h4>
+            <p class="participant-quote">
+                "You're looking for a 1-bedroom apartment in your price range with no broker fee. Try to find some options."
+            </p>
+
+            <h4>Success Criteria:</h4>
+            <ul>
+                <li>✓ Navigates to search from dashboard</li>
+                <li>✓ Uses filters to refine results</li>
+                <li>✓ Identifies no-fee listings</li>
+                <li>✓ Understands listing information (price, features, landlord rating)</li>
+            </ul>
+
+            <h4>Observation Points:</h4>
+            <ul>
+                <li>Do they notice "No broker fee" is already selected?</li>
+                <li>Do they add "Accepts vouchers" filter if needed?</li>
+                <li>Can they explain what the landlord rating means?</li>
+                <li>Do they click into a listing or stay on results?</li>
+            </ul>
+
+            <h4>Follow-up Questions:</h4>
+            <ol>
+                <li>"How easy or hard was it to find apartments you were looking for?"</li>
+                <li>"What information was most important to you in the search results?"</li>
+                <li>"Did you notice anything about broker fees? What did you think?"</li>
+                <li>"How do you feel about the landlord ratings shown?"</li>
+            </ol>
+
+            <p class="moderator-note"><strong>Moderator Note:</strong> Mr. Patterson's #1 priority was avoiding broker fees. Test if no-fee filter prominence is sufficient.</p>
+        </div>
+
+        <h3>Task 5: Landlord Information (Ms. Ellis types only)</h3>
+        <div class="task-card">
+            <div><span class="task-number">5</span><strong>Task:</strong> Check if a landlord accepts vouchers</div>
+
+            <h4>Scenario:</h4>
+            <p class="participant-quote">
+                "You have a housing voucher. Before contacting a landlord, you want to make sure they actually accept vouchers and have a good track record. How can you find this out?"
+            </p>
+
+            <h4>Success Criteria:</h4>
+            <ul>
+                <li>✓ Finds landlord profile/info section</li>
+                <li>✓ Identifies voucher acceptance rate</li>
+                <li>✓ Reads community reviews from other voucher holders</li>
+                <li>✓ Feels confident about landlord before contacting</li>
+            </ul>
+
+            <h4>Observation Points:</h4>
+            <ul>
+                <li>Do they find the "Landlord" tab or section?</li>
+                <li>Do they notice the 95% voucher acceptance rate?</li>
+                <li>Do they read the voucher-specific reviews?</li>
+                <li>Does the "Voucher-Friendly Landlord" badge stand out?</li>
+            </ul>
+
+            <h4>Follow-up Questions:</h4>
+            <ol>
+                <li>"Does this information help you feel more confident about contacting this landlord?"</li>
+                <li>"How does this compare to how you normally find out if a landlord accepts vouchers?"</li>
+                <li>"Would you trust this information? Why or why not?"</li>
+            </ol>
+
+            <p class="moderator-note"><strong>Moderator Note:</strong> Ms. Ellis's #1 request: landlords to have information before meeting. This is the differentiating feature.</p>
+        </div>
+
+        <h3>Task 6: Document Management</h3>
+        <div class="task-card">
+            <div><span class="task-number">6</span><strong>Task:</strong> Upload a required document</div>
+
+            <h4>Scenario:</h4>
+            <p class="participant-quote">
+                "You need to upload your photo ID for your housing application. Show me how you would do that."
+            </p>
+
+            <h4>Success Criteria:</h4>
+            <ul>
+                <li>✓ Navigates to document section</li>
+                <li>✓ Understands upload options (photo, files, cloud)</li>
+                <li>✓ Finds help if document is missing</li>
+                <li>✓ Sees progress toward completion</li>
+            </ul>
+
+            <h4>Observation Points:</h4>
+            <ul>
+                <li>Do they try "Take Photo Now" first (mobile-native)?</li>
+                <li>Do they notice the progress indicator (4 of 6 complete)?</li>
+                <li>Do they see the "Don't have this document?" help section?</li>
+                <li>Does the green/yellow color coding make sense?</li>
+            </ul>
+
+            <h4>Follow-up Questions:</h4>
+            <ol>
+                <li>"Which upload method would you use in real life? Why?"</li>
+                <li>"Does the progress tracker (4 of 6) help or not? How?"</li>
+                <li>"If you were missing a document, would you know what to do?"</li>
+            </ol>
+
+            <p class="moderator-note"><strong>Moderator Note:</strong> 33% cited missing documents as challenge; 50% use photo features. Test if solution addresses both issues.</p>
+        </div>
+
+        <h3>Task 7: Open Exploration</h3>
+        <div class="task-card">
+            <div><span class="task-number">7</span><strong>Task:</strong> Free exploration and feedback</div>
+
+            <h4>Instruction:</h4>
+            <p class="participant-quote">
+                "You can explore the app however you'd like for the next few minutes. Click around, try things, and tell me what you notice."
+            </p>
+
+            <h4>Observation Points:</h4>
+            <ul>
+                <li>What do they click on first?</li>
+                <li>Do they revisit the help button?</li>
+                <li>Do they explore features not covered in tasks?</li>
+                <li>What do they comment on positively or negatively?</li>
+            </ul>
+
+            <h4>Follow-up Questions:</h4>
+            <ol>
+                <li>"What stood out to you most about the app?"</li>
+                <li>"Was there anything you expected to find but didn't?"</li>
+                <li>"Was there anything that surprised you or seemed unnecessary?"</li>
+            </ol>
+        </div>
+
+        <h2>5. Moderator Script</h2>
+
+        <h3>Introduction (5 minutes)</h3>
+        <div class="script-section">
+            <p><strong>Moderator:</strong> "Hi [Name], thank you so much for coming today. I'm [Your Name] and I'll be guiding you through this session.</p>
+
+            <p>We're testing a prototype of an app designed to help people find housing in New York City. I want to be really clear: <strong>we're testing the app, not you.</strong> There are no right or wrong answers. If something doesn't make sense or is hard to use, that's really valuable feedback for us.</p>
+
+            <p>What I'd like you to do is use the app like you normally would, and as you go, <strong>please think out loud.</strong> Tell me what you're looking at, what you're thinking, what you expect to happen. If you get confused or frustrated, that's exactly what we need to know.</p>
+
+            <p>I'm going to be taking notes and [recording/observing], and everything you say will be kept confidential. Your name won't be attached to any of our findings.</p>
+
+            <p>The session will take about an hour. At the end, I'll give you a $50 gift card as a thank you for your time.</p>
+
+            <p>Do you have any questions before we begin?"</p>
+
+            <p class="moderator-note">[Wait for questions, answer honestly. Have participant sign consent form and start recording if approved.]</p>
+        </div>
+
+        <h3>Background Questions (5 minutes)</h3>
+        <div class="script-section">
+            <p><strong>Moderator:</strong> "Before we look at the app, I'd like to ask you a few background questions."</p>
+
+            <ol>
+                <li>"Have you had to search for housing in NYC in the past few years? Can you tell me a bit about that experience?"
+                    <p class="moderator-note">[Listen for pain points, frustrations, what worked/didn't work]</p>
+                </li>
+                <li>"When you were searching, what resources did you use? Websites, apps, calling places, word of mouth?"
+                    <p class="moderator-note">[Note their current methods for comparison later]</p>
+                </li>
+                <li>"How comfortable are you with using apps on your phone in general?"
+                    <p class="moderator-note">[Gauge tech comfort to contextualize observations]</p>
+                </li>
+                <li>"If you could wave a magic wand and have the perfect tool to help you find housing, what would it do?"
+                    <p class="moderator-note">[Captures unmet needs and expectations]</p>
+                </li>
+            </ol>
+        </div>
+
+        <h3>Task Introduction</h3>
+        <div class="script-section">
+            <p><strong>Moderator:</strong> "Great, thank you. Now I'm going to give you some scenarios to try with the app. Remember, think out loud as you go. I might stay quiet while you work - that's normal, I'm just watching and taking notes. If you get really stuck, I'll step in, but I want to see how you'd handle it on your own first."</p>
+
+            <p class="moderator-note">[Hand them the device with prototype loaded to home screen]</p>
+
+            <p><strong>Moderator:</strong> "Okay, here's your first scenario..." [Begin Task 1]</p>
+        </div>
+
+        <h3>During Tasks - Probing Questions</h3>
+        <div class="script-section">
+            <p class="moderator-note">Use these probes when participant is silent or unclear:</p>
+
+            <ul>
+                <li>"What are you thinking right now?"</li>
+                <li>"What are you looking for?"</li>
+                <li>"What do you expect to happen when you tap that?"</li>
+                <li>"Can you walk me through what you're seeing here?"</li>
+                <li>"How do you feel about that?" [after they complete something]</li>
+            </ul>
+
+            <p class="moderator-note">If stuck for 30+ seconds:</p>
+            <ul>
+                <li>"What would you try next?"</li>
+                <li>"If this were the real app, what would you do right now?"</li>
+                <li>[If still stuck after 1 minute]: "Let me give you a hint..." [minimal guidance]</li>
+            </ul>
+        </div>
+
+        <h3>Post-Task Interview (10 minutes)</h3>
+        <div class="script-section">
+            <p><strong>Moderator:</strong> "Thank you so much for working through those tasks with me. Now I have some overall questions about your experience."</p>
+
+            <h4>Overall Impressions:</h4>
+            <ol>
+                <li>"Thinking about the whole app, what's your overall impression?"</li>
+                <li>"Would you use this app if it were available today? Why or why not?"</li>
+                <li>"Would you recommend it to a friend or family member looking for housing?"</li>
+            </ol>
+
+            <h4>Comparison to Current Tools:</h4>
+            <ol start="4">
+                <li>"How does this compare to [the methods you mentioned earlier - websites, 311, etc.]?"</li>
+                <li>"What does this app do better? What does it do worse?"</li>
+                <li>"Is there anything this app does that you wish other tools did?"</li>
+            </ol>
+
+            <h4>Specific Features:</h4>
+            <ol start="7">
+                <li>"What did you think about the step-by-step action plans?"</li>
+                <li>"How did you feel about being able to chat with a real person for help?"</li>
+                <li>"What about the community tips from other users - helpful or not?"</li>
+                <li>[For voucher holders]: "The landlord information showing voucher acceptance rates - valuable?"</li>
+            </ol>
+
+            <h4>What's Missing:</h4>
+            <ol start="11">
+                <li>"Was there anything you expected to see that wasn't there?"</li>
+                <li>"If you could add one feature to this app, what would it be?"</li>
+            </ol>
+
+            <h4>Accessibility & Confusion:</h4>
+            <ol start="13">
+                <li>"Did anything confuse you or make you feel lost?"</li>
+                <li>"Was there anything that made you feel frustrated?"</li>
+                <li>"On a scale of 1-10, how easy was this app to use?" [Note their reasoning]</li>
+            </ol>
+        </div>
+
+        <h3>SUS Questionnaire</h3>
+        <div class="script-section">
+            <p><strong>Moderator:</strong> "Last thing - I have a short questionnaire about the app. For each statement, tell me if you strongly disagree, disagree, neutral, agree, or strongly agree."</p>
+
+            <ol>
+                <li>I think that I would like to use this system frequently.</li>
+                <li>I found the system unnecessarily complex.</li>
+                <li>I thought the system was easy to use.</li>
+                <li>I think that I would need the support of a technical person to be able to use this system.</li>
+                <li>I found the various functions in this system were well integrated.</li>
+                <li>I thought there was too much inconsistency in this system.</li>
+                <li>I would imagine that most people would learn to use this system very quickly.</li>
+                <li>I found the system very cumbersome to use.</li>
+                <li>I felt very confident using the system.</li>
+                <li>I needed to learn a lot of things before I could get going with this system.</li>
+            </ol>
+
+            <div class="rating-scale">
+                <div class="rating-option">
+                    <div class="rating-number">1</div>
+                    <div>Strongly<br>Disagree</div>
+                </div>
+                <div class="rating-option">
+                    <div class="rating-number">2</div>
+                    <div>Disagree</div>
+                </div>
+                <div class="rating-option">
+                    <div class="rating-number">3</div>
+                    <div>Neutral</div>
+                </div>
+                <div class="rating-option">
+                    <div class="rating-number">4</div>
+                    <div>Agree</div>
+                </div>
+                <div class="rating-option">
+                    <div class="rating-number">5</div>
+                    <div>Strongly<br>Agree</div>
+                </div>
+            </div>
+
+            <p class="moderator-note"><strong>SUS Scoring:</strong> Questions 1,3,5,7,9: (scale position - 1). Questions 2,4,6,8,10: (5 - scale position). Sum all and multiply by 2.5 for final score (0-100). Score ≥68 is above average, ≥80 is excellent.</p>
+        </div>
+
+        <h3>Closing (5 minutes)</h3>
+        <div class="script-section">
+            <p><strong>Moderator:</strong> "That's it! Thank you so much for your time and honest feedback. This is incredibly helpful for making the app better.</p>
+
+            <p>Do you have any questions for me about the app or the research?"</p>
+
+            <p class="moderator-note">[Answer questions, provide gift card, have them sign receipt]</p>
+
+            <p><strong>Moderator:</strong> "Here's your $50 gift card as a thank you. We really appreciate you sharing your experience with us today. If you'd like, I can send you updates when the app launches."</p>
+
+            <p class="moderator-note">[Collect email if interested, thank them again, escort out]</p>
+        </div>
+
+        <h2>6. Data Collection & Analysis</h2>
+
+        <h3>Data to Collect</h3>
+
+        <h4>Quantitative Metrics</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>How to Measure</th>
+                    <th>Success Threshold</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Task Completion Rate</strong></td>
+                    <td>% of tasks completed successfully without help</td>
+                    <td>≥80% for critical tasks</td>
+                </tr>
+                <tr>
+                    <td><strong>Time on Task</strong></td>
+                    <td>Seconds from task start to completion (use timer)</td>
+                    <td>≤10 minutes for full flow</td>
+                </tr>
+                <tr>
+                    <td><strong>Error Rate</strong></td>
+                    <td># of wrong taps/paths taken per task</td>
+                    <td>≤2 errors per task</td>
+                </tr>
+                <tr>
+                    <td><strong>Help Requests</strong></td>
+                    <td># of times user asks "What do I do?" or expresses confusion</td>
+                    <td>≤1 per task</td>
+                </tr>
+                <tr>
+                    <td><strong>SUS Score</strong></td>
+                    <td>System Usability Scale (0-100)</td>
+                    <td>≥70 (good), ≥80 (excellent)</td>
+                </tr>
+                <tr>
+                    <td><strong>Recommendation Likelihood</strong></td>
+                    <td>1-10 scale (NPS-style)</td>
+                    <td>≥7 average</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Qualitative Observations</h4>
+        <div class="observation-form">
+            <h4>Observation Template (fill out per task)</h4>
+            <div class="form-field">
+                <label>Participant ID:</label>
+                <input type="text" placeholder="e.g., P01-MrL">
+            </div>
+            <div class="form-field">
+                <label>Task Number & Name:</label>
+                <input type="text" placeholder="e.g., Task 3 - Action Plan">
+            </div>
+            <div class="form-field">
+                <label>Time Started:</label>
+                <input type="text" placeholder="HH:MM:SS">
+            </div>
+            <div class="form-field">
+                <label>Time Completed:</label>
+                <input type="text" placeholder="HH:MM:SS">
+            </div>
+            <div class="form-field">
+                <label>Success? (Yes / Partial / No):</label>
+                <input type="text">
+            </div>
+            <div class="form-field">
+                <label>Confusion Points (describe what confused them):</label>
+                <textarea></textarea>
+            </div>
+            <div class="form-field">
+                <label>Positive Reactions (what worked well):</label>
+                <textarea></textarea>
+            </div>
+            <div class="form-field">
+                <label>Errors Made (wrong taps, wrong paths):</label>
+                <textarea></textarea>
+            </div>
+            <div class="form-field">
+                <label>Verbatim Quotes (capture exact words):</label>
+                <textarea></textarea>
+            </div>
+            <div class="form-field">
+                <label>Additional Notes:</label>
+                <textarea></textarea>
+            </div>
+        </div>
+
+        <h3>Analysis Framework</h3>
+
+        <h4>After Each Session:</h4>
+        <ul>
+            <li>Review notes immediately while fresh</li>
+            <li>Calculate quantitative metrics (task completion, time, errors)</li>
+            <li>Note any critical issues or bugs to fix before next session</li>
+            <li>Identify patterns emerging across participants</li>
+        </ul>
+
+        <h4>After All Sessions:</h4>
+
+        <ol>
+            <li><strong>Quantitative Analysis:</strong>
+                <ul>
+                    <li>Calculate average task completion rates per task</li>
+                    <li>Calculate average time on task</li>
+                    <li>Calculate average SUS score (overall and per persona)</li>
+                    <li>Create charts showing performance across tasks</li>
+                </ul>
+            </li>
+
+            <li><strong>Qualitative Analysis:</strong>
+                <ul>
+                    <li>Affinity mapping: Group similar observations, quotes, issues</li>
+                    <li>Identify recurring themes (both positive and negative)</li>
+                    <li>Create severity ratings for issues found:
+                        <ul>
+                            <li><strong>Critical:</strong> Blocks task completion, causes abandonment</li>
+                            <li><strong>Major:</strong> Significant confusion/frustration, workarounds needed</li>
+                            <li><strong>Minor:</strong> Small annoyances, doesn't block progress</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li><strong>Persona Comparison:</strong>
+                <ul>
+                    <li>Compare performance across persona types (Mr. L vs Ms. Ellis vs Mr. Patterson)</li>
+                    <li>Identify if certain features work better for specific personas</li>
+                    <li>Note any unexpected findings or contradictions to initial research</li>
+                </ul>
+            </li>
+
+            <li><strong>Recommendation Prioritization:</strong>
+                <ul>
+                    <li>Must fix before launch (critical issues)</li>
+                    <li>Should fix soon (major usability problems)</li>
+                    <li>Nice to have (minor improvements)</li>
+                    <li>Future enhancements (feature requests)</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2>7. Success Validation</h2>
+
+        <div class="success-box">
+            <h3>We've succeeded if:</h3>
+            <ul style="margin-bottom: 0;">
+                <li><strong>Mr. L types never say "I'm confused"</strong> during onboarding or action plans</li>
+                <li><strong>Ms. Ellis types feel the landlord info is valuable</strong> and builds confidence</li>
+                <li><strong>Mr. Patterson types immediately notice</strong> no-fee filter and cost savings</li>
+                <li><strong>100% can find human support</strong> within 10 seconds</li>
+                <li><strong>80%+ complete tasks</strong> without moderator intervention</li>
+                <li><strong>SUS score ≥70</strong> (above average usability)</li>
+                <li><strong>Participants say they'd use it</strong> over current methods</li>
+            </ul>
+        </div>
+
+        <div class="danger-box">
+            <h3>Red flags to watch for:</h3>
+            <ul style="margin-bottom: 0;">
+                <li>Multiple participants saying "This is confusing" or "I don't know what to do"</li>
+                <li>Task completion rate <60%</li>
+                <li>Participants abandon tasks out of frustration</li>
+                <li>Tech-uncomfortable users struggle significantly more than comfortable users</li>
+                <li>Help button isn't found when needed</li>
+                <li>Participants prefer their current methods over the app</li>
+                <li>SUS score <50 (poor usability)</li>
+            </ul>
+        </div>
+
+        <h2>8. Reporting Template</h2>
+
+        <h3>Executive Summary</h3>
+        <div class="observation-form">
+            <div class="form-field">
+                <label>Number of Participants:</label>
+                <input type="text">
+            </div>
+            <div class="form-field">
+                <label>Testing Dates:</label>
+                <input type="text">
+            </div>
+            <div class="form-field">
+                <label>Overall SUS Score:</label>
+                <input type="text">
+            </div>
+            <div class="form-field">
+                <label>Average Task Completion Rate:</label>
+                <input type="text">
+            </div>
+            <div class="form-field">
+                <label>Top 3 Findings (Positive):</label>
+                <textarea></textarea>
+            </div>
+            <div class="form-field">
+                <label>Top 3 Issues Found:</label>
+                <textarea></textarea>
+            </div>
+            <div class="form-field">
+                <label>Recommendation: Launch / Iterate / Redesign</label>
+                <textarea></textarea>
+            </div>
+        </div>
+
+        <h3>Report Sections</h3>
+        <ol>
+            <li><strong>Executive Summary</strong> (1 page: key findings, recommendation)</li>
+            <li><strong>Methodology</strong> (participants, tasks, process)</li>
+            <li><strong>Quantitative Results</strong> (tables, charts of metrics)</li>
+            <li><strong>Qualitative Findings</strong> (themes, quotes, observations)</li>
+            <li><strong>Task-by-Task Analysis</strong> (what worked, what didn't, per task)</li>
+            <li><strong>Persona Insights</strong> (differences across user types)</li>
+            <li><strong>Critical Issues</strong> (must-fix before launch)</li>
+            <li><strong>Recommendations</strong> (prioritized list of changes)</li>
+            <li><strong>Appendix</strong> (raw data, full quotes, observation forms)</li>
+        </ol>
+
+        <h2>9. Timeline & Resources</h2>
+
+        <h3>Estimated Timeline</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Phase</th>
+                    <th>Duration</th>
+                    <th>Activities</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Preparation</strong></td>
+                    <td>1 week</td>
+                    <td>Recruit participants, finalize script, print materials, test equipment</td>
+                </tr>
+                <tr>
+                    <td><strong>Testing Sessions</strong></td>
+                    <td>1-2 weeks</td>
+                    <td>Conduct 6-12 sessions (60 min each + buffer time)</td>
+                </tr>
+                <tr>
+                    <td><strong>Analysis</strong></td>
+                    <td>3-5 days</td>
+                    <td>Review notes, code themes, calculate metrics, identify patterns</td>
+                </tr>
+                <tr>
+                    <td><strong>Reporting</strong></td>
+                    <td>2-3 days</td>
+                    <td>Create report, presentation, prioritized recommendations</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td>3-4 weeks</td>
+                    <td>From recruitment to final report delivery</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Budget Estimate</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Cost</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Participant compensation ($50 each)</td>
+                    <td>12</td>
+                    <td>$50</td>
+                    <td>$600</td>
+                </tr>
+                <tr>
+                    <td>Recruitment incentive (social media ads, flyers)</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>$100</td>
+                </tr>
+                <tr>
+                    <td>Materials (printing, supplies)</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>$50</td>
+                </tr>
+                <tr>
+                    <td>Recording equipment (if needed)</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>$0-200</td>
+                </tr>
+                <tr>
+                    <td>Space rental (if needed)</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>$0-300</td>
+                </tr>
+                <tr>
+                    <td><strong>Total Estimated Budget</strong></td>
+                    <td colspan="3"><strong>$750-1,250</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box">
+            <strong>💡 Cost-Saving Tips:</strong>
+            <ul style="margin-bottom: 0;">
+                <li>Partner with community organizations for free space</li>
+                <li>Use smartphone for recording (free)</li>
+                <li>Recruit through existing networks vs. paid ads</li>
+                <li>Start with 6 participants; add more only if needed for saturation</li>
+            </ul>
+        </div>
+
+        <h2>10. Ethical Considerations</h2>
+
+        <div class="warning-box">
+            <h3>Trauma-Informed Research Practices</h3>
+            <ul style="margin-bottom: 0;">
+                <li><strong>Participant autonomy:</strong> Emphasize they can skip questions, stop anytime, no penalty</li>
+                <li><strong>Privacy protection:</strong> All data anonymized, no names in reports</li>
+                <li><strong>Comfortable environment:</strong> Provide water, snacks, breaks as needed</li>
+                <li><strong>Respectful language:</strong> No judgment about housing situation or tech skills</li>
+                <li><strong>Immediate compensation:</strong> Don't make participants wait for payment</li>
+                <li><strong>No deception:</strong> Be honest about research purpose and use of data</li>
+                <li><strong>Sensitivity to crisis:</strong> If participant reveals immediate housing crisis, provide 311/DHS resources</li>
+            </ul>
+        </div>
+
+        <h2>Appendix: Consent Form Template</h2>
+
+        <div style="border: 2px solid #333; padding: 30px; margin: 30px 0; background: #fafafa;">
+            <h3 style="text-align: center; margin-top: 0;">RESEARCH PARTICIPANT CONSENT FORM</h3>
+
+            <h4>Study Title:</h4>
+            <p>People Empowering App: Usability Testing</p>
+
+            <h4>Purpose:</h4>
+            <p>We are testing a mobile app prototype designed to help NYC residents find housing. Your feedback will help us improve the app before it launches.</p>
+
+            <h4>What You'll Do:</h4>
+            <ul>
+                <li>Use the app prototype on a smartphone/tablet</li>
+                <li>Complete several tasks (finding housing, uploading documents, etc.)</li>
+                <li>Answer questions about your experience</li>
+                <li>Session will last approximately 60 minutes</li>
+            </ul>
+
+            <h4>Recording:</h4>
+            <p>☐ I consent to audio recording of this session<br>
+            ☐ I consent to video recording of this session<br>
+            ☐ I do NOT consent to recording (notes only)</p>
+
+            <h4>Confidentiality:</h4>
+            <p>Your responses will be kept confidential. Your name will not be used in any reports. Data will be stored securely and destroyed after the research is complete.</p>
+
+            <h4>Compensation:</h4>
+            <p>You will receive a $50 gift card immediately after completing the session, regardless of whether you complete all tasks.</p>
+
+            <h4>Voluntary Participation:</h4>
+            <p>Your participation is completely voluntary. You may skip any question, stop the session at any time, or withdraw your data after the session without penalty. You will still receive full compensation.</p>
+
+            <h4>Questions or Concerns:</h4>
+            <p>If you have questions about this research, contact: [Your Email]</p>
+
+            <hr style="margin: 20px 0;">
+
+            <p><strong>I have read and understood the above information. I voluntarily agree to participate in this research study.</strong></p>
+
+            <p>Participant Signature: _________________________ Date: __________</p>
+
+            <p>Researcher Signature: _________________________ Date: __________</p>
+
+            <p style="font-size: 0.9em; margin-top: 20px;"><em>You will receive a copy of this form for your records.</em></p>
+        </div>
+
+        <div style="text-align: center; margin: 50px 0;">
+            <h2 style="color: #28a745;">✓ Testing Plan Complete</h2>
+            <p style="font-size: 1.2em; color: #666;">You're ready to validate your prototype with real users!</p>
+            <button class="print-button" onclick="window.print()">🖨️ Print Complete Plan</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Simple print function
+        function printPlan() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
