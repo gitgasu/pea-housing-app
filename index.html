@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEA Project - People Empowering App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #666;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: #5568d3;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-desc {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+
+        .highlight-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box p {
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            color: #666;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>People Empowering App</h1>
+        <p class="subtitle">Empowering NYC Residents to Navigate Housing Insecurity</p>
+
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Research Participants</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">3</div>
+                <div class="stat-label">User Personas</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Wireframe Screens</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Feature Validation</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Project Goal:</strong> Design a mobile-first application that simplifies the housing search process for NYC residents experiencing housing insecurity through step-by-step guidance, 24/7 human support, and transparency about costs and options.</p>
+        </div>
+
+        <div class="section">
+            <h2>🎨 Interactive Prototypes</h2>
+            <div class="card-grid">
+                <a href="interactive_prototype.html" class="card">
+                    <div class="card-icon">📱</div>
+                    <div class="card-title">Interactive Prototype</div>
+                    <div class="card-desc">Fully clickable prototype with 12 connected screens. Switch between personas (Mr. L, Ms. Ellis, Mr. Patterson) to see personalized experiences.</div>
+                </a>
+
+                <a href="wireframes_core_screens.html" class="card">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-title">Core Wireframes (Phase 1)</div>
+                    <div class="card-desc">Onboarding flow, dashboard variations, action plan view, and human support hub. Includes research annotations.</div>
+                </a>
+
+                <a href="wireframes_phase2_screens.html" class="card">
+                    <div class="card-icon">🏘️</div>
+                    <div class="card-title">Phase 2 Wireframes</div>
+                    <div class="card-desc">Housing search with filters, listing details, landlord profiles with acceptance rates, and document manager.</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Presentations</h2>
+            <div class="card-grid">
+                <a href="project_presentation.html" class="card">
+                    <div class="card-icon">📽️</div>
+                    <div class="card-title">Complete Project Presentation</div>
+                    <div class="card-desc">Comprehensive 10-slide presentation covering research process, findings, personas, features, design solutions, and next steps.</div>
+                </a>
+
+                <a href="pea_concise_presentation.html" class="card">
+                    <div class="card-icon">⚡</div>
+                    <div class="card-title">Concise Presentation</div>
+                    <div class="card-desc">Streamlined 10-slide overview perfect for quick stakeholder reviews and class presentations.</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Documentation</h2>
+            <div class="card-grid">
+                <a href="design_system.html" class="card">
+                    <div class="card-icon">🎨</div>
+                    <div class="card-title">Design System</div>
+                    <div class="card-desc">Complete style guide with colors, typography, spacing, components, and accessibility standards (WCAG 2.1 AA).</div>
+                </a>
+
+                <a href="user_testing_plan.html" class="card">
+                    <div class="card-icon">🧪</div>
+                    <div class="card-title">User Testing Plan</div>
+                    <div class="card-desc">Comprehensive testing protocol with 7 task scenarios, moderator script, SUS questionnaire, and analysis framework.</div>
+                </a>
+
+                <a href="user_flows.md" class="card">
+                    <div class="card-icon">🗺️</div>
+                    <div class="card-title">User Flows</div>
+                    <div class="card-desc">Visual journey maps for all three personas using Mermaid diagrams. Shows complete flows from onboarding to goal completion.</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>👥 User Personas</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">👨</div>
+                    <div class="card-title">Mr. L - Emergency Housing Seeker</div>
+                    <div class="card-desc">"Don't make me more confused than I already am." Low tech comfort, needs extreme simplicity and immediate support.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">👩</div>
+                    <div class="card-title">Ms. Ellis - Voucher Holder</div>
+                    <div class="card-desc">"Landlords won't even show me apartments." Faces discrimination, needs voucher-accepting landlords and rights information.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">👨‍💼</div>
+                    <div class="card-title">Mr. Patterson - Cost-Conscious Renter</div>
+                    <div class="card-desc">"Broker fees are thousands of dollars I don't have." High tech comfort, needs cost transparency and no-fee listings.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Design Principle:</strong> "Don't make me more confused than I already am." - This quote from Mr. L became our North Star, guiding every design decision toward radical simplicity and clarity.</p>
+        </div>
+
+        <footer>
+            <p><strong>HCI Design Project - 2025</strong></p>
+            <p>Research-driven, user-centered design for vulnerable populations</p>
+            <p style="margin-top: 1rem;">
+                <a href="https://github.com/gitgasu/pea-housing-app" class="btn">View on GitHub</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
