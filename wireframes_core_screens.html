@@ -597,6 +597,112 @@
             margin: 20px 0;
         }
 
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 8px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .nav-item:hover {
+            background: #f0f0ff;
+        }
+
+        .nav-item.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 1.5em;
+        }
+
+        .nav-label {
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        /* Photo Guidance */
+        .photo-guide {
+            background: #e7f3ff;
+            border: 2px solid #0c5460;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .photo-guide-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #0c5460;
+            font-size: 0.9em;
+        }
+
+        .photo-tips {
+            font-size: 0.8em;
+            line-height: 1.5;
+            color: #0c5460;
+        }
+
+        .photo-tips li {
+            margin-bottom: 4px;
+        }
+
+        .example-photo {
+            width: 100%;
+            height: 120px;
+            background: #e9ecef;
+            border: 2px dashed #adb5bd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        /* Visual indicators */
+        .info-badge {
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .info-badge.success {
+            background: #28a745;
+        }
+
+        .info-badge.warning {
+            background: #ffc107;
+            color: #000;
+        }
+
         @media (max-width: 1200px) {
             .wireframe-wrapper {
                 grid-template-columns: 1fr;
@@ -625,9 +731,11 @@
                     <div class="wireframe">
                         <div class="onboarding-screen">
                             <div class="onboarding-image">🏠</div>
-                            <div class="onboarding-title">Welcome to People Empowering App</div>
+                            <div class="onboarding-title">Find NYC Housing</div>
                             <div class="onboarding-desc">
-                                We're here to help you find housing in NYC. No confusing forms. No overwhelming lists. Just clear steps and real support.
+                                ✓ Clear steps<br>
+                                ✓ Real support<br>
+                                ✓ No confusing forms
                             </div>
                             <div class="indicator-dots">
                                 <div class="dot active"></div>
@@ -643,7 +751,10 @@
                 <div class="annotations">
                     <h3>Design Decisions - Onboarding Screen 1</h3>
                     <div class="annotation-item">
-                        <strong>Simple, friendly language:</strong> "No confusing forms. No overwhelming lists."
+                        <strong>Ultra-simplified text:</strong> Bullet points with checkmarks instead of prose
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Shorter title:</strong> "Find NYC Housing" instead of full app name
                     </div>
                     <div class="research-note">
                         <strong>Research:</strong> Mr. L said "Don't make me more confused" - this sets expectations immediately.
@@ -739,16 +850,17 @@
                     <div class="wireframe">
                         <div class="onboarding-screen">
                             <div class="onboarding-image">✓</div>
-                            <div class="onboarding-title">You're All Set!</div>
+                            <div class="onboarding-title">Ready to Start!</div>
                             <div class="onboarding-desc">
-                                We've created your personal action plan. You'll see clear steps, and you can always chat with someone if you get stuck.
+                                <div style="font-size: 1.1em; margin-bottom: 15px;">Your personalized plan is ready</div>
+                                <span class="info-badge success">24/7 support available</span>
                             </div>
                             <div class="indicator-dots">
                                 <div class="dot"></div>
                                 <div class="dot"></div>
                                 <div class="dot active"></div>
                             </div>
-                            <button class="btn-primary">View My Action Plan</button>
+                            <button class="btn-primary">View My Plan</button>
                         </div>
                     </div>
                 </div>
@@ -756,7 +868,10 @@
                 <div class="annotations">
                     <h3>Design Decisions - Onboarding Complete</h3>
                     <div class="annotation-item">
-                        <strong>Immediate value:</strong> "We've created your personal action plan" - not just registration
+                        <strong>Condensed text:</strong> Shorter sentence, badge for support instead of full sentence
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Simplified button:</strong> "View My Plan" instead of "View My Action Plan"
                     </div>
                     <div class="annotation-item">
                         <strong>Reassurance:</strong> "you can always chat with someone if you get stuck"
@@ -830,14 +945,40 @@
                         </div>
 
                         <div class="action-card">
-                            <div class="action-title">💰 Check if you qualify for rental assistance</div>
-                            <div class="action-desc">You might be eligible for programs you don't know about</div>
+                            <div class="action-title">💰 Check eligibility</div>
+                            <div class="action-desc">Find programs you qualify for</div>
+                        </div>
+
+                        <!-- Bottom Navigation -->
+                        <div class="bottom-nav">
+                            <div class="nav-item active">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-label">Home</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">📊</div>
+                                <div class="nav-label">Progress</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">📄</div>
+                                <div class="nav-label">Docs</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">💬</div>
+                                <div class="nav-label">Help</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="annotations">
                     <h3>Design Decisions - Dashboard</h3>
+                    <div class="annotation-item">
+                        <strong>Bottom navigation added:</strong> Persistent access to key sections
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Simplified card text:</strong> Shorter titles and descriptions
+                    </div>
                     <div class="annotation-item">
                         <strong>Personal greeting:</strong> Uses first name to humanize experience
                     </div>
@@ -980,22 +1121,19 @@
                             <div class="step-item current">
                                 <div class="step-number">2</div>
                                 <div class="step-content">
-                                    <div class="step-title">Gather Required Documents</div>
+                                    <div class="step-title">Upload 4 Documents</div>
                                     <div class="step-desc">
-                                        You need these 4 documents for your intake appointment:
-                                        <ul style="margin: 8px 0 8px 20px; font-size: 0.9em;">
-                                            <li>Photo ID (driver's license or state ID)</li>
-                                            <li>Proof of income (pay stubs, benefit letter)</li>
-                                            <li>Proof of NYC residency</li>
-                                            <li>Social Security card</li>
-                                        </ul>
+                                        📸 Photo ID<br>
+                                        💵 Proof of income<br>
+                                        🏠 NYC residency proof<br>
+                                        🔢 Social Security card
                                     </div>
                                     <div class="community-tip">
-                                        💡 <strong>Tip from others:</strong> Bring extra copies of everything. The office doesn't have a copier.
-                                        <span class="verified-badge">✓ Verified by official source</span>
+                                        💡 <strong>Tip:</strong> Take clear photos. Show full document.
+                                        <span class="verified-badge">✓ Verified</span>
                                     </div>
-                                    <button class="btn-primary" style="margin-top: 10px;">📸 Upload Documents</button>
-                                    <button class="btn-secondary">❓ I'm missing a document</button>
+                                    <button class="btn-primary" style="margin-top: 10px;">📸 Take Photos</button>
+                                    <button class="btn-secondary">❓ Missing a doc?</button>
                                 </div>
                             </div>
 
@@ -1056,49 +1194,314 @@
                 <div class="phone-frame">
                     <div class="wireframe">
                         <div class="header">
-                            <div class="logo">PEA</div>
+                            <button class="back-button">← Back</button>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 10px;">
+                            Take Photo: Photo ID
+                        </div>
+                        <div style="color: #667eea; margin-bottom: 20px; font-size: 0.9em;">
+                            <span class="info-badge">Step 1 of 4</span>
+                        </div>
+
+                        <div class="photo-guide">
+                            <div class="photo-guide-title">📸 Photo Tips</div>
+                            <ul class="photo-tips">
+                                <li>✓ Show entire document</li>
+                                <li>✓ Good lighting</li>
+                                <li>✓ Avoid shadows/glare</li>
+                            </ul>
+                        </div>
+
+                        <div class="example-photo">
+                            <div style="text-align: center;">
+                                <div style="font-size: 3em; margin-bottom: 5px;">📄</div>
+                                <div>Example: Clear, full document visible</div>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary">📸 Open Camera</button>
+                        <button class="btn-secondary">📁 Choose from Files</button>
+
+                        <div style="text-align: center; margin-top: 15px;">
+                            <button class="btn-secondary" style="background: none; border: none; color: #667eea;">Skip for now</button>
+                        </div>
+
+                        <!-- Bottom Navigation -->
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-label">Home</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">📊</div>
+                                <div class="nav-label">Progress</div>
+                            </div>
+                            <div class="nav-item active">
+                                <div class="nav-icon">📄</div>
+                                <div class="nav-label">Docs</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">💬</div>
+                                <div class="nav-label">Help</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Camera-First Upload</h3>
+                    <div class="annotation-item">
+                        <strong>Camera as primary action:</strong> Large "Open Camera" button front and center
+                    </div>
+                    <div class="research-note">
+                        <strong>Research & Feedback:</strong> Mobile users primarily use photos - camera should be first option
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Clear visual guidance:</strong> Photo tips with checkmarks, not paragraphs
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Example shown:</strong> Visual preview of good photo quality
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Progress indicator:</strong> "Step 1 of 4" shows where user is
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Back button:</strong> Easy navigation to previous screen
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Skip option:</strong> No dead end if user doesn't have doc right now
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Bottom nav always visible:</strong> Can navigate to other sections anytime
+                    </div>
+                </div>
+            </div>
+
+            <div class="wireframe-wrapper" style="margin-top: 40px;">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <button class="back-button">← Back</button>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 10px;">
+                            Review Photo
+                        </div>
+                        <div style="color: #667eea; margin-bottom: 20px; font-size: 0.9em;">
+                            <span class="info-badge">Step 1 of 4: Photo ID</span>
+                        </div>
+
+                        <div style="width: 100%; height: 250px; background: #e9ecef; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 4em; margin-bottom: 20px; border: 3px solid #28a745;">
+                            📄
+                        </div>
+
+                        <div style="background: #d4edda; border: 2px solid #28a745; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+                            <strong style="color: #155724;">✓ Photo looks good!</strong>
+                            <div style="font-size: 0.85em; color: #155724; margin-top: 5px;">
+                                Full document visible, good lighting
+                            </div>
+                        </div>
+
+                        <button class="btn-primary">✓ Use This Photo</button>
+                        <button class="btn-secondary">🔄 Retake Photo</button>
+
+                        <!-- Bottom Navigation -->
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-label">Home</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">📊</div>
+                                <div class="nav-label">Progress</div>
+                            </div>
+                            <div class="nav-item active">
+                                <div class="nav-icon">📄</div>
+                                <div class="nav-label">Docs</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">💬</div>
+                                <div class="nav-label">Help</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Photo Preview</h3>
+                    <div class="annotation-item">
+                        <strong>Immediate feedback:</strong> Shows photo quality assessment instantly
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Visual confirmation:</strong> Green border and checkmark show success
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Helpful guidance:</strong> Tells user WHY photo is good ("Full document visible")
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Easy to retry:</strong> "Retake Photo" option if user not satisfied
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Progress tracking:</strong> Shows this is step 1 of 4 documents
+                    </div>
+                </div>
+            </div>
+
+            <div class="wireframe-wrapper" style="margin-top: 40px;">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <button class="back-button">← Home</button>
+                            <button class="help-button">💬 Get Help</button>
+                        </div>
+
+                        <div style="text-align: center; padding: 40px 20px;">
+                            <div style="width: 120px; height: 120px; background: #28a745; border-radius: 60px; display: flex; align-items: center; justify-content: center; font-size: 4em; margin: 0 auto 20px;">
+                                ✓
+                            </div>
+
+                            <div style="font-size: 1.6em; font-weight: bold; margin-bottom: 15px;">
+                                Photo Uploaded!
+                            </div>
+
+                            <div style="font-size: 1.1em; color: #666; margin-bottom: 25px;">
+                                <span class="info-badge success">1 of 4 complete</span>
+                            </div>
+
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; margin-bottom: 25px; text-align: left;">
+                                <div style="font-weight: bold; margin-bottom: 10px;">Still need:</div>
+                                <div style="font-size: 0.95em; line-height: 1.8;">
+                                    💵 Proof of income<br>
+                                    🏠 NYC residency<br>
+                                    🔢 Social Security card
+                                </div>
+                            </div>
+
+                            <button class="btn-primary">📸 Upload Next Document</button>
+                            <button class="btn-secondary">Save & Continue Later</button>
+                        </div>
+
+                        <!-- Bottom Navigation -->
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-label">Home</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">📊</div>
+                                <div class="nav-label">Progress</div>
+                            </div>
+                            <div class="nav-item active">
+                                <div class="nav-icon">📄</div>
+                                <div class="nav-label">Docs</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">💬</div>
+                                <div class="nav-label">Help</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotations">
+                    <h3>Design Decisions - Upload Success</h3>
+                    <div class="annotation-item">
+                        <strong>Celebration moment:</strong> Large checkmark in green circle
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Progress shown:</strong> "1 of 4 complete" with badge
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Clear next steps:</strong> Shows remaining documents with icons
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Momentum building:</strong> Encourages continuing with "Upload Next"
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Save option:</strong> Can pause and return later - no pressure
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Icons reduce text:</strong> Visual emoji indicators instead of long descriptions
+                    </div>
+                </div>
+            </div>
+
+            <div class="wireframe-wrapper" style="margin-top: 40px;">
+                <div class="phone-frame">
+                    <div class="wireframe">
+                        <div class="header">
+                            <button class="back-button">← Back</button>
                             <button class="help-button">💬 Get Help</button>
                         </div>
 
                         <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 15px;">
-                            Missing a Document?
+                            Need Help with Docs?
                         </div>
 
                         <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                            <div style="font-weight: bold; margin-bottom: 10px;">Which document do you need help with?</div>
-                            <button class="option-btn">Photo ID</button>
-                            <button class="option-btn">Proof of Income</button>
-                            <button class="option-btn">Proof of NYC Residency</button>
-                            <button class="option-btn">Social Security Card</button>
+                            <div style="font-weight: bold; margin-bottom: 10px;">Which document?</div>
+                            <button class="option-btn">📸 Photo ID</button>
+                            <button class="option-btn">💵 Proof of Income</button>
+                            <button class="option-btn">🏠 NYC Residency</button>
+                            <button class="option-btn">🔢 Social Security</button>
                         </div>
 
                         <div style="border: 2px solid #667eea; padding: 15px; border-radius: 10px; background: #f0f0ff;">
-                            <div style="font-weight: bold; margin-bottom: 10px;">How to Get Photo ID:</div>
-                            <div style="font-size: 0.9em; line-height: 1.6; color: #333;">
-                                <strong>Option 1: NYC ID Card (IDNYC)</strong><br>
-                                • Free for all NYC residents<br>
-                                • Accepted everywhere<br>
-                                <br>
-                                <strong>What you need:</strong><br>
-                                • Proof of identity (birth certificate, passport)<br>
-                                • Proof of residency (utility bill, lease)<br>
-                                <br>
-                                <strong>Where to go:</strong><br>
-                                IDNYC Enrollment Center<br>
-                                Hours: Mon-Fri 9am-5pm<br>
-                                <br>
-                                <button class="btn-primary">📍 Find Nearest Location</button>
+                            <div style="font-weight: bold; margin-bottom: 15px; font-size: 1.1em;">Get NYC ID Card (IDNYC)</div>
+
+                            <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                                <div style="font-weight: bold; margin-bottom: 5px;">✓ Free for NYC residents</div>
+                                <div style="font-size: 0.85em; color: #666;">Accepted everywhere</div>
                             </div>
+
+                            <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+                                <div style="font-weight: bold; margin-bottom: 8px;">You need:</div>
+                                <div style="font-size: 0.9em; line-height: 1.7;">
+                                    📄 Birth certificate or passport<br>
+                                    🏠 Utility bill or lease
+                                </div>
+                            </div>
+
+                            <button class="btn-primary">📍 Find Location</button>
                         </div>
 
                         <div style="text-align: center; margin-top: 20px;">
-                            <button class="btn-secondary">💬 Still confused? Chat with us</button>
+                            <button class="btn-secondary">💬 Chat with counselor</button>
+                        </div>
+
+                        <!-- Bottom Navigation -->
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-label">Home</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">📊</div>
+                                <div class="nav-label">Progress</div>
+                            </div>
+                            <div class="nav-item active">
+                                <div class="nav-icon">📄</div>
+                                <div class="nav-label">Docs</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">💬</div>
+                                <div class="nav-label">Help</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="annotations">
                     <h3>Design Decisions - Missing Document Flow</h3>
+                    <div class="annotation-item">
+                        <strong>Heavily simplified text:</strong> Removed verbose descriptions, used cards and icons
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Visual hierarchy:</strong> White cards on colored background for scannability
+                    </div>
                     <div class="annotation-item">
                         <strong>Contextual help:</strong> Clicked "I'm missing a document" → Gets specific guidance
                     </div>

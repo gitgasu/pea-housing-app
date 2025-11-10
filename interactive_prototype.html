@@ -606,6 +606,67 @@
             opacity: 0.8;
         }
 
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 8px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .nav-item:hover {
+            background: #f0f0ff;
+        }
+
+        .nav-item.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 1.5em;
+        }
+
+        .nav-label {
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        .info-badge {
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .info-badge.success {
+            background: #28a745;
+        }
+
         @media (max-width: 1024px) {
             .prototype-wrapper {
                 flex-direction: column;
@@ -665,9 +726,11 @@
                 <div class="screen active" id="screen-welcome">
                     <div class="onboarding-screen">
                         <div class="onboarding-image">🏠</div>
-                        <div class="onboarding-title">Welcome to People Empowering App</div>
+                        <div class="onboarding-title">Find NYC Housing</div>
                         <div class="onboarding-desc">
-                            We're here to help you find housing in NYC. No confusing forms. No overwhelming lists. Just clear steps and real support.
+                            ✓ Clear steps<br>
+                            ✓ Real support<br>
+                            ✓ No confusing forms
                         </div>
                         <div class="indicator-dots">
                             <div class="dot active"></div>
@@ -761,12 +824,32 @@
 
                     <div style="font-weight: bold; margin-bottom: 12px;">Suggested for You</div>
                     <div class="action-card">
-                        <div class="action-title">📋 Complete your profile</div>
-                        <div class="action-desc">This helps us give you better recommendations</div>
+                        <div class="action-title">📋 Complete profile</div>
+                        <div class="action-desc">Get better recommendations</div>
                     </div>
                     <div class="action-card">
-                        <div class="action-title">💰 Check if you qualify for rental assistance</div>
-                        <div class="action-desc">You might be eligible for programs you don't know about</div>
+                        <div class="action-title">💰 Check eligibility</div>
+                        <div class="action-desc">Find programs you qualify for</div>
+                    </div>
+
+                    <!-- Bottom Navigation -->
+                    <div class="bottom-nav">
+                        <div class="nav-item active">
+                            <div class="nav-icon">🏠</div>
+                            <div class="nav-label">Home</div>
+                        </div>
+                        <div class="nav-item" onclick="goToScreen('screen-action-plan')">
+                            <div class="nav-icon">📊</div>
+                            <div class="nav-label">Progress</div>
+                        </div>
+                        <div class="nav-item" onclick="goToScreen('screen-documents')">
+                            <div class="nav-icon">📄</div>
+                            <div class="nav-label">Docs</div>
+                        </div>
+                        <div class="nav-item" onclick="goToScreen('screen-support')">
+                            <div class="nav-icon">💬</div>
+                            <div class="nav-label">Help</div>
+                        </div>
                     </div>
                 </div>
 
@@ -843,12 +926,13 @@
                         <div class="step-item current">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <div class="step-title">Gather Required Documents</div>
+                                <div class="step-title">Upload 4 Documents</div>
                                 <div class="step-desc">
-                                    You need 4 documents for your intake appointment
+                                    📸 Photo ID • 💵 Income proof<br>
+                                    🏠 NYC residency • 🔢 Social Security
                                 </div>
-                                <button class="btn-primary" style="margin-top: 10px;" onclick="goToScreen('screen-documents')">📸 Upload Documents</button>
-                                <button class="btn-secondary">❓ I'm missing a document</button>
+                                <button class="btn-primary" style="margin-top: 10px;" onclick="goToScreen('screen-documents')">📸 Take Photos</button>
+                                <button class="btn-secondary">❓ Missing a doc?</button>
                             </div>
                         </div>
 
@@ -1181,37 +1265,67 @@
                         <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Get Help</button>
                     </div>
 
-                    <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 18px;">
-                        Upload Document
+                    <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 10px;">
+                        Take Photo: Photo ID
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <span class="info-badge">Step 1 of 4</span>
                     </div>
 
-                    <div style="border: 3px dashed #ddd; border-radius: 12px; padding: 50px 20px; text-align: center; background: #f8f9fa; margin-bottom: 20px; cursor: pointer;" class="clickable">
-                        <div style="font-size: 3.5em; margin-bottom: 12px; color: #adb5bd;">📸</div>
-                        <div style="font-weight: bold; margin-bottom: 8px;">Take a photo or choose file</div>
-                        <div style="font-size: 0.88em; color: #666;">JPG, PNG, PDF up to 10MB</div>
+                    <div style="background: #e7f3ff; border: 2px solid #0c5460; border-radius: 10px; padding: 12px; margin-bottom: 15px;">
+                        <div style="font-weight: bold; margin-bottom: 8px; color: #0c5460; font-size: 0.95em;">📸 Photo Tips</div>
+                        <ul style="font-size: 0.85em; line-height: 1.6; color: #0c5460; margin-left: 20px;">
+                            <li>✓ Show entire document</li>
+                            <li>✓ Good lighting</li>
+                            <li>✓ Avoid shadows/glare</li>
+                        </ul>
                     </div>
 
-                    <div style="font-weight: bold; margin-bottom: 12px;">Quick Upload Options:</div>
-
-                    <button class="btn-primary">📸 Take Photo Now</button>
-                    <button class="btn-secondary">📁 Choose from Files</button>
-                    <button class="btn-secondary">☁️ Import from Cloud</button>
-
-                    <div style="border-top: 2px solid #e9ecef; margin: 20px 0;"></div>
-
-                    <div style="font-weight: bold; margin-bottom: 12px;">Don't have this document?</div>
-
-                    <div style="background: white; border: 2px solid #ddd; border-radius: 12px; padding: 14px; margin-bottom: 12px; cursor: pointer;" class="clickable">
-                        <div style="font-weight: bold; margin-bottom: 5px;">❓ How to get Proof of Residency</div>
-                        <div style="font-size: 0.88em; color: #666;">
-                            Learn what counts as proof and where to get it
+                    <div style="width: 100%; height: 140px; background: #e9ecef; border: 2px dashed #adb5bd; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <div style="text-align: center; font-size: 0.9em; color: #666;">
+                            <div style="font-size: 3em; margin-bottom: 5px;">📄</div>
+                            <div>Example: Clear, full document</div>
                         </div>
                     </div>
 
-                    <div style="background: white; border: 2px solid #ddd; border-radius: 12px; padding: 14px; cursor: pointer;" class="clickable" onclick="goToScreen('screen-support')">
-                        <div style="font-weight: bold; margin-bottom: 5px;">💬 Ask a housing counselor</div>
-                        <div style="font-size: 0.88em; color: #666;">
-                            Get help understanding what you need
+                    <button class="btn-primary">📸 Open Camera</button>
+                    <button class="btn-secondary">📁 Choose File</button>
+
+                    <div style="border-top: 2px solid #e9ecef; margin: 20px 0;"></div>
+
+                    <div style="font-weight: bold; margin-bottom: 12px;">Need help?</div>
+
+                    <div style="background: white; border: 2px solid #ddd; border-radius: 10px; padding: 12px; margin-bottom: 10px; cursor: pointer;" class="clickable">
+                        <div style="font-weight: bold; margin-bottom: 5px;">❓ What documents work?</div>
+                        <div style="font-size: 0.85em; color: #666;">
+                            See examples
+                        </div>
+                    </div>
+
+                    <div style="background: white; border: 2px solid #ddd; border-radius: 10px; padding: 12px; cursor: pointer;" class="clickable" onclick="goToScreen('screen-support')">
+                        <div style="font-weight: bold; margin-bottom: 5px;">💬 Chat with counselor</div>
+                        <div style="font-size: 0.85em; color: #666;">
+                            Get guidance
+                        </div>
+                    </div>
+
+                    <!-- Bottom Navigation -->
+                    <div class="bottom-nav">
+                        <div class="nav-item" onclick="goToScreen('screen-dashboard')">
+                            <div class="nav-icon">🏠</div>
+                            <div class="nav-label">Home</div>
+                        </div>
+                        <div class="nav-item" onclick="goToScreen('screen-action-plan')">
+                            <div class="nav-icon">📊</div>
+                            <div class="nav-label">Progress</div>
+                        </div>
+                        <div class="nav-item active">
+                            <div class="nav-icon">📄</div>
+                            <div class="nav-label">Docs</div>
+                        </div>
+                        <div class="nav-item" onclick="goToScreen('screen-support')">
+                            <div class="nav-icon">💬</div>
+                            <div class="nav-label">Help</div>
                         </div>
                     </div>
                 </div>

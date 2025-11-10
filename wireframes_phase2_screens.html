@@ -761,6 +761,71 @@
             margin: 20px 0;
         }
 
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 8px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .nav-item:hover {
+            background: #f0f0ff;
+        }
+
+        .nav-item.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 1.5em;
+        }
+
+        .nav-label {
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        .info-badge {
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .info-badge.success {
+            background: #28a745;
+        }
+
+        .info-badge.warning {
+            background: #ffc107;
+            color: #000;
+        }
+
         @media (max-width: 1200px) {
             .wireframe-wrapper {
                 grid-template-columns: 1fr;
@@ -982,11 +1047,34 @@
                                 ⚠️ Total move-in: $7,700 (includes broker fee)
                             </div>
                         </div>
+
+                        <!-- Bottom Navigation -->
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-label">Home</div>
+                            </div>
+                            <div class="nav-item active">
+                                <div class="nav-icon">🔍</div>
+                                <div class="nav-label">Search</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">📄</div>
+                                <div class="nav-label">Docs</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">💬</div>
+                                <div class="nav-label">Help</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="annotations">
                     <h3>Design Decisions - Search Results</h3>
+                    <div class="annotation-item">
+                        <strong>Bottom navigation added:</strong> Easy access to other sections
+                    </div>
                     <div class="annotation-item">
                         <strong>No-fee listings first:</strong> Prioritized at top of results
                     </div>
@@ -1034,55 +1122,81 @@
                             <button class="help-button">💬 Get Help</button>
                         </div>
 
-                        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 5px;">
-                            No Results Found
+                        <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 8px;">
+                            No Matches
                         </div>
-                        <div style="color: #666; margin-bottom: 20px;">
-                            We couldn't find any apartments matching all your filters
+                        <div style="color: #666; margin-bottom: 20px; font-size: 0.95em;">
+                            Try adjusting your filters
                         </div>
 
                         <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                            <div style="font-weight: bold; margin-bottom: 10px;">Your current filters:</div>
+                            <div style="font-weight: bold; margin-bottom: 10px;">Active filters:</div>
                             <div class="filter-chips">
                                 <div class="filter-chip active">No broker fee</div>
-                                <div class="filter-chip active">Accepts vouchers</div>
-                                <div class="filter-chip active">Wheelchair accessible</div>
+                                <div class="filter-chip active">Vouchers</div>
+                                <div class="filter-chip active">Accessible</div>
                                 <div class="filter-chip active">Brooklyn</div>
                                 <div class="filter-chip active">$1000-$1500</div>
                             </div>
                         </div>
 
-                        <div style="font-weight: bold; margin-bottom: 10px;">Try these suggestions:</div>
+                        <div style="font-weight: bold; margin-bottom: 12px;">Quick fixes:</div>
 
                         <div class="listing-card">
-                            <div style="margin-bottom: 10px;">
-                                <strong>💡 Expand your price range</strong>
+                            <div style="margin-bottom: 8px;">
+                                <strong>💡 Expand price range</strong>
                             </div>
                             <div style="font-size: 0.85em; color: #666; margin-bottom: 10px;">
-                                We found 8 apartments if you increase to $1,500-$2,000
+                                8 apartments at $1,500-$2,000
                             </div>
                             <button class="btn-secondary">Try This</button>
                         </div>
 
                         <div class="listing-card">
-                            <div style="margin-bottom: 10px;">
-                                <strong>💡 Include nearby neighborhoods</strong>
+                            <div style="margin-bottom: 8px;">
+                                <strong>💡 Add nearby areas</strong>
                             </div>
                             <div style="font-size: 0.85em; color: #666; margin-bottom: 10px;">
-                                Queens has 12 apartments matching your other criteria
+                                12 apartments in Queens
                             </div>
                             <button class="btn-secondary">Try This</button>
                         </div>
 
                         <div class="divider"></div>
 
-                        <button class="btn-primary">💬 Talk to a housing counselor</button>
-                        <button class="btn-outline">Reset All Filters</button>
+                        <button class="btn-primary">💬 Chat with counselor</button>
+                        <button class="btn-outline">Reset Filters</button>
+
+                        <!-- Bottom Navigation -->
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-label">Home</div>
+                            </div>
+                            <div class="nav-item active">
+                                <div class="nav-icon">🔍</div>
+                                <div class="nav-label">Search</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">📄</div>
+                                <div class="nav-label">Docs</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">💬</div>
+                                <div class="nav-label">Help</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="annotations">
                     <h3>Design Decisions - No Results State</h3>
+                    <div class="annotation-item">
+                        <strong>Simplified headings:</strong> "No Matches" instead of "No Results Found"
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Shorter descriptions:</strong> "8 apartments at..." instead of full sentences
+                    </div>
                     <div class="annotation-item">
                         <strong>Never a dead end:</strong> Shows active filters, suggests alternatives
                     </div>
@@ -1452,37 +1566,57 @@
                             <button class="help-button">💬 Get Help</button>
                         </div>
 
-                        <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 15px;">
+                        <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 15px;">
                             Upload Document
                         </div>
 
                         <div class="upload-area">
                             <div class="upload-icon">📸</div>
-                            <div class="upload-text">Take a photo or choose file</div>
-                            <div class="upload-subtext">JPG, PNG, PDF up to 10MB</div>
+                            <div class="upload-text">Take photo or choose file</div>
+                            <div class="upload-subtext">JPG, PNG, PDF • Max 10MB</div>
                         </div>
 
-                        <div style="font-weight: bold; margin-bottom: 10px;">Quick Upload Options:</div>
+                        <div style="font-weight: bold; margin-bottom: 12px;">Upload options:</div>
 
-                        <button class="btn-primary">📸 Take Photo Now</button>
-                        <button class="btn-secondary">📁 Choose from Files</button>
-                        <button class="btn-secondary">☁️ Import from Cloud</button>
+                        <button class="btn-primary">📸 Open Camera</button>
+                        <button class="btn-secondary">📁 Choose File</button>
+                        <button class="btn-secondary">☁️ Cloud Storage</button>
 
                         <div class="divider"></div>
 
-                        <div style="font-weight: bold; margin-bottom: 10px;">Don't have this document?</div>
+                        <div style="font-weight: bold; margin-bottom: 12px;">Need help?</div>
 
                         <div class="template-card">
-                            <div class="template-title">❓ How to get Proof of Residency</div>
+                            <div class="template-title">❓ What documents qualify?</div>
                             <div class="template-desc">
-                                Learn what counts as proof and where to get it
+                                See examples
                             </div>
                         </div>
 
                         <div class="template-card">
-                            <div class="template-title">💬 Ask a housing counselor</div>
+                            <div class="template-title">💬 Chat with counselor</div>
                             <div class="template-desc">
-                                Get help understanding what you need
+                                Get guidance
+                            </div>
+                        </div>
+
+                        <!-- Bottom Navigation -->
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-label">Home</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">📊</div>
+                                <div class="nav-label">Progress</div>
+                            </div>
+                            <div class="nav-item active">
+                                <div class="nav-icon">📄</div>
+                                <div class="nav-label">Docs</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">💬</div>
+                                <div class="nav-label">Help</div>
                             </div>
                         </div>
                     </div>
@@ -1490,6 +1624,12 @@
 
                 <div class="annotations">
                     <h3>Design Decisions - Document Upload</h3>
+                    <div class="annotation-item">
+                        <strong>Simplified text:</strong> Shorter labels and descriptions
+                    </div>
+                    <div class="annotation-item">
+                        <strong>Camera emphasized:</strong> "Open Camera" as primary button
+                    </div>
                     <div class="annotation-item">
                         <strong>Multiple upload methods:</strong> Photo, files, cloud import
                     </div>
