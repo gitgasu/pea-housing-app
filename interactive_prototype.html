@@ -1202,6 +1202,129 @@
 
                     <button class="btn-primary">📧 Contact Landlord</button>
                     <button class="btn-secondary">💾 Save for Later</button>
+                    <button class="btn-secondary" onclick="goToScreen('screen-community')">💬 View Community Tips</button>
+
+                    <!-- Bottom Navigation -->
+                    <div class="bottom-nav">
+                        <div class="nav-item" onclick="goToScreen('screen-dashboard')">
+                            <div class="nav-icon">🏠</div>
+                            <div class="nav-label">Home</div>
+                        </div>
+                        <div class="nav-item active">
+                            <div class="nav-icon">🔍</div>
+                            <div class="nav-label">Search</div>
+                        </div>
+                        <div class="nav-item" onclick="goToScreen('screen-documents')">
+                            <div class="nav-icon">📄</div>
+                            <div class="nav-label">Docs</div>
+                        </div>
+                        <div class="nav-item" onclick="goToScreen('screen-support')">
+                            <div class="nav-icon">💬</div>
+                            <div class="nav-label">Help</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 11: Community Tips -->
+                <div class="screen" id="screen-community">
+                    <div class="header">
+                        <button class="back-button clickable" onclick="goToScreen('screen-listing-detail')">← Back</button>
+                        <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Get Help</button>
+                    </div>
+
+                    <div style="background: #e7f3ff; border: 2px solid #0c5460; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+                        <div style="font-weight: bold; margin-bottom: 5px; color: #0c5460;">
+                            💡 Tips from People Like You
+                        </div>
+                        <div style="font-size: 0.88em; color: #0c5460;">
+                            Real advice from others who've been through it
+                        </div>
+                    </div>
+
+                    <div style="font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <span>📍</span>
+                        <span>About This Neighborhood</span>
+                    </div>
+
+                    <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 15px; margin-bottom: 12px;">
+                        <div style="margin-bottom: 8px;">
+                            "Best time to visit is morning. Office gets busy after 2pm. Bring snacks - you might wait."
+                        </div>
+                        <div style="font-size: 0.8em; color: #666;">
+                            — Applied 3 months ago • <span style="color: #28a745; font-weight: bold;">✓ Verified</span>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 15px; margin-bottom: 12px;">
+                        <div style="margin-bottom: 8px;">
+                            "Public transportation: Take the A train to 145th. It's a 5 min walk from station."
+                        </div>
+                        <div style="font-size: 0.8em; color: #666;">
+                            — Current resident • <span style="color: #28a745; font-weight: bold;">✓ Verified</span>
+                        </div>
+                    </div>
+
+                    <div style="font-weight: bold; margin-bottom: 12px; margin-top: 20px; display: flex; align-items: center; gap: 8px;">
+                        <span>✅</span>
+                        <span>Application Tips</span>
+                    </div>
+
+                    <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 15px; margin-bottom: 12px;">
+                        <div style="margin-bottom: 8px;">
+                            "Take clear photos of ALL documents before going. Saved me when I forgot my lease copy."
+                        </div>
+                        <div style="font-size: 0.8em; color: #666;">
+                            — Successfully housed • <span style="color: #28a745; font-weight: bold;">✓ Verified</span>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 15px; margin-bottom: 12px;">
+                        <div style="margin-bottom: 8px;">
+                            "Bring extra copies. They kept 2 sets of my documents. Better to have backups."
+                        </div>
+                        <div style="font-size: 0.8em; color: #666;">
+                            — Applied last week • <span style="color: #28a745; font-weight: bold;">✓ Verified</span>
+                        </div>
+                    </div>
+
+                    <div style="font-weight: bold; margin-bottom: 12px; margin-top: 20px; display: flex; align-items: center; gap: 8px;">
+                        <span>⚠️</span>
+                        <span>Watch Out For</span>
+                    </div>
+
+                    <div style="background: #ffe6e6; border: 2px solid #dc3545; border-radius: 10px; padding: 15px; margin-bottom: 12px;">
+                        <div style="margin-bottom: 8px;">
+                            "Scam alert: Never pay application fees via wire transfer. Legitimate landlords use checks or portals."
+                        </div>
+                        <div style="font-size: 0.8em; color: #666;">
+                            — Community moderator • <span style="color: #28a745; font-weight: bold;">✓ Verified</span>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 2px solid #e9ecef; margin: 20px 0;"></div>
+
+                    <button class="btn-primary">💬 Share Your Tip</button>
+                    <button class="btn-secondary">👁️ View All Tips (156)</button>
+
+                    <!-- Bottom Navigation -->
+                    <div class="bottom-nav">
+                        <div class="nav-item" onclick="goToScreen('screen-dashboard')">
+                            <div class="nav-icon">🏠</div>
+                            <div class="nav-label">Home</div>
+                        </div>
+                        <div class="nav-item active">
+                            <div class="nav-icon">🔍</div>
+                            <div class="nav-label">Search</div>
+                        </div>
+                        <div class="nav-item" onclick="goToScreen('screen-documents')">
+                            <div class="nav-icon">📄</div>
+                            <div class="nav-label">Docs</div>
+                        </div>
+                        <div class="nav-item" onclick="goToScreen('screen-support')">
+                            <div class="nav-icon">💬</div>
+                            <div class="nav-label">Help</div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Screen 11: Document Manager -->
@@ -1364,6 +1487,7 @@
             'screen-search': 'Search & Filter',
             'screen-results': 'Search Results',
             'screen-listing-detail': 'Listing Detail',
+            'screen-community': 'Community Tips',
             'screen-documents': 'Document Manager',
             'screen-upload': 'Document Upload'
         };
