@@ -678,7 +678,14 @@
     </style>
 </head>
 <body>
-    <div class="prototype-wrapper">
+    <!-- View Switcher -->
+    <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex; padding: 6px;">
+        <button onclick="switchView('interactive')" id="btn-interactive" style="padding: 12px 24px; border: none; background: #667eea; color: white; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.3s;">Interactive Prototype</button>
+        <button onclick="switchView('wireframes')" id="btn-wireframes" style="padding: 12px 24px; border: none; background: transparent; color: #667eea; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.3s;">All Wireframes</button>
+    </div>
+
+    <!-- Interactive Prototype View -->
+    <div id="interactive-view" class="prototype-wrapper">
         <!-- Controls Panel -->
         <div class="controls-panel">
             <h3>Select User Journey</h3>
@@ -1454,9 +1461,414 @@
         </div>
     </div>
 
+    <!-- Wireframes Gallery View -->
+    <div id="wireframes-view" style="display: none; padding: 100px 40px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <h1 style="color: white; text-align: center; margin-bottom: 20px; font-size: 2.5em;">PEA Project - Complete Wireframe Flow</h1>
+            <p style="color: white; text-align: center; margin-bottom: 60px; font-size: 1.2em; opacity: 0.9;">All screens in order of user journey</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 40px;">
+                <!-- Screen 1: Welcome -->
+                <div style="background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">1. Welcome Screen</h3>
+                    <div class="phone-frame" style="margin: 0;">
+                        <div style="padding: 20px;">
+                            <div class="onboarding-screen">
+                                <div class="onboarding-image">🏠</div>
+                                <div class="onboarding-title">Find NYC Housing</div>
+                                <div class="onboarding-desc">
+                                    ✓ Clear steps<br>
+                                    ✓ Real support<br>
+                                    ✓ No confusing forms
+                                </div>
+                                <div class="indicator-dots">
+                                    <div class="dot active"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                </div>
+                                <button class="btn-primary">Get Started</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 2: Needs Assessment -->
+                <div style="background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">2. Needs Assessment</h3>
+                    <div class="phone-frame" style="margin: 0;">
+                        <div style="padding: 20px;">
+                            <div class="header">
+                                <div class="logo">PEA</div>
+                                <button class="help-button">💬 Need Help?</button>
+                            </div>
+                            <div class="onboarding-title" style="text-align: center; margin: 20px 0;">
+                                What brings you here today?
+                            </div>
+                            <button class="option-btn">
+                                <strong>🚨 Emergency housing</strong><br>
+                                <span style="font-size: 0.88em; color: #666;">I need a place to stay tonight</span>
+                            </button>
+                            <button class="option-btn">
+                                <strong>🏘️ Finding an apartment</strong><br>
+                                <span style="font-size: 0.88em; color: #666;">I'm looking for permanent housing</span>
+                            </button>
+                            <button class="option-btn">
+                                <strong>🎫 Using a housing voucher</strong><br>
+                                <span style="font-size: 0.88em; color: #666;">I have a voucher</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 3: Dashboard -->
+                <div style="background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">3. Dashboard</h3>
+                    <div class="phone-frame" style="margin: 0;">
+                        <div style="padding: 20px; height: 650px; overflow-y: auto;">
+                            <div class="header">
+                                <div class="logo">PEA</div>
+                                <button class="help-button">💬 Get Help</button>
+                            </div>
+                            <div class="greeting">Hi, Louis 👋</div>
+                            <div class="subtext">Here's where you are</div>
+                            <div class="progress-card">
+                                <div class="progress-header">
+                                    <strong>Emergency Housing</strong>
+                                    <span style="color: #666;">Step 2 of 5</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 40%;"></div>
+                                </div>
+                                <div style="margin-top: 12px;">
+                                    <strong style="color: #667eea;">Next: Upload documents</strong>
+                                </div>
+                            </div>
+                            <div class="quick-actions">
+                                <div class="quick-action-btn">
+                                    <div class="icon">🔍</div>
+                                    <div>Find Housing</div>
+                                </div>
+                                <div class="quick-action-btn">
+                                    <div class="icon">📄</div>
+                                    <div>My Documents</div>
+                                </div>
+                                <div class="quick-action-btn">
+                                    <div class="icon">📞</div>
+                                    <div>Talk to Someone</div>
+                                </div>
+                                <div class="quick-action-btn">
+                                    <div class="icon">🔔</div>
+                                    <div>Notifications</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 4: Action Plan -->
+                <div style="background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">4. Action Plan</h3>
+                    <div class="phone-frame" style="margin: 0;">
+                        <div style="padding: 20px; height: 650px; overflow-y: auto;">
+                            <div class="header">
+                                <button class="back-button">← Back</button>
+                                <button class="help-button">💬 Get Help</button>
+                            </div>
+                            <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 10px;">Emergency Housing</div>
+                            <div class="progress-bar" style="margin-bottom: 20px;">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                            <div class="step-item completed">
+                                <div class="step-number completed">✓</div>
+                                <div class="step-content">
+                                    <div class="step-title">Call DHS Hotline</div>
+                                    <div class="step-desc">You called and got your reference number</div>
+                                </div>
+                            </div>
+                            <div class="step-item current">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <div class="step-title">Upload 4 Documents</div>
+                                    <div class="step-desc">
+                                        📸 Photo ID • 💵 Income proof<br>
+                                        🏠 NYC residency • 🔢 Social Security
+                                    </div>
+                                    <button class="btn-primary" style="margin-top: 10px;">📸 Take Photos</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 5: Document Upload -->
+                <div style="background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">5. Document Upload (Camera-First)</h3>
+                    <div class="phone-frame" style="margin: 0;">
+                        <div style="padding: 20px; height: 650px; overflow-y: auto;">
+                            <div class="header">
+                                <button class="back-button">← Back</button>
+                                <button class="help-button">💬 Get Help</button>
+                            </div>
+                            <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 10px;">
+                                Take Photo: Photo ID
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <span class="info-badge">Step 1 of 4</span>
+                            </div>
+                            <div style="background: #e7f3ff; border: 2px solid #0c5460; border-radius: 10px; padding: 12px; margin-bottom: 15px;">
+                                <div style="font-weight: bold; margin-bottom: 8px; color: #0c5460;">📸 Photo Tips</div>
+                                <ul style="font-size: 0.85em; line-height: 1.6; color: #0c5460; margin-left: 20px;">
+                                    <li>✓ Show entire document</li>
+                                    <li>✓ Good lighting</li>
+                                    <li>✓ Avoid shadows/glare</li>
+                                </ul>
+                            </div>
+                            <div style="width: 100%; height: 140px; background: #e9ecef; border: 2px dashed #adb5bd; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 3em;">📄</div>
+                                    <div style="font-size: 0.9em; color: #666;">Example: Clear, full document</div>
+                                </div>
+                            </div>
+                            <button class="btn-primary">📸 Open Camera</button>
+                            <button class="btn-secondary">📁 Choose File</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 6: Search -->
+                <div style="background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">6. Housing Search</h3>
+                    <div class="phone-frame" style="margin: 0;">
+                        <div style="padding: 20px; height: 650px; overflow-y: auto;">
+                            <div class="header">
+                                <button class="back-button">← Back</button>
+                                <button class="help-button">💬 Get Help</button>
+                            </div>
+                            <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 18px;">
+                                Find Housing
+                            </div>
+                            <div class="search-bar">
+                                <input type="text" class="search-input" placeholder="Search by neighborhood...">
+                                <button class="search-button">🔍</button>
+                            </div>
+                            <div class="filter-chips">
+                                <div class="filter-chip active">✓ No broker fee</div>
+                                <div class="filter-chip">Accepts vouchers</div>
+                                <div class="filter-chip">Accessible</div>
+                                <div class="filter-chip">Pet-friendly</div>
+                            </div>
+                            <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 12px; padding: 18px; margin-bottom: 20px;">
+                                <div>
+                                    <label style="font-weight: bold; margin-bottom: 10px; display: block;">Price Range</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <input type="text" placeholder="Min" style="flex: 1; padding: 10px; border: 2px solid #ddd; border-radius: 8px;">
+                                        <input type="text" placeholder="Max" style="flex: 1; padding: 10px; border: 2px solid #ddd; border-radius: 8px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-primary">Show Results</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 7: Search Results -->
+                <div style="background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">7. Search Results</h3>
+                    <div class="phone-frame" style="margin: 0;">
+                        <div style="padding: 20px; height: 650px; overflow-y: auto;">
+                            <div class="header">
+                                <button class="back-button">← Back</button>
+                                <button class="help-button">💬 Get Help</button>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <span style="color: #666;">24 apartments found</span>
+                            </div>
+                            <div class="listing-card">
+                                <div class="listing-header">
+                                    <div class="listing-price">$2,400/mo</div>
+                                    <div class="listing-badge">No Fee</div>
+                                </div>
+                                <div class="listing-title">2 Bedroom in Upper Manhattan</div>
+                                <div class="listing-address">📍 West 145th Street</div>
+                                <div class="listing-features">
+                                    <span>🛏️ 2 BR</span>
+                                    <span>🚿 1 Bath</span>
+                                    <span>📏 850 sq ft</span>
+                                </div>
+                                <div style="margin: 10px 0;">
+                                    <span class="listing-badge voucher">Accepts Vouchers</span>
+                                </div>
+                            </div>
+                            <div class="listing-card">
+                                <div class="listing-header">
+                                    <div class="listing-price">$2,600/mo</div>
+                                    <div class="listing-badge">No Fee</div>
+                                </div>
+                                <div class="listing-title">1 Bedroom in Brooklyn</div>
+                                <div class="listing-address">📍 Bedford Ave, Brooklyn</div>
+                                <div class="listing-features">
+                                    <span>🛏️ 1 BR</span>
+                                    <span>🚿 1 Bath</span>
+                                    <span>📏 650 sq ft</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 8: Listing Detail -->
+                <div style="background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">8. Listing Detail</h3>
+                    <div class="phone-frame" style="margin: 0;">
+                        <div style="padding: 20px; height: 650px; overflow-y: auto;">
+                            <div class="header">
+                                <button class="back-button">← Back</button>
+                                <button class="help-button">💬 Get Help</button>
+                            </div>
+                            <div style="width: 100%; height: 180px; background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 4em; margin-bottom: 20px;">
+                                🏠
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <div class="listing-badge">No Broker Fee</div>
+                                <div class="listing-badge voucher">Accepts Vouchers</div>
+                            </div>
+                            <div style="font-size: 1.6em; font-weight: bold; margin-bottom: 8px;">2BR in Upper Manhattan</div>
+                            <div style="color: #666; margin-bottom: 15px;">📍 West 145th Street</div>
+                            <div style="font-size: 1.9em; font-weight: bold; color: #667eea; margin-bottom: 5px;">$2,400/mo</div>
+                            <div style="background: #e7f3ff; border: 2px solid #0c5460; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+                                <div style="font-weight: bold; margin-bottom: 8px; color: #0c5460;">💰 Cost Comparison</div>
+                                <div style="background: #28a745; color: white; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold;">
+                                    ✓ You save $3,600 with no-fee listing
+                                </div>
+                            </div>
+                            <button class="btn-primary">📧 Contact Landlord</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 9: Community Tips -->
+                <div style="background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">9. Community Tips</h3>
+                    <div class="phone-frame" style="margin: 0;">
+                        <div style="padding: 20px; height: 650px; overflow-y: auto;">
+                            <div class="header">
+                                <button class="back-button">← Back</button>
+                                <button class="help-button">💬 Get Help</button>
+                            </div>
+                            <div style="background: #e7f3ff; border: 2px solid #0c5460; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+                                <div style="font-weight: bold; margin-bottom: 5px; color: #0c5460;">
+                                    💡 Tips from People Like You
+                                </div>
+                                <div style="font-size: 0.88em; color: #0c5460;">
+                                    Real advice from others
+                                </div>
+                            </div>
+                            <div style="font-weight: bold; margin-bottom: 12px;">📍 About This Neighborhood</div>
+                            <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 15px; margin-bottom: 12px;">
+                                <div style="margin-bottom: 8px;">
+                                    "Best time to visit is morning. Office gets busy after 2pm."
+                                </div>
+                                <div style="font-size: 0.8em; color: #666;">
+                                    — Applied 3 months ago • <span style="color: #28a745; font-weight: bold;">✓ Verified</span>
+                                </div>
+                            </div>
+                            <div style="font-weight: bold; margin-bottom: 12px; margin-top: 20px;">✅ Application Tips</div>
+                            <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 15px; margin-bottom: 12px;">
+                                <div style="margin-bottom: 8px;">
+                                    "Take clear photos of ALL documents before going."
+                                </div>
+                                <div style="font-size: 0.8em; color: #666;">
+                                    — Successfully housed • <span style="color: #28a745; font-weight: bold;">✓ Verified</span>
+                                </div>
+                            </div>
+                            <div style="font-weight: bold; margin-bottom: 12px; margin-top: 20px;">⚠️ Watch Out For</div>
+                            <div style="background: #ffe6e6; border: 2px solid #dc3545; border-radius: 10px; padding: 15px; margin-bottom: 12px;">
+                                <div style="margin-bottom: 8px;">
+                                    "Never pay application fees via wire transfer."
+                                </div>
+                                <div style="font-size: 0.8em; color: #666;">
+                                    — Community moderator • <span style="color: #28a745; font-weight: bold;">✓ Verified</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 10: Human Support -->
+                <div style="background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">10. Human Support Hub</h3>
+                    <div class="phone-frame" style="margin: 0;">
+                        <div style="padding: 20px; height: 650px; overflow-y: auto;">
+                            <div class="header">
+                                <button class="back-button">← Back</button>
+                                <button class="help-button" style="background: #28a745;">✓ Help Active</button>
+                            </div>
+                            <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 12px;">
+                                How can we help you?
+                            </div>
+                            <div class="subtext">Choose the way that works best</div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                                <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 12px; padding: 20px; text-align: center;">
+                                    <div style="font-size: 2.8em; margin-bottom: 10px;">💬</div>
+                                    <div style="font-weight: bold; margin-bottom: 5px;">Live Chat</div>
+                                    <div style="font-size: 0.85em; color: #666;">Response: 2 min</div>
+                                    <div style="color: #28a745; font-weight: bold; font-size: 0.88em; margin-top: 5px;">● Available now</div>
+                                </div>
+                                <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 12px; padding: 20px; text-align: center;">
+                                    <div style="font-size: 2.8em; margin-bottom: 10px;">📞</div>
+                                    <div style="font-weight: bold; margin-bottom: 5px;">Phone Call</div>
+                                    <div style="font-size: 0.85em; color: #666;">Response: 5 min</div>
+                                    <div style="color: #28a745; font-weight: bold; font-size: 0.88em; margin-top: 5px;">● Available now</div>
+                                </div>
+                            </div>
+                            <div style="background: #dc3545; color: white; padding: 18px; border-radius: 10px;">
+                                <strong style="display: block; margin-bottom: 5px; font-size: 1.1em;">🚨 In Crisis?</strong>
+                                <div style="font-size: 0.92em; margin-bottom: 12px;">Call 311 for immediate help</div>
+                                <button class="btn-primary" style="background: white; color: #dc3545;">📞 Call 311 Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 60px; padding: 40px; background: rgba(255,255,255,0.1); border-radius: 20px;">
+                <h2 style="color: white; margin-bottom: 15px;">Complete User Flow</h2>
+                <p style="color: white; opacity: 0.9; margin-bottom: 25px;">
+                    From onboarding through housing search to community support - all designed for accessibility and mobile-first usage
+                </p>
+                <div style="color: white; opacity: 0.8; font-size: 0.9em;">
+                    🤖 Generated with Claude Code
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         let currentPersona = 'mr-l';
         let screenHistory = [];
+
+        function switchView(view) {
+            const interactiveView = document.getElementById('interactive-view');
+            const wireframesView = document.getElementById('wireframes-view');
+            const btnInteractive = document.getElementById('btn-interactive');
+            const btnWireframes = document.getElementById('btn-wireframes');
+
+            if (view === 'interactive') {
+                interactiveView.style.display = 'flex';
+                wireframesView.style.display = 'none';
+                btnInteractive.style.background = '#667eea';
+                btnInteractive.style.color = 'white';
+                btnWireframes.style.background = 'transparent';
+                btnWireframes.style.color = '#667eea';
+            } else {
+                interactiveView.style.display = 'none';
+                wireframesView.style.display = 'block';
+                btnInteractive.style.background = 'transparent';
+                btnInteractive.style.color = '#667eea';
+                btnWireframes.style.background = '#667eea';
+                btnWireframes.style.color = 'white';
+            }
+        }
 
         const personaFlows = {
             'mr-l': {
