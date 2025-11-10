@@ -145,19 +145,39 @@
 
         .screen {
             display: none;
-            padding: 20px;
             height: 700px;
             overflow-y: auto;
             animation: fadeIn 0.3s ease-in;
+            position: relative;
+            scrollbar-width: thin;
+            scrollbar-color: #667eea #f1f1f1;
+        }
+
+        .screen::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .screen::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .screen::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 3px;
         }
 
         .screen.active {
             display: block;
         }
 
+        .screen-content {
+            padding: 20px;
+            padding-bottom: 100px; /* Space for sticky nav */
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Component Styles */
@@ -213,13 +233,18 @@
             cursor: pointer;
             margin-bottom: 10px;
             font-size: 1em;
-            transition: all 0.3s;
+            transition: all 0.2s ease;
         }
 
         .btn-primary:hover {
             background: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
         }
 
         .btn-secondary {
@@ -309,13 +334,18 @@
             width: 100%;
             text-align: left;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s ease;
         }
 
         .option-btn:hover {
             border-color: #667eea;
             background: #f0f0ff;
-            transform: translateX(5px);
+            transform: translateX(3px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+        }
+
+        .option-btn:active {
+            transform: translateX(1px);
         }
 
         .greeting {
@@ -374,13 +404,18 @@
             text-align: center;
             font-size: 0.9em;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s ease;
         }
 
         .quick-action-btn:hover {
             border-color: #667eea;
             background: #f0f0ff;
-            transform: translateY(-3px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .quick-action-btn:active {
+            transform: translateY(0);
         }
 
         .icon {
@@ -395,12 +430,17 @@
             padding: 16px;
             margin-bottom: 15px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s ease;
         }
 
         .action-card:hover {
             background: #f0f0ff;
-            transform: translateX(5px);
+            transform: translateX(3px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .action-card:active {
+            transform: translateX(1px);
         }
 
         .action-title {
@@ -608,15 +648,18 @@
 
         /* Bottom Navigation */
         .bottom-nav {
-            position: relative;
-            margin-top: 80px;
+            position: absolute;
+            bottom: 15px;
+            left: 20px;
+            right: 20px;
             background: white;
             border: 2px solid #ddd;
             border-radius: 20px;
             display: flex;
             justify-content: space-around;
             padding: 12px 8px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+            z-index: 10;
         }
 
         .nav-item {
@@ -627,18 +670,24 @@
             cursor: pointer;
             padding: 8px 12px;
             border-radius: 12px;
-            transition: all 0.3s;
+            transition: all 0.2s ease;
             flex: 1;
             text-align: center;
         }
 
         .nav-item:hover {
             background: #f0f0ff;
+            transform: scale(1.05);
         }
 
         .nav-item.active {
             background: #667eea;
             color: white;
+            transform: scale(1.05);
+        }
+
+        .nav-item:active {
+            transform: scale(0.98);
         }
 
         .nav-icon {
@@ -785,55 +834,57 @@
 
                 <!-- Screen 3: Dashboard (Mr. L) -->
                 <div class="screen" id="screen-dashboard">
-                    <div class="header">
-                        <div class="logo">PEA</div>
-                        <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Get Help</button>
-                    </div>
-                    <div class="greeting">Hi, Louis 👋</div>
-                    <div class="subtext">Here's where you are in your journey</div>
+                    <div class="screen-content">
+                        <div class="header">
+                            <div class="logo">PEA</div>
+                            <button class="help-button clickable" onclick="goToScreen('screen-support')">💬 Get Help</button>
+                        </div>
+                        <div class="greeting">Hi, Louis 👋</div>
+                        <div class="subtext">Here's where you are in your journey</div>
 
-                    <div class="progress-card clickable" onclick="goToScreen('screen-action-plan')">
-                        <div class="progress-header">
-                            <strong>Emergency Housing Application</strong>
-                            <span style="color: #666; font-size: 0.9em;">Step 2 of 5</span>
+                        <div class="progress-card clickable" onclick="goToScreen('screen-action-plan')">
+                            <div class="progress-header">
+                                <strong>Emergency Housing Application</strong>
+                                <span style="color: #666; font-size: 0.9em;">Step 2 of 5</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                            <div style="margin-top: 12px;">
+                                <strong style="color: #667eea;">Next: Upload required documents</strong>
+                            </div>
+                            <button class="btn-primary" style="margin-top: 12px;">Continue</button>
                         </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 40%;"></div>
-                        </div>
-                        <div style="margin-top: 12px;">
-                            <strong style="color: #667eea;">Next: Upload required documents</strong>
-                        </div>
-                        <button class="btn-primary" style="margin-top: 12px;">Continue</button>
-                    </div>
 
-                    <div style="font-weight: bold; margin-bottom: 12px;">Quick Actions</div>
-                    <div class="quick-actions">
-                        <div class="quick-action-btn clickable" onclick="goToScreen('screen-search')">
-                            <div class="icon">🔍</div>
-                            <div>Find Housing</div>
+                        <div style="font-weight: bold; margin-bottom: 12px;">Quick Actions</div>
+                        <div class="quick-actions">
+                            <div class="quick-action-btn clickable" onclick="goToScreen('screen-search')">
+                                <div class="icon">🔍</div>
+                                <div>Find Housing</div>
+                            </div>
+                            <div class="quick-action-btn clickable" onclick="goToScreen('screen-documents')">
+                                <div class="icon">📄</div>
+                                <div>My Documents</div>
+                            </div>
+                            <div class="quick-action-btn clickable" onclick="goToScreen('screen-support')">
+                                <div class="icon">📞</div>
+                                <div>Talk to Someone</div>
+                            </div>
+                            <div class="quick-action-btn">
+                                <div class="icon">🔔</div>
+                                <div>Notifications <span style="background: #dc3545; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.75em;">2</span></div>
+                            </div>
                         </div>
-                        <div class="quick-action-btn clickable" onclick="goToScreen('screen-documents')">
-                            <div class="icon">📄</div>
-                            <div>My Documents</div>
-                        </div>
-                        <div class="quick-action-btn clickable" onclick="goToScreen('screen-support')">
-                            <div class="icon">📞</div>
-                            <div>Talk to Someone</div>
-                        </div>
-                        <div class="quick-action-btn">
-                            <div class="icon">🔔</div>
-                            <div>Notifications <span style="background: #dc3545; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.75em;">2</span></div>
-                        </div>
-                    </div>
 
-                    <div style="font-weight: bold; margin-bottom: 12px;">Suggested for You</div>
-                    <div class="action-card">
-                        <div class="action-title">📋 Complete profile</div>
-                        <div class="action-desc">Get better recommendations</div>
-                    </div>
-                    <div class="action-card">
-                        <div class="action-title">💰 Check eligibility</div>
-                        <div class="action-desc">Find programs you qualify for</div>
+                        <div style="font-weight: bold; margin-bottom: 12px;">Suggested for You</div>
+                        <div class="action-card">
+                            <div class="action-title">📋 Complete profile</div>
+                            <div class="action-desc">Get better recommendations</div>
+                        </div>
+                        <div class="action-card">
+                            <div class="action-title">💰 Check eligibility</div>
+                            <div class="action-desc">Find programs you qualify for</div>
+                        </div>
                     </div>
 
                     <!-- Bottom Navigation -->
@@ -1923,10 +1974,35 @@
                 // Update screen indicator
                 updateScreenIndicator(screenId);
 
-                // Scroll to top
-                targetScreen.scrollTop = 0;
+                // Scroll to top smoothly
+                setTimeout(() => {
+                    targetScreen.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }, 50);
             }
         }
+
+        // Ensure all screens have proper content wrappers and sticky nav
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.screen').forEach(screen => {
+                // If screen doesn't have screen-content wrapper, add it
+                if (!screen.querySelector('.screen-content')) {
+                    const bottomNav = screen.querySelector('.bottom-nav');
+                    const contentWrapper = document.createElement('div');
+                    contentWrapper.className = 'screen-content';
+
+                    // Move all children except bottom-nav into wrapper
+                    while (screen.firstChild && screen.firstChild !== bottomNav) {
+                        contentWrapper.appendChild(screen.firstChild);
+                    }
+
+                    // Add wrapper back to screen
+                    screen.insertBefore(contentWrapper, bottomNav);
+                }
+            });
+        });
 
         function updateScreenIndicator(screenId) {
             const screenNameElement = document.getElementById('current-screen-name');
