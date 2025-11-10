@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PEA Project - People Empowering App</title>
+    <title>People Empowering App - Wireframes & Prototype</title>
     <style>
         * {
             margin: 0;
@@ -12,295 +12,610 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 2rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 16px;
-            padding: 3rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: #667eea;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            color: #666;
-            text-align: center;
-            margin-bottom: 3rem;
-            font-weight: 300;
-        }
-
-        .section {
-            margin-bottom: 3rem;
-        }
-
-        .section h2 {
-            font-size: 2rem;
-            color: #5568d3;
-            margin-bottom: 1.5rem;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 0.5rem;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .card {
-            background: white;
-            border: 3px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .card:hover {
-            border-color: #667eea;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 0.75rem;
-        }
-
-        .card-desc {
-            color: #555;
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.95;
-        }
-
-        .highlight-box {
-            background: #f8f9ff;
-            border-left: 5px solid #667eea;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-        }
-
-        .highlight-box p {
-            line-height: 1.8;
             color: #333;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: #667eea;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
         }
 
-        .btn:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8em;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 18px 40px;
+            font-size: 1.1em;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn.primary {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .personas-section {
+            background: white;
+            border-radius: 24px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .section-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .personas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .persona-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 16px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .persona-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .persona-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .persona-name {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .persona-role {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .persona-description {
+            font-size: 1em;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
+        .journey-section {
+            background: white;
+            border-radius: 24px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+
+        .journey-title {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .journey-steps {
+            display: grid;
+            gap: 20px;
+        }
+
+        .step-item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .step-item:hover {
+            background: #f0f0ff;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+
+        .step-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: #f0f0ff;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .feature-description {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.5;
         }
 
         footer {
             text-align: center;
-            color: #666;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid #e0e0e0;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 2rem;
+            .hero h1 {
+                font-size: 2.5em;
             }
 
-            h1 {
-                font-size: 2rem;
+            .hero-subtitle {
+                font-size: 1.3em;
             }
 
-            .card-grid {
+            .personas-section, .journey-section {
+                padding: 30px 20px;
+            }
+
+            .personas-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 30px 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>People Empowering App</h1>
-        <p class="subtitle">Empowering NYC Residents to Navigate Housing Insecurity</p>
-
-        <div class="stats">
-            <div class="stat-box">
-                <div class="stat-number">5</div>
-                <div class="stat-label">Research Participants</div>
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>HOUSING REIMAGINED</h1>
+            <div class="hero-subtitle">People Empowering App</div>
+            <div class="hero-description">
+                A mobile-first platform designed to simplify NYC housing access for vulnerable populations.
+                From emergency shelter to permanent housing, we provide clear guidance, community support, and human connection at every step.
             </div>
-            <div class="stat-box">
-                <div class="stat-number">3</div>
-                <div class="stat-label">User Personas</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">12</div>
-                <div class="stat-label">Wireframe Screens</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">Feature Validation</div>
+            <div class="cta-buttons">
+                <a href="interactive_prototype.html" class="cta-btn primary">🎯 Interactive Prototype</a>
+                <a href="wireframes_core_screens.html" class="cta-btn secondary">📱 View Wireframes</a>
             </div>
         </div>
 
-        <div class="highlight-box">
-            <p><strong>Project Goal:</strong> Design a mobile-first application that simplifies the housing search process for NYC residents experiencing housing insecurity through step-by-step guidance, 24/7 human support, and transparency about costs and options.</p>
-        </div>
+        <!-- User Personas Section -->
+        <div class="personas-section">
+            <h2 class="section-title">Choose Your Journey</h2>
+            <p class="section-subtitle">Explore user flows designed for different housing needs</p>
 
-        <div class="section">
-            <h2>🎨 Interactive Prototypes</h2>
-            <div class="card-grid">
-                <a href="interactive_prototype.html" class="card">
-                    <div class="card-icon">📱</div>
-                    <div class="card-title">Interactive Prototype</div>
-                    <div class="card-desc">Fully clickable prototype with 12 connected screens. Switch between personas (Mr. L, Ms. Ellis, Mr. Patterson) to see personalized experiences.</div>
+            <div class="personas-grid">
+                <a href="#mr-l-journey" class="persona-card">
+                    <div class="persona-icon">👨</div>
+                    <div class="persona-name">Mr. L (Louis)</div>
+                    <div class="persona-role">Emergency Housing Seeker</div>
+                    <div class="persona-description">
+                        58-year-old facing homelessness. Needs immediate shelter and clear, simple guidance through the DHS system.
+                    </div>
                 </a>
 
-                <a href="wireframes_core_screens.html" class="card">
-                    <div class="card-icon">🎯</div>
-                    <div class="card-title">Core Wireframes (Phase 1)</div>
-                    <div class="card-desc">Onboarding flow, dashboard variations, action plan view, and human support hub. Includes research annotations.</div>
+                <a href="#ms-ellis-journey" class="persona-card">
+                    <div class="persona-icon">👩</div>
+                    <div class="persona-name">Ms. Ellis (Jennifer)</div>
+                    <div class="persona-role">Voucher Holder</div>
+                    <div class="persona-description">
+                        Working mother with Section 8 voucher. Faces landlord discrimination, needs transparent landlord info and profile showcase.
+                    </div>
                 </a>
 
-                <a href="wireframes_phase2_screens.html" class="card">
-                    <div class="card-icon">🏘️</div>
-                    <div class="card-title">Phase 2 Wireframes</div>
-                    <div class="card-desc">Housing search with filters, listing details, landlord profiles with acceptance rates, and document manager.</div>
-                </a>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>📊 Presentations</h2>
-            <div class="card-grid">
-                <a href="project_presentation.html" class="card">
-                    <div class="card-icon">📽️</div>
-                    <div class="card-title">Complete Project Presentation</div>
-                    <div class="card-desc">Comprehensive 10-slide presentation covering research process, findings, personas, features, design solutions, and next steps.</div>
-                </a>
-
-                <a href="pea_concise_presentation.html" class="card">
-                    <div class="card-icon">⚡</div>
-                    <div class="card-title">Concise Presentation</div>
-                    <div class="card-desc">Streamlined 10-slide overview perfect for quick stakeholder reviews and class presentations.</div>
+                <a href="#mr-patterson-journey" class="persona-card">
+                    <div class="persona-icon">👨‍💼</div>
+                    <div class="persona-name">Mr. Patterson</div>
+                    <div class="persona-role">No-Fee Apartment Seeker</div>
+                    <div class="persona-description">
+                        Budget-conscious professional. Wants no-broker-fee listings with transparent cost breakdowns and efficient search.
+                    </div>
                 </a>
             </div>
         </div>
 
-        <div class="section">
-            <h2>📚 Documentation</h2>
-            <div class="card-grid">
-                <a href="design_system.html" class="card">
-                    <div class="card-icon">🎨</div>
-                    <div class="card-title">Design System</div>
-                    <div class="card-desc">Complete style guide with colors, typography, spacing, components, and accessibility standards (WCAG 2.1 AA).</div>
-                </a>
-
-                <a href="user_testing_plan.html" class="card">
-                    <div class="card-icon">🧪</div>
-                    <div class="card-title">User Testing Plan</div>
-                    <div class="card-desc">Comprehensive testing protocol with 7 task scenarios, moderator script, SUS questionnaire, and analysis framework.</div>
-                </a>
-
-                <a href="user_flows.md" class="card">
-                    <div class="card-icon">🗺️</div>
-                    <div class="card-title">User Flows</div>
-                    <div class="card-desc">Visual journey maps for all three personas using Mermaid diagrams. Shows complete flows from onboarding to goal completion.</div>
-                </a>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>👥 User Personas</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-icon">👨</div>
-                    <div class="card-title">Mr. L - Emergency Housing Seeker</div>
-                    <div class="card-desc">"Don't make me more confused than I already am." Low tech comfort, needs extreme simplicity and immediate support.</div>
+        <!-- Mr. L Journey -->
+        <div class="journey-section" id="mr-l-journey">
+            <h3 class="journey-title">
+                <span>👨</span>
+                Mr. L's Journey: Emergency Housing
+            </h3>
+            <div class="journey-steps">
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">1</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Welcome & Onboarding</div>
+                        <div class="step-description">Simplified intro with clear steps, real support promise, no overwhelming text</div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-icon">👩</div>
-                    <div class="card-title">Ms. Ellis - Voucher Holder</div>
-                    <div class="card-desc">"Landlords won't even show me apartments." Faces discrimination, needs voucher-accepting landlords and rights information.</div>
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">2</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Needs Assessment</div>
+                        <div class="step-description">Quick selection: Emergency housing, Permanent housing, Voucher help, or Talk to someone</div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-icon">👨‍💼</div>
-                    <div class="card-title">Mr. Patterson - Cost-Conscious Renter</div>
-                    <div class="card-desc">"Broker fees are thousands of dollars I don't have." High tech comfort, needs cost transparency and no-fee listings.</div>
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">3</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Dashboard - Progress Tracking</div>
+                        <div class="step-description">Visual progress bar, next steps clearly shown, quick actions for Documents, Search, Help</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">4</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Action Plan - Step-by-Step</div>
+                        <div class="step-description">Guided checklist: Call DHS, Upload documents, Attend intake - with status indicators</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">5</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Document Upload - Camera First</div>
+                        <div class="step-description">Photo tips, example images, "Open Camera" as primary action, clear guidance</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">6</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Human Support Hub</div>
+                        <div class="step-description">Multiple contact options: Live chat, Phone, Video, Text - all with wait times shown</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="highlight-box">
-            <p><strong>Design Principle:</strong> "Don't make me more confused than I already am." - This quote from Mr. L became our North Star, guiding every design decision toward radical simplicity and clarity.</p>
+        <!-- Ms. Ellis Journey -->
+        <div class="journey-section" id="ms-ellis-journey">
+            <h3 class="journey-title">
+                <span>👩</span>
+                Ms. Ellis's Journey: Voucher Holder
+            </h3>
+            <div class="journey-steps">
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">1</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Dashboard - Voucher Focus</div>
+                        <div class="step-description">Tenant profile ready indicator, recommended voucher-friendly apartments highlighted</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">2</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Housing Search - Filter First</div>
+                        <div class="step-description">"Accepts Vouchers" filter, No broker fee, Accessibility options, clear sorting</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">3</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Search Results</div>
+                        <div class="step-description">Voucher-friendly badges, landlord ratings visible, no-fee listings prioritized</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">4</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Listing Detail - Cost Transparency</div>
+                        <div class="step-description">Full cost breakdown, savings comparison (no-fee vs with broker), voucher acceptance confirmed</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">5</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Landlord Profile - Trust Building</div>
+                        <div class="step-description">Voucher acceptance rate (95%), response time, building violations, tenant ratings</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">6</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Community Tips</div>
+                        <div class="step-description">Peer advice, neighborhood info, application tips, scam warnings - all verified</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <footer>
-            <p><strong>HCI Design Project - 2025</strong></p>
-            <p>Research-driven, user-centered design for vulnerable populations</p>
-            <p style="margin-top: 1rem;">
-                <a href="https://github.com/gitgasu/pea-housing-app" class="btn">View on GitHub</a>
-            </p>
-        </footer>
+        <!-- Key Features Section -->
+        <div class="journey-section">
+            <h3 class="journey-title">Key Features & Innovations</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">Mobile-First Design</div>
+                    <div class="feature-description">Camera-first document uploads, simplified text, icons for quick scanning</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">Progress Tracking</div>
+                    <div class="feature-description">Visual progress bars, step indicators, clear next actions - never feel lost</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-title">24/7 Human Support</div>
+                    <div class="feature-description">Multiple channels (chat, phone, video, text) with real-time availability</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">Transparent Search</div>
+                    <div class="feature-description">No-fee first, voucher-friendly filters, landlord ratings, cost comparisons</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-title">Verified Community</div>
+                    <div class="feature-description">Peer tips from real users, neighborhood insights, scam warnings</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏠</div>
+                    <div class="feature-title">Sticky Navigation</div>
+                    <div class="feature-description">Always-accessible bottom nav: Home, Progress, Docs, Help</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Screens Overview -->
+        <div class="journey-section">
+            <h3 class="journey-title">Complete Screen Flow (10 Screens)</h3>
+            <div class="journey-steps">
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">1</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Welcome / Onboarding</div>
+                        <div class="step-description">First impression with clear value proposition</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">2</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Needs Assessment</div>
+                        <div class="step-description">Route users to appropriate flow</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">3</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Dashboard</div>
+                        <div class="step-description">Personalized progress and quick actions</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">4</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Action Plan</div>
+                        <div class="step-description">Step-by-step checklist with status</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">5</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Document Upload (Camera-First)</div>
+                        <div class="step-description">Photo tips, examples, mobile-optimized</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">6</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Housing Search</div>
+                        <div class="step-description">Filters, price range, accessibility options</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">7</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Search Results</div>
+                        <div class="step-description">Listing cards with key info and badges</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">8</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Listing Detail</div>
+                        <div class="step-description">Full apartment info with cost transparency</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">9</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Community Tips</div>
+                        <div class="step-description">Verified peer advice and warnings</div>
+                    </div>
+                </div>
+
+                <div class="step-item" onclick="window.location.href='interactive_prototype.html'">
+                    <span class="step-number">10</span>
+                    <div style="display: inline-block;">
+                        <div class="step-title">Human Support Hub</div>
+                        <div class="step-description">Multi-channel support with availability</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <footer>
+        <p style="font-size: 1.2em; margin-bottom: 10px; opacity: 0.9;">Built with research, designed for impact</p>
+        <p style="opacity: 0.7;">Based on interviews with housing-insecure individuals in NYC</p>
+        <div class="footer-links">
+            <a href="interactive_prototype.html">Interactive Prototype</a>
+            <a href="wireframes_core_screens.html">Core Wireframes</a>
+            <a href="wireframes_phase2_screens.html">Advanced Wireframes</a>
+        </div>
+        <p style="margin-top: 30px; opacity: 0.6; font-size: 0.9em;">🤖 Generated with Claude Code</p>
+    </footer>
 </body>
 </html>
